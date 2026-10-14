@@ -12,6 +12,15 @@ S = C["site"]
 GH, EMAIL = S["github"], S["email"]
 
 
+def status_html(t):
+    # Each part kept whole; on phones the last part drops to its own line.
+    parts = t.split(' · ')
+    out = []
+    for i, x in enumerate(parts):
+        if i: out.append(f'<span class="ssep{" slast" if i == len(parts)-1 else ""}"> · </span>')
+        out.append(f'<span class="sp{" slast" if i == len(parts)-1 else ""}">{e(x)}</span>')
+    return ''.join(out)
+
 def role_html(r):
     # First part on its own line on phones; one line on wider screens.
     head, sep, rest = r.partition(' · ')
@@ -90,7 +99,7 @@ home = f"""<div class="view" data-view="home">
 <div id="top" class="wrap hero">
  <img class="portrait" src="img/{a(pr['photo'])}" alt="Photo of {a(pr['name_line_1'])} {a(pr['name_line_2'])}" width="720" height="900">
  <div class="hero-main">
-  <p class="status"><i aria-hidden="true"></i>{e(pr['status'])}</p>
+  <p class="status"><i aria-hidden="true"></i><span>{status_html(pr['status'])}</span></p>
   <h1><span>{e(pr['name_line_1'])}</span><span>{e(pr['name_line_2'])}</span><small class="aka">{e(pr['goes_by'])}</small></h1>
   <p class="role">{role_html(pr['role'])}</p>
   <p class="pitch">{e(pr['pitch'])}</p>
@@ -327,7 +336,7 @@ page = f"""<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

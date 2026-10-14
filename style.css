@@ -364,3 +364,7 @@ html{scroll-behavior:auto}
 @media (min-width:1000px){.view .fig{max-width:880px}}
 h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none}
 @media (max-width:719px){.role .r1,.role .r2{display:block}.role .rsep{display:none}}
+.hero .status{align-items:flex-start}
+.hero .status i{margin-top:.5em}
+.status .sp{white-space:nowrap}
+@media (max-width:719px){.status .sp.slast{display:block}.status .ssep.slast{display:none}.status .sp{white-space:normal}}
