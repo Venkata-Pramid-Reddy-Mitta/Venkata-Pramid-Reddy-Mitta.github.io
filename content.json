@@ -645,6 +645,12 @@
   "_how_to_edit_ask": "Each item in the ask list is one answer. keywords is a comma-separated list of words or phrases a visitor might type. Put a blank line between paragraphs as \\n\\n and wrap a word in two stars to make it bold. In links, 'to' can be a screen (p-olist, experience-adobe, education, projects, contact), another answer (ask-sql), a full web address, or one of: email, resume, linkedin, github. If an answer replaces the automatic 'Do you know X?' answer for a skill, list that skill in covers_skills. Only use facts that are already on this site.",
   "ask": [
     {
+      "id": "name",
+      "question": "What's your full name?",
+      "keywords": "full name, your name, name, first name, last name, surname, family name, legal name, called, call you, nickname, goes by, go by, pramid, venkata, mitta, reddy, who is this, whose site, whose portfolio",
+      "answer": "My full name is **Venkata Pramid Reddy Mitta**. I go by Pramid."
+    },
+    {
       "id": "work-auth",
       "question": "Are you authorized to work in the US?",
       "keywords": "work authorization, work authorisation, authorized, authorised, authorization, work permit, visa, sponsorship, sponsor, opt, h1b, h-1b, eligible to work, legally, citizen, citizenship, immigration, ead, right to work",
@@ -660,7 +666,7 @@
     {
       "id": "looking-for",
       "question": "What kind of roles are you looking for?",
-      "keywords": "looking for, role, job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role",
+      "keywords": "looking for, role, job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role, available, availability, open to work, job search, job hunting, new job, opportunities",
       "answer": "Full-time data analyst and business analyst roles, anywhere in the US."
     },
     {
@@ -673,7 +679,7 @@
     {
       "id": "about-me",
       "question": "Tell me about yourself",
-      "keywords": "tell me about yourself, about yourself, about you, who are you, introduce yourself, introduction, background, summary, overview, bio, profile, pitch, describe yourself",
+      "keywords": "tell me about yourself, about yourself, about you, who are you, introduce yourself, introduction, background, summary, overview, bio, profile, pitch, describe yourself, what do you do, profession, occupation, career, hi, hello, hey",
       "answer": "I'm a data analyst with 5+ years at Adobe and Amazon. I use SQL, Python and Power BI to turn raw data into dashboards and reports that teams use to make decisions.\n\nI work with stakeholders to define KPIs, write the SQL behind them, and check the numbers before they reach leadership. I added machine learning during my M.S. in Computer Science at Rutgers.",
       "links": [{"label": "Experience and skills", "to": "experience"}, {"label": "Projects", "to": "projects"}]
     },
@@ -687,7 +693,7 @@
     {
       "id": "adobe",
       "question": "What do you do at Adobe?",
-      "keywords": "adobe, current job, current role, current employer, current company, currently working, where do you work, present role, customer experience, marketing analytics",
+      "keywords": "adobe, current job, current role, current employer, current company, currently working, where do you work, present role, job title, title, designation, current title, current position, working now, right now, customer experience, marketing analytics",
       "answer": "At Adobe (Dec 2025 to present) I'm a Business Data Analyst for Customer Experience Intelligence & Marketing Analytics. I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.\n\nResults: the reporting cycle went from **9 hours to 5**, **8 Power BI dashboards** are used by **20+ stakeholders**, and I reconciled **25 KPIs**.\n\nTools: SQL, Snowflake, dbt, Databricks, Power BI, Python, Azure Data Factory, Jira.",
       "links": [{"label": "Adobe role", "to": "experience-adobe"}]
     },
