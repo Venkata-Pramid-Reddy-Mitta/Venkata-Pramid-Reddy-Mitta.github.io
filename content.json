@@ -505,7 +505,6 @@
       "title": "Data Analyst, Supply Chain Optimization & Seller Performance Analytics",
       "short_title": "Data Analyst",
       "dates": "Jan 2020 to Aug 2024",
-      "dates_note": "Started as an intern",
       "place": "India",
       "key_numbers": [
         {
@@ -728,7 +727,7 @@
       "id": "amazon",
       "question": "What did you do at Amazon?",
       "keywords": "amazon, previous job, previous role, previous employer, last job, last role, supply chain, seller, sellers, seller performance, fulfillment, fulfilment, sla, india",
-      "answer": "At Amazon (Jan 2020 to Aug 2024, India) I started as an intern while finishing my B.E., then stayed on as a Data Analyst in Supply Chain Optimization & Seller Performance Analytics.\n\nI wrote SQL against Redshift order, inventory and fulfillment tables spanning **50M+ records**, pulling from S3, to produce the SLA and seller-performance metrics used in weekly operations reviews. I built SQL-based ETL across **15 source datasets** that fed daily reporting, and delivered **10 Tableau dashboards** used by **30+ stakeholders**.\n\nI also ran cohort analysis across seller segments to flag high-risk accounts before they breached SLA, built fulfillment-volume forecasts for peak-season staffing, and automated Excel and SQL reporting, which cut weekly prep from **6 hours to under 2**.",
+      "answer": "At Amazon (Jan 2020 to Aug 2024, India) I was a Data Analyst in Supply Chain Optimization & Seller Performance Analytics.\n\nI wrote SQL against Redshift order, inventory and fulfillment tables spanning **50M+ records**, pulling from S3, to produce the SLA and seller-performance metrics used in weekly operations reviews. I built SQL-based ETL across **15 source datasets** that fed daily reporting, and delivered **10 Tableau dashboards** used by **30+ stakeholders**.\n\nI also ran cohort analysis across seller segments to flag high-risk accounts before they breached SLA, built fulfillment-volume forecasts for peak-season staffing, and automated Excel and SQL reporting, which cut weekly prep from **6 hours to under 2**.",
       "links": [
         {
           "label": "Amazon role",
