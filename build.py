@@ -129,7 +129,7 @@ home = f"""<div class="view" data-view="home">
 <section class="wrap sec" aria-labelledby="xp-h">
   <h2 id="xp-h">Experience</h2>
   <div class="xrows">{xrows}</div>
-  <a class="go" href="#experience">See skills and tools</a>
+  <a class="go" href="#experience">See experience and skills</a>
 </section>
 </div>"""
 

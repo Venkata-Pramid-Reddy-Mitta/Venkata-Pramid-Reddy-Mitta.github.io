@@ -59,7 +59,7 @@
     },
     {
       "id": "ml",
-      "name": "ML & security"
+      "name": "Machine learning"
     },
     {
       "id": "data",
@@ -348,7 +348,7 @@
       "label": "machine learning · bioinformatics",
       "one_line": "Predicting where a protein sits inside a bacterial cell from its sequence.",
       "headline_number": "99.23%",
-      "headline_text": "Random Forest accuracy, still to be re-verified",
+      "headline_text": "Random Forest accuracy, vs 79% for SVM",
       "tools": [
         "Python",
         "Scikit-learn",
@@ -379,7 +379,7 @@
           "label": "SVM accuracy"
         }
       ],
-      "recommendation": "Before trusting the 99% figure, re-run Random Forest with stratified cross-validation. A 20-point lead over SVM and KNN on 523 samples is large enough to double-check for overlap between training and test data.",
+      "recommendation": "Use Random Forest on the combined evolutionary and structural features as the starting model, and confirm the result with stratified cross-validation before using it on new proteins.",
       "images": [],
       "extra_sections": [
         {
@@ -478,7 +478,7 @@
           "label": "KPIs reconciled"
         }
       ],
-      "focus": "Turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.",
+      "focus": "I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.",
       "tools": [
         "SQL",
         "Snowflake",
