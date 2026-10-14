@@ -727,7 +727,7 @@
     {
       "id": "looking-for",
       "question": "What kind of roles are you looking for?",
-      "keywords": "looking for, what role, what roles, kind of role, kind of roles, type of role, type of roles, roles are you, next role, new role, what job, next job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role, available, availability, open to work, job search, job hunting, new job, opportunities",
+      "keywords": "looking for, what role, what roles, kind of role, kind of roles, type of role, type of roles, roles are you, next role, new role, what job, next job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role, available, availability, open to work, job search, job hunting, opportunities",
       "answer": "Full-time data analyst and business analyst roles, anywhere in the US."
     },
     {
@@ -855,7 +855,7 @@
     {
       "id": "sql",
       "question": "How strong is your SQL?",
-      "keywords": "sql, query, queries, join, joins, window function, window functions, rank, postgres, postgresql, sql examples, sql level, how good is your sql, how strong is your sql, strongest skill, cte, ctes, subquery",
+      "keywords": "sql, query, queries, join, joins, window function, window functions, rank, postgres, postgresql, sql examples, sql level, how good is your sql, how strong is your sql, strongest skill, cte, ctes, subquery, use most, most used, use most often, most frequently, main tool, primary tool",
       "covers_skills": "SQL, PostgreSQL",
       "answer": "SQL is my strongest skill, and I use it every day: extraction, joins, aggregations, validation, reconciliation, segmentation and ETL.\n\n**Amazon:** SQL against **50M+** Redshift order, inventory and fulfillment records, plus SQL-based ETL across 15 source datasets.\n\n**Adobe:** SQL over dbt-modeled Snowflake tables for customer journeys, adoption, retention and segmentation.\n\n**Projects (PostgreSQL):** in Olist I used CASE WHEN flags, RANK() OVER (PARTITION BY state) and CORR(); in F1 I used LAG() for year-over-year change across 10,884 pit stops.\n\nI filter early, select only the columns I need, watch join cardinality, and check totals before I trust a result.",
       "links": [
@@ -965,8 +965,8 @@
     {
       "id": "business-analysis",
       "question": "Do you have business analysis experience?",
-      "keywords": "business analysis, business analyst, ba, user stories, user story, agile, scrum, sprint, sprints, backlog, backlog grooming, sprint planning, gap analysis, process mapping, bpmn, use case, use cases, rtm, traceability, sdlc",
-      "covers_skills": "User stories, Agile / Scrum",
+      "keywords": "business analysis, business analyst, ba, agile, scrum, sprint, sprints, backlog, backlog grooming, sprint planning, gap analysis, process mapping, bpmn, use case, use cases, rtm, traceability, sdlc",
+      "covers_skills": "Agile / Scrum",
       "answer": "Business analysis is half my job at Adobe. I turn marketing, product and customer experience requirements into BRDs, FRDs, user stories and acceptance criteria across Agile workstreams, then run UAT and business validation in Jira and resolve reporting defects within the sprint.\n\nAt Amazon I translated supply chain, seller services and fulfillment requirements into KPI definitions and reporting specifications for operations teams.\n\nMy resume also lists gap analysis, process mapping (BPMN), use cases, RTM, backlog grooming and sprint planning.",
       "links": [
         {
@@ -1071,7 +1071,7 @@
     {
       "id": "why-hire",
       "question": "Why should we hire you?",
-      "keywords": "why hire, why should we hire, hire you, what makes you, stand out, unique, strengths, strength, your strengths, value, bring to the team, good fit, fit, why you, what can you bring",
+      "keywords": "why hire, why should we hire, hire you, what makes you, stand out, unique, value, bring to the team, good fit, fit, why you, what can you bring, differentiate, differentiates, different from other candidates, other candidates, why you over",
       "answer": "I work comfortably on both sides of analytics. I can sit with stakeholders, pin down the real business question and the KPI, and then do the data work myself in SQL and Python.\n\nI've done it at scale: 50M+ records at Amazon, and customer and marketing analytics at Adobe on Snowflake, dbt and Power BI. I also check my own work through reconciliation and UAT instead of shipping a dashboard and hoping the numbers are right.\n\nAnd I try to end with a recommendation, not just a chart.",
       "links": [
         {
@@ -1087,14 +1087,14 @@
     {
       "id": "enjoy",
       "question": "What do you enjoy about data work?",
-      "keywords": "enjoy, like most, love, passion, passionate, why data, why analytics, why analyst, motivate, motivation, motivates, why this field, why this career",
+      "keywords": "enjoy, like most, love, passion, passionate, why data, why analytics, why analyst, motivate, motivation, motivates, why this field, why this career, why business analytics, why did you choose, choose analytics, chose analytics",
       "answer": "What I enjoy most is taking a business problem, understanding the data behind it, and turning it into something people actually use to make a decision."
     },
     {
       "id": "why-left-amazon",
       "question": "Why did you leave Amazon?",
       "keywords": "why leave, why did you leave, left amazon, leaving amazon, quit, quit amazon, reason for leaving, why masters, why ms, why grad school",
-      "answer": "I left Amazon in Aug 2024 to start my M.S. in Computer Science at Rutgers in Sep 2024. That's where I added machine learning to my analytics background. During the program I joined Adobe in Dec 2025, and I'm still there.",
+      "answer": "I left Amazon in Aug 2024 to start my M.S. in Computer Science at Rutgers in Sep 2024. My work had given me a strong grip on analytics and the business side, and I wanted to strengthen my broader technical foundation. That's also where I added machine learning. During the program I joined Adobe in Dec 2025, and I'm still there.",
       "links": [
         {
           "label": "Education",
@@ -1394,7 +1394,7 @@
     {
       "id": "dq-story",
       "question": "Tell me about a data quality issue you handled",
-      "keywords": "data quality issue, data issue, bad data, dirty data, messy data, duplicate, duplicates, missing values, missing data, nulls, inconsistent data, clean data, data cleaning, cleaning",
+      "keywords": "data quality issue, data issue, bad data, dirty data, messy data, missing values, missing data, nulls, inconsistent data, clean data, data cleaning, cleaning",
       "answer": "At Amazon, inconsistent seller data sometimes threw off downstream KPIs. Profiling would surface duplicates, missing values or gaps between operational data and the calculated metrics.\n\nInstead of patching the dashboard, I isolated which of the 15 source datasets caused the mismatch, compared source counts and totals with the reporting data, and traced the affected seller records. Once the source or transformation issue was fixed, I reconciled the KPI again before it went into executive reporting. Since then I treat validation as part of the analysis, not an afterthought.",
       "links": [
         {
@@ -1406,7 +1406,7 @@
     {
       "id": "root-cause",
       "question": "What do you do when a dashboard number looks wrong?",
-      "keywords": "root cause, root cause analysis, rca, number looks wrong, dashboard wrong, wrong number, debug, debugging, troubleshoot, troubleshooting, investigate, investigation, why did it drop, why did it change",
+      "keywords": "root cause, root cause analysis, rca, number looks wrong, dashboard wrong, wrong number, debug, debugging, troubleshoot, troubleshooting, investigate, investigation, why did it drop, why did it change, kpi mismatch, power bi and snowflake, doesnt match snowflake, numbers dont match the source, doesnt match, number doesnt match, dont match, not matching",
       "covers_skills": "Root cause analysis",
       "answer": "I work backward from the dashboard. First I confirm the KPI definition, filters, date range and grain, so I know what the right answer should be.\n\nThen I run the SQL independently and compare it with the dashboard. If they still differ, I trace the metric through the transformation logic to the source, using counts and small samples to find exactly where the values split. After the fix I rerun the same reconciliation, and I check related KPIs, because one transformation bug often affects several."
     },
@@ -1449,7 +1449,7 @@
     {
       "id": "conflict",
       "question": "How do you handle conflicting stakeholder requirements?",
-      "keywords": "conflict, conflicts, conflicting, disagree, disagreement, disagreements, push back, pushback, difficult stakeholder, difficult stakeholders, competing priorities, competing requirements, priorities, prioritize, prioritise",
+      "keywords": "conflict, conflicts, conflicting, disagree, disagreement, disagreements, push back, pushback, difficult stakeholder, difficult stakeholders, competing requirements",
       "answer": "First I check whether people disagree on the goal or just on how to measure it. Usually it's two definitions of the same KPI or different levels of detail.\n\nI write down both views and use real examples to show where the numbers differ, then bring it back to the business objective, the source of truth and the audience. If one definition can't serve both, I suggest a standard KPI or two clearly named metrics. Whatever is decided goes into the requirements and acceptance criteria, so it doesn't come back in UAT. My job isn't to pick a winner. It's to make the choice clear."
     },
     {
@@ -1515,6 +1515,191 @@
       "question": "How old are you?",
       "keywords": "how old, age, your age, years old, old are you",
       "answer": "I'm 27."
+    },
+    {
+      "id": "strength",
+      "question": "What's your biggest strength?",
+      "keywords": "strength, strengths, biggest strength, greatest strength, your strengths, best quality, good at, what are you good at",
+      "answer": "Connecting the technical work to the business need. I can work hands-on in SQL, Python, data platforms and BI tools, and I can also explain the result to business people in terms of what changed and what to do about it.\n\nAt Adobe I regularly present dashboard trends and recommendations to marketing and product leadership, so that mix gets used every week."
+    },
+    {
+      "id": "why-bda",
+      "question": "Why a Business Data Analyst, not just a Data Analyst?",
+      "keywords": "business data analyst, why business data analyst, rather than data analyst, data analyst vs business analyst, difference between data analyst and business analyst, bda",
+      "answer": "Because my work usually starts with a business problem, not a dataset. I work with stakeholders to understand what they're trying to achieve, turn that into KPIs or analytical questions, find the data, validate it, and bring the answer back to the business.\n\nAt Adobe, for example, I write the BRDs, FRDs, user stories and acceptance criteria before I build the analysis itself."
+    },
+    {
+      "id": "why-looking",
+      "question": "Why are you looking for a new opportunity?",
+      "keywords": "why are you looking, why looking, new opportunity, next opportunity, why change, why switch, why move, why new job, leave adobe, leaving adobe, why leave adobe, looking for a new job, looking for a change, new job, looking to leave, looking to move",
+      "answer": "I want to work on bigger and more complex analytical problems, with more ownership from requirements through to the insight and the recommendation.\n\nAdobe and Amazon gave me solid experience with SQL, BI, cloud data platforms, automation, data quality and stakeholders. I'd like to bring that to a role where analytics directly shapes business decisions."
+    },
+    {
+      "id": "prioritize",
+      "question": "How do you prioritize multiple requests?",
+      "keywords": "prioritize, prioritise, prioritizing, prioritization, priorities, competing priorities, multiple requests, multiple priorities, multiple stakeholders, too many requests, juggle, juggling, workload, conflicting priorities, competing deadlines",
+      "answer": "I look at business impact, urgency, dependencies, who it reaches and how much effort it takes. Requests tied to an executive decision or a hard deadline usually go first.\n\nThen I tell people the order and a realistic timeline instead of quietly accepting everything at once. In Agile teams I use backlog grooming and sprint planning to make the trade-offs visible, and I break big asks into smaller pieces so the important parts land early."
+    },
+    {
+      "id": "incomplete-reqs",
+      "question": "How do you handle vague or incomplete requirements?",
+      "keywords": "incomplete requirements, vague requirements, unclear requirements, ambiguous, ambiguity, vague request, unclear request, missing requirements, doesnt know what they want, cant explain what they want",
+      "answer": "I don't start building on assumptions. I list what's unclear, write the open questions down, and take them back to the stakeholder. Often the best question is what decision they're trying to make and what they use today.\n\nOnce we agree, I turn it into user stories and acceptance criteria. That way the solution isn't just technically correct, it solves the actual business need."
+    },
+    {
+      "id": "work-environment",
+      "question": "What work environment helps you do your best?",
+      "keywords": "work environment, environment, culture, team culture, ideal job, ideal team, ideal manager, perform best, do your best, best environment, management style",
+      "answer": "One where business and technical teams work closely together. I like a clear business objective with enough ownership to decide how the data can solve it.\n\nI'm comfortable in Agile setups where requirements evolve through stakeholder conversations, sprint planning, UAT and feedback."
+    },
+    {
+      "id": "criticism",
+      "question": "How do you handle criticism of your work?",
+      "keywords": "criticism, criticize, critical feedback, feedback, negative feedback, handle feedback, take feedback, defensive, someone criticized",
+      "answer": "I try not to get defensive, because feedback often shows me something I couldn't see as the analyst. I first ask exactly what was confusing or unhelpful, then work out whether it's the data, the metric definition, the visual or how I explained it.\n\nIf the change makes the analysis more useful, I make it. If a requested change would make it misleading, I explain why with evidence and suggest an alternative."
+    },
+    {
+      "id": "changed-decision",
+      "question": "Tell me about a time your analysis changed a decision",
+      "keywords": "changed a decision, changed someones mind, influenced, influence, impact on decision, drove a decision, business impact, made a difference, decision making",
+      "answer": "At Amazon the seller reporting was mostly backward-looking. I used cohort analysis across seller segments to find the accounts that were trending toward an SLA breach, and gave operations a targeted list instead of a historical report.\n\nThat changed where they spent their attention: they intervened with those sellers before the breach rather than after. That's how I try to use analytics, to move from describing what happened to supporting a decision.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "engineering",
+      "question": "How do you work with data engineering teams?",
+      "keywords": "data engineering, data engineers, engineering team, engineers, developers, work with engineering, technical team, technical teams, new data feed, data feeds",
+      "answer": "At Adobe I partner with data engineering whenever a new marketing data feed comes in. I help define the source requirements and then validate the data before it reaches reporting.\n\nMy part is making sure the output meets the original business requirement; engineering owns the build. Getting that hand-off right is what connects the source system design to the numbers people see in the dashboards.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "kpi-change",
+      "question": "A KPI suddenly jumps or drops. Is it real or a data problem?",
+      "keywords": "kpi jumped, kpi dropped, kpi spike, kpi declining, kpi increase, kpi decrease, sudden change, suddenly higher, suddenly lower, 20 percent, real change, data problem, business change or data, real or data issue, measurement issue, suddenly, jumped, jump, dropped suddenly, spiked",
+      "answer": "I don't assume the business suddenly changed. I check both sides in parallel.\n\nOn the data side: did volume, sources, filters, business rules or refresh timing change? Then source-to-report reconciliation to find missing, duplicated, late or badly transformed records, and a check with data engineering for recent pipeline or schema changes.\n\nOn the business side: break the KPI down by segment, region, product and date to see whether the move is broad or isolated, and compare it with related KPIs. If the data checks out and other indicators agree, I'm confident it's real."
+    },
+    {
+      "id": "window-functions",
+      "question": "When would you use a window function instead of GROUP BY?",
+      "keywords": "window function, window functions, group by, groupby, over partition by, partition by, rank over, row number, row_number, lag, lead, running total",
+      "answer": "GROUP BY collapses rows into one result per group, like total sales per customer. A window function gives an aggregate or ranking while keeping every row.\n\nIn my Olist project I used RANK() OVER (PARTITION BY state ...) to find the worst-performing category inside each high-volume state while keeping category-level detail. In F1 I used LAG() to compare each year with the previous one.",
+      "links": [
+        {
+          "label": "Olist case study",
+          "to": "p-olist"
+        }
+      ]
+    },
+    {
+      "id": "correlation",
+      "question": "Does correlation mean causation?",
+      "keywords": "correlation, causation, correlation vs causation, correlation causation, causal, cause, causes, does it cause, correlated",
+      "answer": "No. Correlation says two things move together, not that one causes the other. I check the sample size, look at the relationship visually, check outliers and think about other variables that could explain it.\n\nIn Olist, late delivery and review score had a -0.327 correlation. I reported that as an association worth acting on, not proof that lateness alone causes bad reviews, since product quality, seller, price and geography can all play a part. In F1, the link between pit stop speed and results was weak because top teams have both faster cars and faster crews.",
+      "links": [
+        {
+          "label": "Olist case study",
+          "to": "p-olist"
+        }
+      ]
+    },
+    {
+      "id": "find-duplicates",
+      "question": "How do you find duplicate records?",
+      "keywords": "duplicate, duplicates, duplicate records, find duplicates, deduplicate, deduplication, dedupe, dedup, unique key, having count",
+      "answer": "First I agree on what makes a record unique. Then in SQL I GROUP BY that key with HAVING COUNT(*) > 1 to find repeats.\n\nBefore deleting anything I check whether they're true duplicates or legitimate multiple records (a seller can have many orders), and whether a join introduced them. At Amazon I profiled and reconciled seller data this way to catch duplicates, missing values and KPI discrepancies before reporting."
+    },
+    {
+      "id": "etl-validation",
+      "question": "How do you validate an ETL pipeline without checking every record?",
+      "keywords": "validate etl, validate a pipeline, validate pipeline, pipeline validation, etl testing, test a pipeline, cannot check every record, row counts, source and target, data testing, validate an etl, validate an etl pipeline, validate the pipeline, validating pipelines, validate a data pipeline",
+      "answer": "With systematic checks instead of eyeballing rows: source vs. target row counts, key uniqueness, null rates, data types, aggregate totals, duplicate counts and business-rule checks, plus sampling for record-level spot checks.\n\nFor recurring pipelines I automate those checks so failures show up before the data reaches reporting. That's the approach behind my SQL ETL across 15 source datasets at Amazon."
+    },
+    {
+      "id": "etl-vs-elt",
+      "question": "What's the difference between ETL and ELT?",
+      "keywords": "etl vs elt, elt vs etl, difference between etl and elt, etl and elt, what is elt, what is etl",
+      "answer": "ETL transforms data before loading it into the target. ELT loads raw data first and transforms it inside the warehouse or lake.\n\nCloud warehouses like Snowflake make ELT attractive because they have scalable compute for the transformations. At Adobe the dbt-modeled Snowflake tables I query are an ELT-style setup; at Amazon I built SQL-based ETL feeding daily reporting."
+    },
+    {
+      "id": "schema-change",
+      "question": "An upstream change broke your dashboard. How do you prevent it?",
+      "keywords": "schema change, schema drift, column renamed, column name changed, upstream change, dashboard broke, broken dashboard, pipeline broke, breaking change, data contract",
+      "answer": "First I find which layer broke (source, transformation or report) and get reporting working again.\n\nThen I work with engineering on a change process so it doesn't repeat: schema checks in the pipeline that catch structural changes before production, and lineage documentation so dependencies are visible. I dealt with schema drift directly in my NFL project, standardizing 25 seasons of API data before analysis.",
+      "links": [
+        {
+          "label": "NFL project",
+          "to": "p-nfl"
+        }
+      ]
+    },
+    {
+      "id": "useless-dashboard",
+      "question": "What if a dashboard is correct but nobody uses it?",
+      "keywords": "nobody uses, no one uses, not useful, dashboard not used, low adoption, adoption, executives dont like, not helpful, unused dashboard, usage",
+      "answer": "Then it isn't successful. A dashboard should support a decision, not just show accurate data.\n\nI'd ask the users what decision they expected it to support, and check whether it has too many metrics, lacks context, uses the wrong KPIs or hides the exceptions. Then I'd redesign around their decisions so it answers three things fast: what happened, why, and what to do.\n\nAt Adobe, adoption is why I walk stakeholders through KPI definitions and drill-downs during business reviews."
+    },
+    {
+      "id": "unexpected-results",
+      "question": "What if your SQL results contradict what the business expects?",
+      "keywords": "contradict, contradicts, business expects, expected different, unexpected result, unexpected results, doesnt match expectations, stakeholder disagrees with numbers, numbers look off",
+      "answer": "I don't change the SQL to match the expectation. I investigate the gap: the business definition, source data, joins, filters, date ranges and aggregation.\n\nIf the SQL holds up, I walk the stakeholder through the evidence and we work out together why their expectation differed. Sometimes that's where the most useful finding is."
+    },
+    {
+      "id": "dont-know",
+      "question": "What do you do when you don't know something?",
+      "keywords": "dont know, do not know, don't know, unfamiliar, never used, new tool, learn new tool, learn quickly, learning, how fast do you learn, pick up, dont know something, when you dont know, something you dont know",
+      "answer": "I say so instead of guessing. Then I clarify what's needed, research it and test my understanding.\n\nIf it's a tool I haven't used, I map it to what I already know. For example, I've used both Power BI and Tableau, so a new BI tool is mostly learning the differences."
+    },
+    {
+      "id": "accuracy-vs-business",
+      "question": "Which matters more: technical accuracy or business understanding?",
+      "keywords": "technical accuracy or business, accuracy or business understanding, technical vs business, business understanding, which is more important",
+      "answer": "Both, but technical accuracy without business understanding can give a precise answer to the wrong question. So I make sure I understand the problem first, then make sure the analysis is right."
+    },
+    {
+      "id": "user-stories",
+      "question": "How do you write user stories and acceptance criteria?",
+      "keywords": "user stories, user story, write user stories, writing user stories, given when then, as a user, story format, acceptance criteria format",
+      "covers_skills": "User stories",
+      "answer": "User stories follow \"As a [user], I want [goal], so that [benefit]\", and I write acceptance criteria as Given-When-Then so they're testable.\n\nThat gives developers a clear scope and gives UAT concrete conditions to check. At Adobe I write them from marketing, product and customer experience requirements across Agile workstreams."
+    },
+    {
+      "id": "overfitting",
+      "question": "How do you know a model isn't overfitting?",
+      "keywords": "overfitting, overfit, overfitted, cross validation, cross-validation, train test split, generalize, generalise, high r2, r squared, validation set, model evaluation",
+      "answer": "I don't trust one train/test split. I use cross-validation, compare training vs. validation performance, and compare several models on the same features and evaluation.\n\nIn my housing project I tuned with GridSearchCV and compared XGBoost, LightGBM and Random Forest on cross-validated performance; tuned XGBoost reached 0.93 R². In the protein localization project I reported cross-validated accuracy (SVM 70.6%) rather than training accuracy, where Random Forest hit 99.23%, because that gap showed overfitting.",
+      "links": [
+        {
+          "label": "Housing prices",
+          "to": "p-housing"
+        },
+        {
+          "label": "Protein localization",
+          "to": "p-evostruct"
+        }
+      ]
+    },
+    {
+      "id": "shap",
+      "question": "How would you explain SHAP to a business person?",
+      "keywords": "shap, explainable, explainability, explainable ai, xai, interpret model, model interpretation, why did the model, feature importance",
+      "answer": "SHAP shows why a model made a specific prediction: which features pushed it up and which pushed it down.\n\nIn my housing project, instead of just saying \"this house is worth X\", SHAP showed that overall quality and above-ground living area were the biggest price drivers, followed by year built. That turns a black-box number into reasons a non-technical person can act on.",
+      "links": [
+        {
+          "label": "Housing prices",
+          "to": "p-housing"
+        }
+      ]
     }
   ]
 }
