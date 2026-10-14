@@ -1,0 +1,626 @@
+{
+  "_how_to_edit": "Edit the text between quotes. Keep commas between items and no comma after the last item in a list. After you commit, GitHub rebuilds the site in about a minute. Images go in the img folder.",
+  "site": {
+    "url": "https://venkata-pramid-reddy-mitta.github.io/",
+    "github": "https://github.com/Venkata-Pramid-Reddy-Mitta/",
+    "linkedin": "https://www.linkedin.com/in/mittavenkatapramidreddy",
+    "email": "pramidreddy@mycvcareer.com",
+    "location_footer": "Camden, NJ"
+  },
+  "profile": {
+    "name_line_1": "Venkata Pramid",
+    "name_line_2": "Reddy Mitta",
+    "goes_by": "Goes by Pramid",
+    "status": "Camden, NJ · Authorized to work in the US (OPT) · Open to relocation",
+    "role": "Business Data Analyst · SQL, Python, BI · ML security research",
+    "pitch": "I turn business questions into numbers people can trust. Five years of analytics at Adobe and Amazon, a Rutgers master's, and a capstone on catching model-stealing attacks.",
+    "photo": "pramid.webp",
+    "highlights": [
+      {
+        "number": "5+ yrs",
+        "label": "analytics at Adobe and Amazon"
+      },
+      {
+        "number": "50M+",
+        "label": "records queried in Redshift"
+      },
+      {
+        "number": "9h→5h",
+        "label": "reporting cycle at Adobe"
+      }
+    ]
+  },
+  "about": {
+    "text": "I've spent five years on the analytics side of Adobe and Amazon: defining KPIs with stakeholders, writing the SQL behind them, and checking every number before it reaches leadership. At Rutgers I went deeper into machine learning, ending with a capstone on detecting model-stealing attacks. I'm looking for full-time data analyst and business analyst roles anywhere in the US.",
+    "how_i_work": [
+      {
+        "title": "Define the question",
+        "text": "Agree on the decision and the metric with the people who will use it."
+      },
+      {
+        "title": "Make the numbers trustworthy",
+        "text": "Reconcile sources and catch gaps before anyone sees a chart."
+      },
+      {
+        "title": "Turn them into a decision",
+        "text": "Dashboards and short write-ups that say what to do next."
+      }
+    ]
+  },
+  "featured_projects": [
+    "prada",
+    "olist",
+    "f1"
+  ],
+  "project_categories": [
+    {
+      "id": "bi",
+      "name": "SQL & BI"
+    },
+    {
+      "id": "ml",
+      "name": "ML & security"
+    },
+    {
+      "id": "data",
+      "name": "Pipelines & apps"
+    }
+  ],
+  "projects": [
+    {
+      "id": "prada",
+      "title": "Sybil-Resilient Model Extraction Detection",
+      "category": "ml",
+      "label": "master's capstone · ML security",
+      "one_line": "Catching attackers who split a model-stealing attack across many fake accounts.",
+      "headline_number": "0 → 64",
+      "headline_text": "Sybil accounts caught, before vs after my detection layer",
+      "tools": [
+        "Python",
+        "FastAPI",
+        "JS divergence",
+        "MNIST"
+      ],
+      "github_repo": "PRADA-Sybil_Resilient_Model",
+      "intro": "An extension of PRADA (Juuti et al., EuroS&P 2019), tested on a MNIST classifier. My master's capstone at Rutgers.",
+      "question": "PRADA spots model-stealing by checking whether an account's query distances look normally distributed. An attacker can split queries across fake (Sybil) accounts so each one stays under PRADA's 100-query warm-up and never gets checked.",
+      "question_heading": "The problem",
+      "what_i_did": "A second detection layer that compares query-distance histograms across accounts using Jensen-Shannon divergence. Sybil accounts all send Jacobian-generated images, so their histograms converge. Benign accounts' don't.",
+      "result": "PRADA alone flagged **0 of 64** Sybil accounts. With the JS layer, detection held from 4 to 128 accounts with zero false positives.",
+      "key_numbers": [
+        {
+          "number": "0 / 64",
+          "label": "Sybil accounts caught by PRADA alone"
+        },
+        {
+          "number": "0",
+          "label": "false positives, 4 to 128 accounts"
+        },
+        {
+          "number": "0.9978",
+          "label": "pair-level AUC, 64 Sybil vs 64 benign"
+        },
+        {
+          "number": "96.56%",
+          "label": "attacker's substitute model agreement"
+        }
+      ],
+      "recommendation": "Run a cross-account check like this alongside per-account detection on any public model API, and re-tune the threshold on held-out traffic before relying on it in production.",
+      "images": [
+        {
+          "file": "prada-sweep.webp",
+          "thumbnail": "prada-sweep-sm.webp",
+          "alt": "Detection rate vs number of Sybil accounts",
+          "caption": "Detection rate as the attack is split across more fake accounts. PRADA alone drops to 0% at 64 accounts. The JS layer keeps firing, but past about 192 accounts its separation signal weakens (see limitations below)."
+        },
+        {
+          "file": "prada-wscores.webp",
+          "thumbnail": "prada-wscores-sm.webp",
+          "alt": "PRADA W scores, attackers vs benign",
+          "caption": "PRADA's single-account baseline. Attacker accounts score below the 0.96 threshold and get flagged. The benign account (0.9864) stays clean."
+        }
+      ],
+      "extra_sections": [
+        {
+          "heading": "How the test bed works",
+          "html": "<p>A CNN victim model (99.08% MNIST test accuracy) is served through a FastAPI endpoint that logs every query. A Papernot Jacobian-based attack runs 6 augmentation rounds to train a substitute model. PRADA (distance computation plus a Shapiro-Wilk test) and the JS layer are evaluated side by side, including a benign-user baseline and three query distributions: round-robin, randomized, and mixed 70/30.</p>"
+        },
+        {
+          "heading": "What it can't do",
+          "html": "<ul class=\"tight\"><li>Beyond about 192 Sybil accounts, per-account histograms get sparse and the JS separation gap collapses, so detection becomes unstable.</li><li>A mixed 70/30 attack shrinks the separation gap to 0.002 in some configurations. Still detected, but the margin is thin.</li><li>The JS threshold (0.15) was tuned on the same data used for evaluation. There is no held-out test set.</li><li>PRADA's AUC of 1.0 comes from only two W scores, so I don't treat it as a robust result.</li></ul>"
+        }
+      ],
+      "what_i_did_heading": "What I built"
+    },
+    {
+      "id": "olist",
+      "title": "Olist Delivery Performance",
+      "category": "bi",
+      "label": "SQL + Power BI",
+      "one_line": "Where are deliveries late, and do customers notice?",
+      "headline_number": "-0.327",
+      "headline_text": "correlation between late delivery and review score",
+      "tools": [
+        "PostgreSQL",
+        "RANK() OVER",
+        "CORR()",
+        "Power BI"
+      ],
+      "github_repo": "Olist-Delivery-Performance-Analysis",
+      "intro": "99,441 Brazilian e-commerce orders across 27 states and 70+ product categories.",
+      "question": "Which product categories and regions have the highest late-delivery rates, and does that line up with lower review scores? Written for two audiences: Logistics and Customer Experience.",
+      "question_heading": "The question",
+      "what_i_did": "Joined the orders, customers, products, sellers and reviews tables in PostgreSQL. Flagged late orders with CASE WHEN, ranked states and categories with RANK() OVER, dropped categories under 500 orders to cut small-sample noise, and exposed SQL views as the data layer for a four-visual Power BI dashboard.",
+      "result": "Alagoas had the worst late rate at **23.0%** of orders. Electronics led categories at 9.6%. Late delivery and review score showed a moderate negative correlation of -0.327.",
+      "key_numbers": [
+        {
+          "number": "99,441",
+          "label": "orders analyzed"
+        },
+        {
+          "number": "23.0%",
+          "label": "late rate in Alagoas, the worst state"
+        },
+        {
+          "number": "9.6%",
+          "label": "late rate for electronics, the worst category"
+        },
+        {
+          "number": "-0.327",
+          "label": "correlation, late delivery vs review score"
+        }
+      ],
+      "recommendation": "Start with Alagoas and the electronics category, where late rates are highest. Since late orders track with lower review scores, add seller and carrier data next to find out why those orders run late.",
+      "images": [
+        {
+          "file": "olist-dashboard.webp",
+          "thumbnail": "olist-dashboard-sm.webp",
+          "alt": "Olist delivery performance dashboard in Power BI",
+          "caption": "My Power BI dashboard: late rate by state and by category, late rate vs average review score, and the worst category in the five high-volume states."
+        }
+      ],
+      "extra_sections": [
+        {
+          "heading": "Scope, stated plainly",
+          "html": "<p>This locates where delivery problems are worst. It doesn't claim a root cause, because seller, warehouse and carrier data aren't in the dataset. The worst-category-per-state ranking is only reliable for the five high-volume states: MG, PR, RJ, RS and SP.</p>"
+        }
+      ]
+    },
+    {
+      "id": "f1",
+      "title": "F1 Pit Stop Strategy",
+      "category": "bi",
+      "label": "SQL + DAX",
+      "one_line": "Do faster pit stops actually win races?",
+      "headline_number": "+0.175",
+      "headline_text": "strongest correlation found, which is weak",
+      "tools": [
+        "PostgreSQL",
+        "LAG()",
+        "Power BI",
+        "DAX"
+      ],
+      "github_repo": "F1-Pit-Stop-Strategy-Analysis",
+      "intro": "10,884 Formula 1 pit stops from 2011 to 2024, across six PostgreSQL tables.",
+      "question": "Does pit stop speed relate to where a driver finishes, and have stops gotten faster over the years?",
+      "question_heading": "The question",
+      "what_i_did": "Tested the link at three levels (single stop, race average, race total) with CORR(), compared constructors with AVG and STDDEV, and tracked year-over-year change with LAG. In Power BI I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.",
+      "result": "The link is weak: **+0.135 to +0.175**. P1 finishers averaged 43.2s of pit lane time per race, vs 57.0s for P18, but faster cars and faster crews overlap.",
+      "key_numbers": [
+        {
+          "number": "10,884",
+          "label": "pit stops analyzed"
+        },
+        {
+          "number": "+0.175",
+          "label": "strongest correlation, race total"
+        },
+        {
+          "number": "+1.29s",
+          "label": "biggest year-over-year change, 2013 to 2014"
+        },
+        {
+          "number": "23.74s",
+          "label": "Red Bull average, fastest and most consistent"
+        }
+      ],
+      "recommendation": "Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so that is where a team would focus.",
+      "images": [
+        {
+          "file": "f1-dashboard.webp",
+          "thumbnail": "f1-dashboard-sm.webp",
+          "alt": "F1 pit stop strategy dashboard in Power BI",
+          "caption": "My Power BI dashboard: pit lane time by finishing position and by season, plus speed vs consistency by constructor."
+        }
+      ],
+      "extra_sections": [
+        {
+          "heading": "Data cleaning",
+          "html": "<p>Stops of 100 seconds or longer were filtered out as red-flag and safety-car artifacts, so they wouldn't distort the averages.</p>"
+        }
+      ]
+    },
+    {
+      "id": "nfl",
+      "title": "NFL Performance & Weather",
+      "category": "data",
+      "label": "data pipeline · team project",
+      "one_line": "Do warm-weather teams fold in the cold? A three-person team project.",
+      "headline_number": "-7.7 pts",
+      "headline_text": "win rate for warm-weather teams in extreme cold",
+      "tools": [
+        "Python",
+        "Pandas",
+        "nflreadpy",
+        "Meteostat"
+      ],
+      "github_repo": "NFL-Performance-Weather-Analysis",
+      "intro": "25 NFL seasons (2000 to 2024) joined with historical weather data. A course project built with two classmates.",
+      "question": "Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?",
+      "question_heading": "The question",
+      "what_i_did": "Built an ingestion script for game data with nflreadpy and a weather-enrichment step with the Meteostat API, then compared road win rates across temperature thresholds in a notebook.",
+      "result": "Warm-weather teams lose **7.7 points** of win rate in extreme cold. Cold-weather teams show no meaningful drop in heat. The myth is one-sided.",
+      "key_numbers": [
+        {
+          "number": "25",
+          "label": "seasons analyzed"
+        },
+        {
+          "number": "-7.7 pts",
+          "label": "warm teams' win rate in extreme cold"
+        },
+        {
+          "number": "None",
+          "label": "meaningful drop for cold teams in heat"
+        },
+        {
+          "number": "2",
+          "label": "data sources joined"
+        }
+      ],
+      "recommendation": "For warm-weather teams, cold road games are where results drop, so that is where extra preparation pays off. Cold-weather teams don't need to treat heat as a special risk.",
+      "images": [],
+      "extra_sections": [],
+      "interactive": "nfl",
+      "card_thumbnail": "nfl-chart-sm.webp",
+      "what_i_did_heading": "What we did"
+    },
+    {
+      "id": "housing",
+      "title": "Explainable Housing Prices",
+      "category": "ml",
+      "label": "machine learning",
+      "one_line": "A price model a non-technical person can question.",
+      "headline_number": "0.93 R²",
+      "headline_text": "tuned XGBoost on 2,930 homes",
+      "tools": [
+        "Python",
+        "Scikit-learn",
+        "XGBoost",
+        "LightGBM",
+        "SHAP"
+      ],
+      "github_repo": "Housing-Price-Prediction-SHAP",
+      "intro": "Ames, Iowa housing data: 2,930 properties and 82 features.",
+      "question": "Can I predict sale prices accurately and still explain, for any one house, why the model priced it that way?",
+      "question_heading": "The question",
+      "what_i_did": "Compared Random Forest, XGBoost and LightGBM, tuned with GridSearchCV, then used SHAP to explain individual predictions and rank the features that move price most.",
+      "result": "Tuned XGBoost reached **0.93 R²** (baseline 0.92, Random Forest 0.91). SHAP ranked overall quality and above-ground living area as the biggest price drivers, followed by year built.",
+      "key_numbers": [
+        {
+          "number": "0.93",
+          "label": "R², tuned XGBoost"
+        },
+        {
+          "number": "0.92",
+          "label": "R², baseline XGBoost"
+        },
+        {
+          "number": "0.91",
+          "label": "R², Random Forest"
+        },
+        {
+          "number": "82",
+          "label": "features in the dataset"
+        }
+      ],
+      "recommendation": "For a pricing tool, lead with overall quality and living area, and show the SHAP breakdown so an agent can explain each valuation to a buyer or seller.",
+      "images": [
+        {
+          "file": "housing-shap.webp",
+          "thumbnail": "housing-shap-sm.webp",
+          "alt": "SHAP summary plot for the tuned XGBoost model",
+          "caption": "SHAP summary for the tuned XGBoost model. Overall quality and above-ground living area move the predicted price the most. Red is a high feature value, blue is low."
+        },
+        {
+          "file": "housing-r2.webp",
+          "thumbnail": "housing-r2-sm.webp",
+          "alt": "R squared comparison across three models",
+          "caption": "R² by model on the test set. XGBoost leads at 0.93."
+        }
+      ],
+      "extra_sections": []
+    },
+    {
+      "id": "evostruct",
+      "title": "EvoStruct-Sub Protein Localization",
+      "category": "ml",
+      "label": "machine learning · bioinformatics",
+      "one_line": "Predicting where a protein sits inside a bacterial cell from its sequence.",
+      "headline_number": "99.23%",
+      "headline_text": "Random Forest accuracy, still to be re-verified",
+      "tools": [
+        "Python",
+        "Scikit-learn",
+        "PSI-BLAST",
+        "SPIDER 2.0"
+      ],
+      "github_repo": "evostruct-sub-protein-localization",
+      "intro": "523 gram-positive bacterial proteins, four cell compartments.",
+      "question": "Given only a protein's amino-acid sequence, can a model predict which of four compartments it belongs to: cytoplasm, membrane, periplasm or extracellular?",
+      "question_heading": "The question",
+      "what_i_did": "Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 405-feature matrix, then trained and compared KNN, SVM and Random Forest.",
+      "result": "Random Forest reached **99.23%** accuracy, well ahead of SVM (79.08%) and KNN (77.74%). That gap is unusually large for 523 samples, so I treat it as a result to verify, not a final number.",
+      "key_numbers": [
+        {
+          "number": "523",
+          "label": "proteins"
+        },
+        {
+          "number": "405",
+          "label": "features per protein"
+        },
+        {
+          "number": "99.23%",
+          "label": "Random Forest accuracy"
+        },
+        {
+          "number": "79.08%",
+          "label": "SVM accuracy"
+        }
+      ],
+      "recommendation": "Before trusting the 99% figure, re-run Random Forest with stratified cross-validation. A 20-point lead over SVM and KNN on 523 samples is large enough to double-check for overlap between training and test data.",
+      "images": [],
+      "extra_sections": [
+        {
+          "heading": "Reproducibility",
+          "html": "<p>Pre-extracted features and trained models are in the repo, so the classifiers run in about 10 minutes without the external tools. Rebuilding features from raw sequences needs PSI-BLAST and SPIDER 2.0 and takes several hours.</p>"
+        }
+      ]
+    },
+    {
+      "id": "metaheuristics",
+      "title": "Metaheuristic Algorithm Comparison",
+      "category": "ml",
+      "label": "optimization",
+      "one_line": "Four nature-inspired optimizers, one classification task: which trains a better model?",
+      "headline_number": "97.4%",
+      "headline_text": "test accuracy for Wolf Pack and PSO",
+      "tools": [
+        "Python",
+        "NumPy",
+        "Scikit-learn",
+        "Matplotlib"
+      ],
+      "github_repo": "metaheuristic-optimization",
+      "intro": "Breast cancer classification on the UCI dataset.",
+      "question": "Instead of gradient descent, how well do metaheuristic optimizers train a classifier, and which one generalizes best?",
+      "question_heading": "The question",
+      "what_i_did": "Implemented and compared the Grasshopper Optimization Algorithm, Wolf Pack Optimization, Particle Swarm Optimization and a Genetic Algorithm, tracking train and test accuracy and loss for each.",
+      "result": "Wolf Pack and PSO tied at **97.37%** test accuracy, the Genetic Algorithm reached 96.49%, and Grasshopper lagged at 71.05%.",
+      "key_numbers": [
+        {
+          "number": "97.37%",
+          "label": "Wolf Pack test accuracy"
+        },
+        {
+          "number": "97.37%",
+          "label": "PSO test accuracy"
+        },
+        {
+          "number": "96.49%",
+          "label": "Genetic Algorithm"
+        },
+        {
+          "number": "71.05%",
+          "label": "Grasshopper"
+        }
+      ],
+      "recommendation": "Use Wolf Pack or PSO for this kind of problem. Grasshopper needs parameter tuning before it is competitive.",
+      "images": [
+        {
+          "file": "meta-comparison.webp",
+          "thumbnail": "meta-comparison-sm.webp",
+          "alt": "Accuracy and loss comparison across four optimizers",
+          "caption": "Train vs test accuracy and training loss for each optimizer, from the project notebook."
+        }
+      ],
+      "extra_sections": []
+    }
+  ],
+  "smaller_projects": [
+    {
+      "title": "Emotion Detection from Speech",
+      "text": "Team of 2, equal contribution. MFCC, ZCR and RMS features into a tuned CNN, with Captum attributions.",
+      "github_repo": "Emotion-Detection-From-Speech",
+      "category": "ml"
+    },
+    {
+      "title": "StudyArena",
+      "text": "RUC hackathon. React app that turns a PDF into quizzes and flashcards through an n8n workflow.",
+      "github_repo": "RUC-Hackathon--StudyArena",
+      "category": "data"
+    }
+  ],
+  "experience": [
+    {
+      "id": "adobe",
+      "company": "Adobe",
+      "title": "Business Data Analyst, Customer Experience Intelligence & Marketing Analytics",
+      "short_title": "Business Data Analyst",
+      "dates": "Dec 2025 to present",
+      "place": "USA",
+      "key_numbers": [
+        {
+          "number": "9h→5h",
+          "label": "per reporting cycle"
+        },
+        {
+          "number": "8",
+          "label": "Power BI dashboards"
+        },
+        {
+          "number": "20+",
+          "label": "stakeholders using them"
+        },
+        {
+          "number": "25",
+          "label": "KPIs reconciled"
+        }
+      ],
+      "focus": "Turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.",
+      "tools": [
+        "SQL",
+        "Snowflake",
+        "dbt",
+        "Databricks",
+        "Power BI",
+        "Python",
+        "Azure Data Factory",
+        "Jira"
+      ]
+    },
+    {
+      "id": "amazon",
+      "company": "Amazon",
+      "title": "Data Analyst, Supply Chain Optimization & Seller Performance Analytics",
+      "short_title": "Data Analyst",
+      "dates": "Jan 2020 to Aug 2024",
+      "place": "India",
+      "key_numbers": [
+        {
+          "number": "50M+",
+          "label": "records in Redshift"
+        },
+        {
+          "number": "10",
+          "label": "Tableau dashboards"
+        },
+        {
+          "number": "30+",
+          "label": "stakeholders using them"
+        },
+        {
+          "number": "6h→<2h",
+          "label": "weekly report prep"
+        }
+      ],
+      "focus": "Built the SQL, ETL and Tableau reporting that operations teams used to track seller health, fulfillment and SLA compliance.",
+      "tools": [
+        "SQL",
+        "Redshift",
+        "S3",
+        "Tableau",
+        "Excel",
+        "ETL"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "group": "Analytics & BI",
+      "items": [
+        "SQL",
+        "Power BI",
+        "Tableau",
+        "DAX",
+        "Excel",
+        "KPI design",
+        "Cohort analysis",
+        "Forecasting"
+      ]
+    },
+    {
+      "group": "Programming & ML",
+      "items": [
+        "Python",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "XGBoost",
+        "SHAP",
+        "Java",
+        "TypeScript"
+      ]
+    },
+    {
+      "group": "Data platforms",
+      "items": [
+        "Snowflake",
+        "Databricks",
+        "dbt",
+        "Azure Data Factory",
+        "Redshift",
+        "S3",
+        "PostgreSQL",
+        "MySQL"
+      ]
+    },
+    {
+      "group": "Data quality",
+      "items": [
+        "Reconciliation",
+        "Data profiling",
+        "Anomaly detection",
+        "Root cause analysis"
+      ]
+    },
+    {
+      "group": "Business analysis",
+      "items": [
+        "BRD / FRD",
+        "User stories",
+        "Acceptance criteria",
+        "UAT",
+        "Agile / Scrum"
+      ]
+    },
+    {
+      "group": "Cloud & tools",
+      "items": [
+        "AWS",
+        "Azure",
+        "Docker",
+        "Git",
+        "Jira",
+        "Confluence"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Rutgers University-Camden",
+      "degree": "M.S., Computer Science: Scientific Computing",
+      "dates": "Sep 2024 to May 2026",
+      "details": "GPA 3.90"
+    },
+    {
+      "school": "Sathyabama Institute of Science and Technology",
+      "degree": "B.E., Computer Science and Engineering",
+      "dates": "Jul 2016 to May 2020",
+      "details": "GPA 8.19 / 10 · Chennai"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Microsoft Azure Fundamentals (AZ-900)",
+      "issuer": "Microsoft",
+      "year": "",
+      "link": ""
+    }
+  ],
+  "contact": {
+    "heading": "Let's talk",
+    "text": "I'm looking for full-time data analyst and business analyst roles anywhere in the US. Email is the fastest way to reach me."
+  }
+}
