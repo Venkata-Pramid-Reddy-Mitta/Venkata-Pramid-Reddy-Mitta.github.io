@@ -31,7 +31,7 @@
     ]
   },
   "about": {
-    "text": "For 5+ years at Adobe and Amazon, I've worked with stakeholders to define KPIs, written the SQL behind them, and checked the numbers before they reached leadership. At Rutgers I added machine learning, and my capstone was on detecting attempts to copy a deployed ML model. I'm looking for full-time data analyst and business analyst roles anywhere in the US.",
+    "text": "For 5+ years at Adobe and Amazon, I've worked with stakeholders to define KPIs, written the SQL behind them, and checked the numbers before they reached leadership. At Rutgers I added machine learning, and my capstone was on detecting model-stealing attacks, where someone copies a deployed ML model through its API. I'm looking for full-time data analyst and business analyst roles anywhere in the US.",
     "how_i_work": [
       {
         "title": "Define the question",
@@ -72,9 +72,9 @@
       "title": "Sybil-Resilient Model Extraction Detection",
       "category": "ml",
       "label": "master's capstone · ML security",
-      "one_line": "Detecting attempts to copy an ML model, even when the attacker spreads the work across many fake accounts.",
+      "one_line": "Catching model-stealing attacks that hide across many fake (Sybil) accounts.",
       "headline_number": "0 → 64",
-      "headline_text": "fake attacker accounts caught: existing method alone vs with my added layer",
+      "headline_text": "Sybil accounts caught: PRADA alone vs with my detection layer",
       "tools": [
         "Python",
         "FastAPI",
