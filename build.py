@@ -12,6 +12,12 @@ S = C["site"]
 GH, EMAIL = S["github"], S["email"]
 
 
+def role_html(r):
+    # First part on its own line on phones; one line on wider screens.
+    head, sep, rest = r.partition(' · ')
+    if not sep: return e(r)
+    return f'<span class="r1">{e(head)}</span><span class="rsep"> · </span><span class="r2">{e(rest)}</span>'
+
 def e(text):
     """Escape plain text for HTML; **text** becomes bold."""
     t = html.escape(str(text), quote=False)
@@ -86,7 +92,7 @@ home = f"""<div class="view" data-view="home">
  <div class="hero-main">
   <p class="status"><i aria-hidden="true"></i>{e(pr['status'])}</p>
   <h1><span>{e(pr['name_line_1'])}</span><span>{e(pr['name_line_2'])}</span><small class="aka">{e(pr['goes_by'])}</small></h1>
-  <p class="role">{e(pr['role'])}</p>
+  <p class="role">{role_html(pr['role'])}</p>
   <p class="pitch">{e(pr['pitch'])}</p>
   <div class="btns">
     <a class="btn solid" href="#projects">View projects</a>
@@ -321,7 +327,7 @@ page = f"""<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -343,7 +349,7 @@ page = f"""<!doctype html>
 <footer class="wrap">&copy; 2026 {e(full_name)} &middot; {e(S['location_footer'])}</footer>
 <nav class="dock" aria-label="Quick links">
 {dock}</nav>
-<script src="site.js?v=8" defer></script>
+<script src="site.js?v=9" defer></script>
 </body>
 </html>
 """

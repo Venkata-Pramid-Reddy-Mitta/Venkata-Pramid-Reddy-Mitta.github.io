@@ -363,3 +363,4 @@ html{scroll-behavior:auto}
 @media (min-width:720px){.gh-btn{width:auto;padding-inline:24px}}
 @media (min-width:1000px){.view .fig{max-width:880px}}
 h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none}
+@media (max-width:719px){.role .r1,.role .r2{display:block}.role .rsep{display:none}}
