@@ -85,7 +85,7 @@
       "intro": "An extension of PRADA (Juuti et al., EuroS&P 2019), tested on an MNIST classifier. My master's capstone at Rutgers.",
       "question": "PRADA spots model-stealing by checking whether an account's query distances look normally distributed. An attacker can split queries across fake (Sybil) accounts so each one stays under PRADA's 100-query warm-up and never gets checked.",
       "question_heading": "The problem",
-      "what_i_did": "A second detection layer that compares query-distance histograms across accounts using Jensen-Shannon divergence. Sybil accounts all send Jacobian-generated images, so their histograms converge. Benign accounts' don't.",
+      "what_i_did": "A second detection layer that compares query-distance histograms across accounts using Jensen-Shannon divergence. Sybil accounts all send Jacobian-generated images, so their histograms converge. Benign accounts' histograms don't.",
       "result": "PRADA alone flagged **0 of 64** Sybil accounts. With the JS layer, detection held from 4 to 128 accounts with zero false positives.",
       "key_numbers": [
         {
@@ -102,7 +102,7 @@
         },
         {
           "number": "96.56%",
-          "label": "attacker's substitute model agreement"
+          "label": "label agreement between the attacker's copy and the victim model"
         }
       ],
       "recommendation": "Run a cross-account check like this alongside per-account detection on any public model API, and re-tune the threshold on held-out traffic before relying on it in production.",
@@ -111,7 +111,7 @@
           "file": "prada-sweep.webp",
           "thumbnail": "prada-sweep-sm.webp",
           "alt": "Detection rate vs number of Sybil accounts",
-          "caption": "Detection rate as the attack is split across more fake accounts. PRADA alone drops to 0% at 64 accounts. The JS layer keeps firing, but past about 192 accounts its separation signal weakens (see limitations below)."
+          "caption": "Detection rate as the attack is split across more fake accounts. PRADA alone drops to 0% at 64 accounts. The JS layer keeps firing, but from about 192 accounts up its separation signal weakens (see limitations below)."
         },
         {
           "file": "prada-wscores.webp",
@@ -127,7 +127,7 @@
         },
         {
           "heading": "What it can't do",
-          "html": "<ul class=\"tight\"><li>Beyond about 192 Sybil accounts, per-account histograms get sparse and the JS separation gap collapses, so detection becomes unstable.</li><li>A mixed 70/30 attack shrinks the separation gap to 0.002 in some configurations. Still detected, but the margin is thin.</li><li>The JS threshold (0.15) was tuned on the same data used for evaluation. There is no held-out test set.</li><li>PRADA's AUC of 1.0 comes from only two W scores, so I don't treat it as a robust result.</li></ul>"
+          "html": "<ul class=\"tight\"><li>At 192 or more Sybil accounts, per-account histograms get sparse and the JS separation gap collapses, so detection becomes unstable.</li><li>A mixed 70/30 attack shrinks the separation gap to 0.002 in some configurations. Still detected, but the margin is thin.</li><li>The JS threshold (0.15) was tuned on the same data used for evaluation. There is no held-out test set.</li><li>PRADA's AUC of 1.0 comes from only two W scores, so I don't treat it as a robust result.</li></ul>"
         }
       ],
       "what_i_did_heading": "What I built"
@@ -147,10 +147,10 @@
         "Power BI"
       ],
       "github_repo": "Olist-Delivery-Performance-Analysis",
-      "intro": "99,441 Brazilian e-commerce orders across 27 states and 70+ product categories.",
+      "intro": "99,441 Brazilian e-commerce orders across Brazil's 26 states and the Federal District, and 70+ product categories.",
       "question": "Which product categories and regions have the highest late-delivery rates, and does that line up with lower review scores? Written for two audiences: Logistics and Customer Experience.",
       "question_heading": "The question",
-      "what_i_did": "Joined the orders, customers, products, sellers and reviews tables in PostgreSQL. Flagged late orders with CASE WHEN, ranked states and categories with RANK() OVER, dropped categories under 500 orders to cut small-sample noise, and exposed SQL views as the data layer for a four-visual Power BI dashboard.",
+      "what_i_did": "Joined the orders, customers, order items, products and reviews tables in PostgreSQL. Flagged late orders with CASE WHEN, ranked states and categories with RANK() OVER, dropped categories with fewer than 500 order items to cut small-sample noise, and exposed SQL views as the data layer for a four-visual Power BI dashboard.",
       "result": "Alagoas had the worst late rate at **23.0%** of orders. Electronics led categories at 9.6%. Late delivery and review score showed a moderate negative correlation of -0.327.",
       "key_numbers": [
         {
@@ -170,7 +170,7 @@
           "label": "correlation, late delivery vs review score"
         }
       ],
-      "recommendation": "Start with Alagoas and the electronics category, where late rates are highest. Since late orders track with lower review scores, add seller and carrier data next to find out why those orders run late.",
+      "recommendation": "Start with Alagoas and the electronics category, where late rates are highest. Since late orders track with lower review scores, add seller-level data next, and carrier data if it can be sourced, to find out why those orders run late.",
       "images": [
         {
           "file": "olist-dashboard.webp",
@@ -182,7 +182,7 @@
       "extra_sections": [
         {
           "heading": "Limits",
-          "html": "<p>This locates where delivery problems are worst. It doesn't claim a root cause, because seller, warehouse and carrier data aren't in the dataset. The worst-category-per-state ranking is only reliable for the five high-volume states: MG, PR, RJ, RS and SP.</p>"
+          "html": "<p>This locates where delivery problems are worst. It doesn't claim a root cause: seller-level performance wasn't part of this analysis, and warehouse and carrier data aren't in the dataset. The worst-category-per-state ranking is only reliable for the five high-volume states: MG, PR, RJ, RS and SP.</p>"
         }
       ]
     },
@@ -193,7 +193,7 @@
       "label": "SQL + DAX",
       "one_line": "Do faster pit stops actually win races?",
       "headline_number": "+0.175",
-      "headline_text": "strongest link between pit time and finishing position, which is weak",
+      "headline_text": "correlation between total pit lane time and finishing position: more time, slightly worse finish (weak)",
       "tools": [
         "PostgreSQL",
         "LAG()",
@@ -213,18 +213,18 @@
         },
         {
           "number": "+0.175",
-          "label": "strongest correlation, race total"
+          "label": "strongest correlation, total pit lane time vs finish"
         },
         {
           "number": "+1.29s",
-          "label": "biggest year-over-year change in average pit time, 2013 to 2014"
+          "label": "pit lane time got 1.29s slower from 2013 to 2014, the biggest year-over-year change"
         },
         {
           "number": "23.74s",
-          "label": "Red Bull average pit time, fastest and most consistent"
+          "label": "Red Bull average pit lane time (entry to exit), fastest and most consistent"
         }
       ],
-      "recommendation": "Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so consistency is where they have the most to gain.",
+      "recommendation": "Don't treat pit-crew speed alone as a lever for race results. Some teams' problem is consistency rather than speed: Aston Martin is mid-pack on speed but second-worst on variability, so that's where they have the most to gain.",
       "images": [
         {
           "file": "f1-dashboard.webp",
@@ -247,7 +247,7 @@
       "label": "data pipeline · team project",
       "one_line": "Do warm-weather teams fold in the cold? A three-person team project.",
       "headline_number": "-7.7 pts",
-      "headline_text": "road win rate for warm-weather teams in games below 40°F",
+      "headline_text": "change in warm-weather teams' road win rate in games below 40°F (32.6% vs 40.3%)",
       "tools": [
         "Python",
         "Pandas",
@@ -267,11 +267,11 @@
         },
         {
           "number": "-7.7 pts",
-          "label": "warm teams' road win rate below 40°F"
+          "label": "change in warm teams' road win rate below 40°F"
         },
         {
           "number": "+3.4 pts",
-          "label": "cold teams' road win rate above 75°F (no drop)"
+          "label": "change in cold teams' road win rate above 75°F (no drop)"
         },
         {
           "number": "2",
@@ -292,7 +292,7 @@
       "label": "machine learning",
       "one_line": "Predicting house prices, and explaining each prediction in plain terms.",
       "headline_number": "0.93 R²",
-      "headline_text": "tuned XGBoost on 2,930 homes",
+      "headline_text": "test-set R², tuned XGBoost (2,930 homes)",
       "tools": [
         "Python",
         "Scikit-learn",
@@ -301,7 +301,7 @@
         "SHAP"
       ],
       "github_repo": "Housing-Price-Prediction-SHAP",
-      "intro": "Ames, Iowa housing data: 2,930 properties and 82 features.",
+      "intro": "Ames, Iowa housing data: 2,930 homes with about 80 variables each.",
       "question": "Can I predict sale prices accurately and still explain, for any one house, why the model priced it that way?",
       "question_heading": "The question",
       "what_i_did": "Compared Random Forest, XGBoost and LightGBM, tuned with GridSearchCV, then used SHAP to explain individual predictions and rank the features that move price most.",
@@ -320,8 +320,8 @@
           "label": "R², Random Forest"
         },
         {
-          "number": "82",
-          "label": "features in the dataset"
+          "number": "586",
+          "label": "homes in the test set"
         }
       ],
       "recommendation": "For a pricing tool, lead with overall quality and living area, and show the SHAP breakdown so an agent can explain each valuation to a buyer or seller.",
@@ -346,9 +346,9 @@
       "title": "EvoStruct-Sub Protein Localization",
       "category": "ml",
       "label": "machine learning · bioinformatics",
-      "one_line": "Predicting where a protein sits inside a bacterial cell from its sequence.",
-      "headline_number": "99.23%",
-      "headline_text": "Random Forest accuracy, vs 79% for SVM",
+      "one_line": "Predicting where a protein ends up in or around a bacterial cell, from its sequence.",
+      "headline_number": "70.6%",
+      "headline_text": "best 10-fold cross-validated accuracy (SVM), across three models",
       "tools": [
         "Python",
         "Scikit-learn",
@@ -359,27 +359,27 @@
       "intro": "523 Gram-positive bacterial proteins, four subcellular locations.",
       "question": "Given only a protein's amino-acid sequence, can a model predict which of four locations it belongs to: cell membrane, cell wall, cytoplasm or extracellular?",
       "question_heading": "The question",
-      "what_i_did": "Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 405-feature matrix, then trained and compared KNN, SVM and Random Forest.",
-      "result": "Random Forest reached **99.23%** accuracy, well ahead of SVM (79.08%) and KNN (77.74%). That gap is unusually large for 523 samples, so I treat it as a result to verify, not a final number.",
+      "what_i_did": "Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 235-feature matrix, then trained and compared KNN, SVM and Random Forest with 10-fold cross-validation.",
+      "result": "Cross-validated accuracy: SVM **70.6%**, Random Forest 69.9%, KNN 66.0%. Accuracy on the training data was much higher (Random Forest 99.23%), which shows overfitting, so I report the cross-validated numbers.",
       "key_numbers": [
         {
           "number": "523",
           "label": "proteins"
         },
         {
-          "number": "405",
+          "number": "235",
           "label": "features per protein"
         },
         {
-          "number": "99.23%",
-          "label": "Random Forest accuracy"
+          "number": "70.6%",
+          "label": "SVM, 10-fold cross-validated accuracy"
         },
         {
-          "number": "79.08%",
-          "label": "SVM accuracy"
+          "number": "69.9%",
+          "label": "Random Forest, 10-fold cross-validated accuracy"
         }
       ],
-      "recommendation": "Use Random Forest on the combined evolutionary and structural features as the starting model, and confirm the result with stratified cross-validation before using it on new proteins.",
+      "recommendation": "Judge models on cross-validated accuracy, not training accuracy. To move past about 70%, tackle the class imbalance first (only 18 cell wall proteins) and reduce overfitting before adding more models.",
       "images": [],
       "extra_sections": [
         {
@@ -407,7 +407,7 @@
       "question": "Instead of gradient descent, how well do metaheuristic optimizers train a classifier, and which one generalizes best?",
       "question_heading": "The question",
       "what_i_did": "Implemented and compared the Grasshopper Optimization Algorithm, Wolf Pack Optimization, Particle Swarm Optimization and a Genetic Algorithm, tracking train and test accuracy and loss for each.",
-      "result": "Wolf Pack and PSO tied at **97.37%** test accuracy, the Genetic Algorithm reached 96.49%, and Grasshopper lagged at 71.05%.",
+      "result": "In a single run, Wolf Pack and PSO tied at **97.37%** test accuracy, the Genetic Algorithm reached 96.49%, and Grasshopper lagged at 71.05%.",
       "key_numbers": [
         {
           "number": "97.37%",
