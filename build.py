@@ -187,7 +187,7 @@ experience_view = f"""<div class="view" data-view="experience">
 <div class="wrap phead">
   <a class="crumb" href="#home">Home</a>
   <h1>Experience</h1>
-  <p class="sub">Highlights from each role. My resume has the full details.</p>
+  <p class="sub">Key results from each role. Full details are in my resume.</p>
 </div>
 <section class="wrap" aria-label="Roles">
   <div class="tabs" role="tablist" aria-label="Employer">{tabs}</div>{panels}
