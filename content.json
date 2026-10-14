@@ -13,7 +13,7 @@
     "goes_by": "Goes by Pramid",
     "status": "Camden, NJ · Open to relocation · Authorized to work in the US (OPT)",
     "role": "Business Data Analyst · SQL, Python, BI · ML",
-    "pitch": "I turn business questions into numbers people can trust. Five years of analytics at Adobe and Amazon, a Rutgers master's, and a capstone on catching model-stealing attacks.",
+    "pitch": "Data analyst with 5+ years at Adobe and Amazon. I use SQL, Python and Power BI to turn raw data into dashboards and reports that teams use to make decisions. MS in Computer Science from Rutgers.",
     "photo": "pramid.webp",
     "highlights": [
       {
@@ -31,7 +31,7 @@
     ]
   },
   "about": {
-    "text": "I've spent five years on the analytics side of Adobe and Amazon: defining KPIs with stakeholders, writing the SQL behind them, and checking every number before it reaches leadership. At Rutgers I went deeper into machine learning, ending with a capstone on detecting model-stealing attacks. I'm looking for full-time data analyst and business analyst roles anywhere in the US.",
+    "text": "For 5+ years at Adobe and Amazon, I've worked with stakeholders to define KPIs, written the SQL behind them, and checked the numbers before they reached leadership. At Rutgers I added machine learning, and my capstone was on detecting attempts to copy a deployed ML model. I'm looking for full-time data analyst and business analyst roles anywhere in the US.",
     "how_i_work": [
       {
         "title": "Define the question",
@@ -42,7 +42,7 @@
         "text": "Reconcile sources and catch gaps before anyone sees a chart."
       },
       {
-        "title": "Turn them into a decision",
+        "title": "Turn them into action",
         "text": "Dashboards and short write-ups that say what to do next."
       }
     ]
@@ -72,9 +72,9 @@
       "title": "Sybil-Resilient Model Extraction Detection",
       "category": "ml",
       "label": "master's capstone · ML security",
-      "one_line": "Catching attackers who split a model-stealing attack across many fake accounts.",
+      "one_line": "Detecting attempts to copy an ML model, even when the attacker spreads the work across many fake accounts.",
       "headline_number": "0 → 64",
-      "headline_text": "Sybil accounts caught, before vs after my detection layer",
+      "headline_text": "fake attacker accounts caught: existing method alone vs with my added layer",
       "tools": [
         "Python",
         "FastAPI",
@@ -181,7 +181,7 @@
       ],
       "extra_sections": [
         {
-          "heading": "Scope, stated plainly",
+          "heading": "Limits",
           "html": "<p>This locates where delivery problems are worst. It doesn't claim a root cause, because seller, warehouse and carrier data aren't in the dataset. The worst-category-per-state ranking is only reliable for the five high-volume states: MG, PR, RJ, RS and SP.</p>"
         }
       ]
@@ -193,7 +193,7 @@
       "label": "SQL + DAX",
       "one_line": "Do faster pit stops actually win races?",
       "headline_number": "+0.175",
-      "headline_text": "strongest correlation found, which is weak",
+      "headline_text": "strongest link between pit time and finishing position, which is weak",
       "tools": [
         "PostgreSQL",
         "LAG()",
@@ -205,7 +205,7 @@
       "question": "Does pit stop speed relate to where a driver finishes, and have stops gotten faster over the years?",
       "question_heading": "The question",
       "what_i_did": "Tested the link at three levels (single stop, race average, race total) with CORR(), compared constructors with AVG and STDDEV, and tracked year-over-year change with LAG. In Power BI I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.",
-      "result": "The link is weak: **+0.135 to +0.175**. P1 finishers averaged 43.2s of pit lane time per race, vs 57.0s for P18, but faster cars and faster crews overlap.",
+      "result": "The link is weak: **+0.135 to +0.175**. P1 finishers averaged 43.2s of pit lane time per race vs 57.0s for P18, but top teams tend to have both faster cars and faster crews, so pit speed alone doesn't explain results.",
       "key_numbers": [
         {
           "number": "10,884",
@@ -247,7 +247,7 @@
       "label": "data pipeline · team project",
       "one_line": "Do warm-weather teams fold in the cold? A three-person team project.",
       "headline_number": "-7.7 pts",
-      "headline_text": "win rate for warm-weather teams in extreme cold",
+      "headline_text": "road win rate for warm-weather teams in extreme cold",
       "tools": [
         "Python",
         "Pandas",
@@ -259,7 +259,7 @@
       "question": "Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?",
       "question_heading": "The question",
       "what_i_did": "Built an ingestion script for game data with nflreadpy and a weather-enrichment step with the Meteostat API, then compared road win rates across temperature thresholds in a notebook.",
-      "result": "Warm-weather teams lose **7.7 points** of win rate in extreme cold. Cold-weather teams show no meaningful drop in heat. The myth is one-sided.",
+      "result": "Warm-weather teams' road win rate drops **7.7 points** in extreme cold. Cold-weather teams show no drop in heat (+3.4 points). The myth only holds one way.",
       "key_numbers": [
         {
           "number": "25",
@@ -270,8 +270,8 @@
           "label": "warm teams' win rate in extreme cold"
         },
         {
-          "number": "None",
-          "label": "meaningful drop for cold teams in heat"
+          "number": "+3.4 pts",
+          "label": "cold teams' road win rate in heat (no drop)"
         },
         {
           "number": "2",
@@ -290,7 +290,7 @@
       "title": "Explainable Housing Prices",
       "category": "ml",
       "label": "machine learning",
-      "one_line": "A price model a non-technical person can question.",
+      "one_line": "Predicting house prices, and explaining each prediction in plain terms.",
       "headline_number": "0.93 R²",
       "headline_text": "tuned XGBoost on 2,930 homes",
       "tools": [
@@ -394,7 +394,7 @@
       "category": "ml",
       "label": "optimization",
       "one_line": "Four nature-inspired optimizers, one classification task: which trains a better model?",
-      "headline_number": "97.4%",
+      "headline_number": "97.37%",
       "headline_text": "test accuracy for Wolf Pack and PSO",
       "tools": [
         "Python",
@@ -441,13 +441,13 @@
   "smaller_projects": [
     {
       "title": "Emotion Detection from Speech",
-      "text": "Team of 2, equal contribution. MFCC, ZCR and RMS features into a tuned CNN, with Captum attributions.",
+      "text": "Two-person team project, equal contribution. A CNN that classifies emotion from voice recordings, using audio features (MFCC, ZCR, RMS) and Captum to show what the model relies on.",
       "github_repo": "Emotion-Detection-From-Speech",
       "category": "ml"
     },
     {
       "title": "StudyArena",
-      "text": "RUC hackathon. React app that turns a PDF into quizzes and flashcards through an n8n workflow.",
+      "text": "Rutgers-Camden hackathon. A React app that turns a PDF into quizzes and flashcards using an n8n workflow.",
       "github_repo": "RUC-Hackathon--StudyArena",
       "category": "data"
     }

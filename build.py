@@ -118,7 +118,7 @@ home = f"""<div class="view" data-view="home">
 </section>
 
 <section class="wrap sec" aria-labelledby="feat-h">
-  <h2 id="feat-h">Featured work</h2>
+  <h2 id="feat-h">Featured projects</h2>
   <p class="lede">Projects to start with. Tap one for the full story.</p>
   <div class="grid feat">
 {featured}
