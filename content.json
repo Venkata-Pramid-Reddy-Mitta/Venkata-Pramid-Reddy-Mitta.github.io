@@ -224,7 +224,7 @@
           "label": "Red Bull average pit time, fastest and most consistent"
         }
       ],
-      "recommendation": "Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so that is where a team would focus.",
+      "recommendation": "Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so consistency is where they have the most to gain.",
       "images": [
         {
           "file": "f1-dashboard.webp",
@@ -247,7 +247,7 @@
       "label": "data pipeline · team project",
       "one_line": "Do warm-weather teams fold in the cold? A three-person team project.",
       "headline_number": "-7.7 pts",
-      "headline_text": "road win rate for warm-weather teams in extreme cold",
+      "headline_text": "road win rate for warm-weather teams in games below 40°F",
       "tools": [
         "Python",
         "Pandas",
@@ -259,7 +259,7 @@
       "question": "Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?",
       "question_heading": "The question",
       "what_i_did": "Built an ingestion script for game data with nflreadpy and a weather-enrichment step with the Meteostat API, then compared road win rates across temperature thresholds in a notebook.",
-      "result": "Warm-weather teams' road win rate drops **7.7 points** in extreme cold. Cold-weather teams show no drop in heat (+3.4 points). The myth only holds one way.",
+      "result": "Warm-weather teams' road win rate drops **7.7 points** in games below 40°F. Cold-weather teams show no drop in games above 75°F (+3.4 points). The myth only holds one way.",
       "key_numbers": [
         {
           "number": "25",
@@ -267,11 +267,11 @@
         },
         {
           "number": "-7.7 pts",
-          "label": "warm teams' win rate in extreme cold"
+          "label": "warm teams' road win rate below 40°F"
         },
         {
           "number": "+3.4 pts",
-          "label": "cold teams' road win rate in heat (no drop)"
+          "label": "cold teams' road win rate above 75°F (no drop)"
         },
         {
           "number": "2",
@@ -419,11 +419,11 @@
         },
         {
           "number": "96.49%",
-          "label": "Genetic Algorithm"
+          "label": "Genetic Algorithm test accuracy"
         },
         {
           "number": "71.05%",
-          "label": "Grasshopper"
+          "label": "Grasshopper test accuracy"
         }
       ],
       "recommendation": "Use Wolf Pack or PSO for this kind of problem. Grasshopper needs parameter tuning before it is competitive.",

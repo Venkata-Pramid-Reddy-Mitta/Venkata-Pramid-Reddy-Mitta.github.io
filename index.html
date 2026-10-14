@@ -143,7 +143,7 @@
       <p class="kicker">data pipeline · team project</p>
       <h3><a href="#p-nfl">NFL Performance &amp; Weather</a></h3>
       <p>Do warm-weather teams fold in the cold? A three-person team project.</p>
-      <div class="stat"><b>-7.7 pts</b><span>road win rate for warm-weather teams in extreme cold</span></div>
+      <div class="stat"><b>-7.7 pts</b><span>road win rate for warm-weather teams in games below 40°F</span></div>
       <ul class="chips"><li>Python</li><li>Pandas</li><li>nflreadpy</li><li>Meteostat</li></ul>
       <span class="open" aria-hidden="true">Read the case study</span>
     </article>
@@ -313,7 +313,7 @@
     <a class="btn solid gh-btn" href="https://github.com/Venkata-Pramid-Reddy-Mitta/F1-Pit-Stop-Strategy-Analysis" rel="noopener">View code on GitHub</a>
   </div>
   
-  <div class="block"><h2>What I'd recommend</h2><p>Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so that is where a team would focus.</p></div><div class="block"><h2>Data cleaning</h2><p>Stops of 100 seconds or longer were filtered out as red-flag and safety-car artifacts, so they wouldn't distort the averages.</p></div>
+  <div class="block"><h2>What I'd recommend</h2><p>Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so consistency is where they have the most to gain.</p></div><div class="block"><h2>Data cleaning</h2><p>Stops of 100 seconds or longer were filtered out as red-flag and safety-car artifacts, so they wouldn't distort the averages.</p></div>
   <nav class="pager" aria-label="More projects">
     <a href="#projects"><small>back</small><strong>All projects</strong></a>
     <a class="next" href="#p-nfl"><small>next project</small><strong>NFL Performance &amp; Weather</strong></a>
@@ -343,8 +343,8 @@
 </div>
 <article class="wrap">
   <div class="card feature">
-    <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?</dd></div><div><dt>What we did</dt><dd>Built an ingestion script for game data with nflreadpy and a weather-enrichment step with the Meteostat API, then compared road win rates across temperature thresholds in a notebook.</dd></div><div><dt>Result</dt><dd>Warm-weather teams' road win rate drops <b>7.7 points</b> in extreme cold. Cold-weather teams show no drop in heat (+3.4 points). The myth only holds one way.</dd></div></dl>
-    <div class="figs"><div><b>25</b><span>seasons analyzed</span></div><div><b>-7.7 pts</b><span>warm teams' win rate in extreme cold</span></div><div><b>+3.4 pts</b><span>cold teams' road win rate in heat (no drop)</span></div><div><b>2</b><span>data sources joined</span></div></div>
+    <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?</dd></div><div><dt>What we did</dt><dd>Built an ingestion script for game data with nflreadpy and a weather-enrichment step with the Meteostat API, then compared road win rates across temperature thresholds in a notebook.</dd></div><div><dt>Result</dt><dd>Warm-weather teams' road win rate drops <b>7.7 points</b> in games below 40°F. Cold-weather teams show no drop in games above 75°F (+3.4 points). The myth only holds one way.</dd></div></dl>
+    <div class="figs"><div><b>25</b><span>seasons analyzed</span></div><div><b>-7.7 pts</b><span>warm teams' road win rate below 40°F</span></div><div><b>+3.4 pts</b><span>cold teams' road win rate above 75°F (no drop)</span></div><div><b>2</b><span>data sources joined</span></div></div>
     <ul class="chips"><li>Python</li><li>Pandas</li><li>nflreadpy</li><li>Meteostat</li></ul>
     <a class="btn solid gh-btn" href="https://github.com/Venkata-Pramid-Reddy-Mitta/NFL-Performance-Weather-Analysis" rel="noopener">View code on GitHub</a>
   </div>
@@ -413,7 +413,7 @@
 <article class="wrap">
   <div class="card feature">
     <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Instead of gradient descent, how well do metaheuristic optimizers train a classifier, and which one generalizes best?</dd></div><div><dt>What I did</dt><dd>Implemented and compared the Grasshopper Optimization Algorithm, Wolf Pack Optimization, Particle Swarm Optimization and a Genetic Algorithm, tracking train and test accuracy and loss for each.</dd></div><div><dt>Result</dt><dd>Wolf Pack and PSO tied at <b>97.37%</b> test accuracy, the Genetic Algorithm reached 96.49%, and Grasshopper lagged at 71.05%.</dd></div></dl>
-    <div class="figs"><div><b>97.37%</b><span>Wolf Pack test accuracy</span></div><div><b>97.37%</b><span>PSO test accuracy</span></div><div><b>96.49%</b><span>Genetic Algorithm</span></div><div><b>71.05%</b><span>Grasshopper</span></div></div>
+    <div class="figs"><div><b>97.37%</b><span>Wolf Pack test accuracy</span></div><div><b>97.37%</b><span>PSO test accuracy</span></div><div><b>96.49%</b><span>Genetic Algorithm test accuracy</span></div><div><b>71.05%</b><span>Grasshopper test accuracy</span></div></div>
     <ul class="chips"><li>Python</li><li>NumPy</li><li>Scikit-learn</li><li>Matplotlib</li></ul>
     <a class="btn solid gh-btn" href="https://github.com/Venkata-Pramid-Reddy-Mitta/metaheuristic-optimization" rel="noopener">View code on GitHub</a>
   </div>
