@@ -76,6 +76,16 @@ Add to `"smaller_projects"`:
 {"title": "Project name", "text": "One-line description.", "github_repo": "Repo-Name", "category": "ml"}
 ```
 
+## Edit the "Ask me" answers
+The **Ask me** screen answers typed questions from pre-written text. There is no AI and no server.
+- `ask` in `content.json`: one block per answer. Fields: `id`, `question` (shown as the heading and chip), `keywords` (comma-separated words or phrases a visitor might type), `answer`, and optional `links`.
+- In `answer`, use `\n\n` for a new paragraph and `**word**` for bold.
+- In `links`, `to` can be a screen (`p-olist`, `experience-adobe`, `education`, `projects`), another answer (`ask-sql`), a full web address, or `email`, `resume`, `linkedin`, `github`.
+- `ask_suggested` lists the question chips on the Ask screen. `ask_home` lists the five on the home page.
+- `ask_page`: the screen's heading, intro, placeholder and the "no match" messages.
+- Project answers and "Do you know X?" answers (one per skill) are made automatically from the projects and skills lists. To write your own for a skill, add it to `covers_skills` on an answer. Add extra words people might type for a project with `ask_keywords`.
+- Only put facts in answers that are already on the site. If a question has no match, the visitor sees the closest topics and an Email me button with their question filled in.
+
 ## Other things you can change in content.json
 - `profile`: name, "goes by", the status line, title, intro, photo file, the three highlight numbers
 - `about`: the About me text and the three "How I work" steps
@@ -89,9 +99,11 @@ Add to `"smaller_projects"`:
 - `build.py`: turns `content.json` into `index.html` (GitHub runs it for you)
 - `.github/workflows/deploy.yml`: builds and publishes on every commit to `main`
 - `style.css`: all styling. `site.js`: screen switching, filters, tabs and the NFL chart
+- `ask.js`: the matching and display for the Ask me screen
 - `img/`: photo and project images. `data/nfl.json`: game data for the NFL interactive chart
 
 To preview on a computer: `python build.py`, then open `index.html` in a browser.
 
 The page has several screens; the part after `#` in the address picks one:
-`#home`, `#projects`, `#experience`, `#education`, `#contact`, or a project such as `#p-olist`.
+`#home`, `#projects`, `#experience`, `#education`, `#ask`, `#contact`, or a project such as `#p-olist`.
+`#ask-sql` opens Ask me on one answer.

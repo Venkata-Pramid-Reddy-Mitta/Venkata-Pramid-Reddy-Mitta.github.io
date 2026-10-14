@@ -368,3 +368,34 @@ h1[tabindex="-1"]:focus,h2[tabindex="-1"]:focus{outline:none}
 .hero .status i{margin-top:.5em}
 .status .sp{white-space:nowrap}
 @media (max-width:719px){.status .sp.slast{display:block}.status .ssep.slast{display:none}.status .sp{white-space:normal}}
+
+/* ---------- Ask me ---------- */
+.vh{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.askform{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-top:6px}
+.askform input{min-height:52px;min-width:0;padding:0 16px;border:1.5px solid var(--ink);border-radius:12px;background:var(--sheet);color:var(--ink);font:400 1rem/1.3 var(--body);-webkit-appearance:none;appearance:none}
+.askform input::placeholder{color:var(--muted);opacity:1}
+.askform input:focus-visible{outline:3px solid var(--pen);outline-offset:3px}
+.askform .btn{min-width:84px;min-height:52px}
+.askout{margin-top:18px}
+.askout:empty{display:none}
+.askcard{border:1.5px solid var(--ink)}
+.asked{color:var(--muted);font-size:.9rem;margin:0 0 6px;overflow-wrap:anywhere}
+.askq{font-size:1.35rem;margin:0 0 12px}
+.askans p{max-width:62ch;margin:0 0 12px}
+.askans p:last-child{margin-bottom:0}
+.asklinks{display:flex;flex-wrap:wrap;gap:2px 20px;margin-top:8px}
+.asklinks.stackbtns{gap:10px;margin-top:16px}
+.asklinks.stackbtns .btn{flex:1 1 180px}
+.askrel{margin-top:18px;padding-top:14px;border-top:1px dashed var(--rule)}
+.askpick{border-top:0;padding-top:0;margin-top:24px}
+.askrel .hint{margin:0 0 4px}
+.qchips{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.qchips button,.qchips a{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--rule);background:var(--sheet);color:var(--ink);font:600 .92rem/1.25 var(--body);text-decoration:none;cursor:pointer;text-align:left}
+.qchips button:hover,.qchips a:hover{border-color:var(--ink)}
+.qchips button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.askfoot{margin-top:22px}
+.askhome .btn{margin-top:18px}
+/* six dock items: keep labels from touching on narrow phones */
+.dock{grid-template-columns:repeat(6,1fr);gap:0;padding-inline:2px}
+.dock a{font-size:clamp(.58rem,2.9vw,.7rem);min-width:0}
+@media (min-width:720px){.askform{max-width:640px}.askcard{max-width:760px}}
