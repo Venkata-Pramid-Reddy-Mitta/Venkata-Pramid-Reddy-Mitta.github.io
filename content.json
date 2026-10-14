@@ -356,7 +356,7 @@
         "SPIDER 2.0"
       ],
       "github_repo": "evostruct-sub-protein-localization",
-      "intro": "523 Gram-positive bacterial proteins, four subcellular locations.",
+      "intro": "Applies the published EvoStruct-Sub method to a benchmark of 523 Gram-positive bacterial proteins in four subcellular locations. A Rutgers course project.",
       "question": "Given only a protein's amino-acid sequence, can a model predict which of four locations it belongs to: cell membrane, cell wall, cytoplasm or extracellular?",
       "question_heading": "The question",
       "what_i_did": "Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 235-feature matrix, then trained and compared KNN, SVM and Random Forest with 10-fold cross-validation.",
