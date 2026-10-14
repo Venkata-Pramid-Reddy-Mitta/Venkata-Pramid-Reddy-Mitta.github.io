@@ -82,6 +82,7 @@
         "MNIST"
       ],
       "github_repo": "PRADA-Sybil_Resilient_Model",
+      "ask_keywords": "capstone, sybil, model extraction, model stealing, prada, ml security",
       "intro": "An extension of PRADA (Juuti et al., EuroS&P 2019), tested on an MNIST classifier. My master's capstone at Rutgers.",
       "question": "PRADA spots model-stealing by checking whether an account's query distances look normally distributed. An attacker can split queries across fake (Sybil) accounts so each one stays under PRADA's 100-query warm-up and never gets checked.",
       "question_heading": "The problem",
@@ -147,6 +148,7 @@
         "Power BI"
       ],
       "github_repo": "Olist-Delivery-Performance-Analysis",
+      "ask_keywords": "olist, delivery, late delivery, e commerce, ecommerce, brazil, review score",
       "intro": "99,441 Brazilian e-commerce orders across Brazil's 26 states and the Federal District, and 70+ product categories.",
       "question": "Which product categories and regions have the highest late-delivery rates, and does that line up with lower review scores? Written for two audiences: Logistics and Customer Experience.",
       "question_heading": "The question",
@@ -201,6 +203,7 @@
         "DAX"
       ],
       "github_repo": "F1-Pit-Stop-Strategy-Analysis",
+      "ask_keywords": "f1, formula 1, formula one, pit stop, racing, motorsport, constructor",
       "intro": "10,884 Formula 1 pit stops from 2011 to 2024, across six PostgreSQL tables.",
       "question": "Does pit stop speed relate to where a driver finishes, and have stops gotten faster over the years?",
       "question_heading": "The question",
@@ -255,6 +258,7 @@
         "Meteostat"
       ],
       "github_repo": "NFL-Performance-Weather-Analysis",
+      "ask_keywords": "nfl, football, weather, warm weather, cold weather, win rate",
       "intro": "25 NFL seasons (2000 to 2024) joined with historical weather data. A course project built with two classmates.",
       "question": "Sports talk says warm-weather teams struggle in the cold and cold-weather teams struggle in the heat. Does the data agree, in both directions?",
       "question_heading": "The question",
@@ -301,6 +305,7 @@
         "SHAP"
       ],
       "github_repo": "Housing-Price-Prediction-SHAP",
+      "ask_keywords": "housing, house price, home price, real estate, ames, explainable",
       "intro": "Ames, Iowa housing data: 2,930 homes with about 80 variables each.",
       "question": "Can I predict sale prices accurately and still explain, for any one house, why the model priced it that way?",
       "question_heading": "The question",
@@ -356,6 +361,7 @@
         "SPIDER 2.0"
       ],
       "github_repo": "evostruct-sub-protein-localization",
+      "ask_keywords": "evostruct, protein, bioinformatics, biology, localization, bacteria",
       "intro": "Applies the published EvoStruct-Sub method to a benchmark of 523 Gram-positive bacterial proteins in four subcellular locations. A Rutgers course project.",
       "question": "Given only a protein's amino-acid sequence, can a model predict which of four locations it belongs to: cell membrane, cell wall, cytoplasm or extracellular?",
       "question_heading": "The question",
@@ -403,6 +409,7 @@
         "Matplotlib"
       ],
       "github_repo": "metaheuristic-optimization",
+      "ask_keywords": "metaheuristic, optimizer, optimization algorithm, genetic algorithm, particle swarm, pso, wolf pack, grasshopper",
       "intro": "Breast cancer classification on the UCI dataset.",
       "question": "Instead of gradient descent, how well do metaheuristic optimizers train a classifier, and which one generalizes best?",
       "question_heading": "The question",
@@ -443,12 +450,14 @@
       "title": "Emotion Detection from Speech",
       "text": "Two-person team project, equal contribution. A CNN that classifies emotion from voice recordings, using audio features (MFCC, ZCR, RMS) and Captum to show what the model relies on.",
       "github_repo": "Emotion-Detection-From-Speech",
+      "ask_keywords": "emotion, emotion detection, speech, voice, audio, cnn",
       "category": "ml"
     },
     {
       "title": "StudyArena",
       "text": "Rutgers-Camden hackathon. A React app that turns a PDF into quizzes and flashcards using an n8n workflow.",
       "github_repo": "RUC-Hackathon--StudyArena",
+      "ask_keywords": "studyarena, study arena, hackathon, flashcards, quiz, react, n8n",
       "category": "data"
     }
   ],
@@ -622,5 +631,198 @@
   "contact": {
     "heading": "Let's talk",
     "text": "I'm looking for full-time data analyst and business analyst roles anywhere in the US. Email is the fastest way to reach me."
-  }
+  },
+  "ask_page": {
+    "heading": "Ask me",
+    "text": "Type a question and get an answer pulled from what's on this site, or tap one below. The answers are pre-written, so nothing is made up.",
+    "home_text": "Looking for something specific? Type a question or tap one below.",
+    "placeholder": "e.g. Do you know SQL?",
+    "no_match": "I don't have a ready answer for that one, and I'd rather not guess.",
+    "no_match_skill": "That isn't listed on this site, so I won't claim it here. My main tools are SQL, Python and Power BI. Email me and I'll tell you directly.",
+    "email_subject": "Question from your portfolio"
+  },
+  "ask_suggested": ["work-auth", "location", "experience-years", "adobe", "amazon", "best-project", "sql", "dashboards", "education", "resume"],
+  "ask_home": ["work-auth", "experience-years", "adobe", "best-project", "resume"],
+  "_how_to_edit_ask": "Each item in the ask list is one answer. keywords is a comma-separated list of words or phrases a visitor might type. Put a blank line between paragraphs as \\n\\n and wrap a word in two stars to make it bold. In links, 'to' can be a screen (p-olist, experience-adobe, education, projects, contact), another answer (ask-sql), a full web address, or one of: email, resume, linkedin, github. If an answer replaces the automatic 'Do you know X?' answer for a skill, list that skill in covers_skills. Only use facts that are already on this site.",
+  "ask": [
+    {
+      "id": "work-auth",
+      "question": "Are you authorized to work in the US?",
+      "keywords": "work authorization, work authorisation, authorized, authorised, authorization, work permit, visa, sponsorship, sponsor, opt, h1b, h-1b, eligible to work, legally, citizen, citizenship, immigration, ead, right to work",
+      "answer": "I'm authorized to work in the US (OPT). If you have questions beyond that, such as sponsorship, email me and I'll answer directly.",
+      "links": [{"label": "Email me", "to": "email"}]
+    },
+    {
+      "id": "location",
+      "question": "Where are you based, and are you open to relocating?",
+      "keywords": "where are you, where do you live, based, located, location, live, city, relocate, relocation, relocating, move, moving, camden, new jersey, nj, anywhere",
+      "answer": "I'm based in Camden, NJ, and open to relocation. I'm looking for roles anywhere in the US."
+    },
+    {
+      "id": "looking-for",
+      "question": "What kind of roles are you looking for?",
+      "keywords": "looking for, role, job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role",
+      "answer": "Full-time data analyst and business analyst roles, anywhere in the US."
+    },
+    {
+      "id": "experience-years",
+      "question": "How many years of experience do you have?",
+      "keywords": "how many years, years of experience, years, how long, seniority, senior, tenure, how experienced",
+      "answer": "5+ years in analytics, across two roles: Adobe (Dec 2025 to present) and Amazon (Jan 2020 to Aug 2024).",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}]
+    },
+    {
+      "id": "about-me",
+      "question": "Tell me about yourself",
+      "keywords": "tell me about yourself, about yourself, about you, who are you, introduce yourself, introduction, background, summary, overview, bio, profile, pitch, describe yourself",
+      "answer": "I'm a data analyst with 5+ years at Adobe and Amazon. I use SQL, Python and Power BI to turn raw data into dashboards and reports that teams use to make decisions.\n\nI work with stakeholders to define KPIs, write the SQL behind them, and check the numbers before they reach leadership. I added machine learning during my M.S. in Computer Science at Rutgers.",
+      "links": [{"label": "Experience and skills", "to": "experience"}, {"label": "Projects", "to": "projects"}]
+    },
+    {
+      "id": "how-i-work",
+      "question": "How do you work with stakeholders?",
+      "keywords": "stakeholder, stakeholders, how do you work, how i work, approach, process, methodology, requirements, requirement, communicate, communication, strengths, strength, why hire you, why should we hire you, why should i hire you, what makes you different, kpi, kpis, kpi design, define kpis",
+      "covers_skills": "KPI design",
+      "answer": "I work in three steps.\n\n**Define the question.** Agree on the decision and the metric with the people who will use it.\n\n**Make the numbers trustworthy.** Reconcile sources and catch gaps before anyone sees a chart.\n\n**Turn them into action.** Dashboards and short write-ups that say what to do next.\n\nIn practice, 20+ stakeholders use my dashboards at Adobe, and 30+ used the ones I delivered at Amazon."
+    },
+    {
+      "id": "adobe",
+      "question": "What do you do at Adobe?",
+      "keywords": "adobe, current job, current role, current employer, current company, currently working, where do you work, present role, customer experience, marketing analytics",
+      "answer": "At Adobe (Dec 2025 to present) I'm a Business Data Analyst for Customer Experience Intelligence & Marketing Analytics. I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.\n\nResults: the reporting cycle went from **9 hours to 5**, **8 Power BI dashboards** are used by **20+ stakeholders**, and I reconciled **25 KPIs**.\n\nTools: SQL, Snowflake, dbt, Databricks, Power BI, Python, Azure Data Factory, Jira.",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}]
+    },
+    {
+      "id": "amazon",
+      "question": "What did you do at Amazon?",
+      "keywords": "amazon, previous job, previous role, previous employer, last job, last role, supply chain, seller, sellers, seller performance, fulfillment, fulfilment, sla, india",
+      "answer": "At Amazon (Jan 2020 to Aug 2024, India) I was a Data Analyst for Supply Chain Optimization & Seller Performance Analytics. I built the SQL, ETL and Tableau reporting that operations teams used to track seller health, fulfillment and SLA compliance.\n\nResults: **50M+ records** in Redshift, **10 Tableau dashboards** used by **30+ stakeholders**, and weekly report prep cut from **6 hours to under 2**.\n\nTools: SQL, Redshift, S3, Tableau, Excel, ETL.",
+      "links": [{"label": "Amazon role", "to": "experience-amazon"}]
+    },
+    {
+      "id": "timeline",
+      "question": "What have you done since Amazon?",
+      "keywords": "timeline, career path, career history, work history, since amazon, after amazon, left amazon, gap, career gap, employment gap",
+      "answer": "Amazon ended in Aug 2024. From Sep 2024 to May 2026 I did my M.S. in Computer Science (Scientific Computing) at Rutgers University-Camden, and in Dec 2025 I started at Adobe, where I still work.",
+      "links": [{"label": "Education", "to": "education"}, {"label": "Adobe role", "to": "experience-adobe"}]
+    },
+    {
+      "id": "skills-main",
+      "question": "What are your main skills and tools?",
+      "keywords": "skills, skill, tools, tech stack, stack, technologies, toolkit, strongest, best at, proficient, languages, programming languages, main tools, what do you use",
+      "answer": "My main tools are SQL, Python and Power BI. I also work with Tableau, Snowflake, Redshift, Databricks, dbt and Azure Data Factory.\n\nAsk about any one of them, such as Snowflake or Tableau, or see the full list on the Experience page.",
+      "links": [{"label": "All skills", "to": "experience"}]
+    },
+    {
+      "id": "projects-list",
+      "question": "What projects have you done?",
+      "keywords": "project, projects, portfolio, side projects, personal projects, case study, case studies, all projects",
+      "answer": "The case studies on this site are my Rutgers capstone on model-extraction detection, Olist delivery performance, F1 pit stops, NFL and weather, housing prices, protein localization and a metaheuristics comparison. There are also two smaller projects: Emotion Detection from Speech and StudyArena.",
+      "links": [{"label": "All projects", "to": "projects"}]
+    },
+    {
+      "id": "best-project",
+      "question": "Which project should I look at first?",
+      "keywords": "best project, strongest project, favorite project, favourite project, proudest, proud of, most proud, most impressive, highlights, highlight, featured, which project, top project, start with, look at first, standout, stand out",
+      "answer": "Three I'd start with.\n\n**Olist Delivery Performance** shows my SQL-to-dashboard work: 99,441 orders in PostgreSQL, with a Power BI dashboard on SQL views.\n\n**The capstone, Sybil-Resilient Model Extraction Detection,** is my ML security project. PRADA alone flagged 0 of 64 Sybil accounts, and with my extra layer detection held from 4 to 128 accounts with zero false positives.\n\n**F1 Pit Stop Strategy** asks whether faster pit stops win races, using SQL and DAX on 10,884 pit stops.",
+      "links": [{"label": "Olist", "to": "p-olist"}, {"label": "Capstone", "to": "p-prada"}, {"label": "F1 pit stops", "to": "p-f1"}]
+    },
+    {
+      "id": "sql",
+      "question": "Can you show me examples of your SQL?",
+      "keywords": "sql, query, queries, join, joins, window function, window functions, rank, postgres, postgresql",
+      "covers_skills": "SQL, PostgreSQL",
+      "answer": "SQL is one of my main tools.\n\n**Amazon:** SQL against 50M+ Redshift records, plus the ETL behind the reporting.\n\n**Olist (PostgreSQL):** joined five tables, flagged late orders with CASE WHEN, ranked states and categories with RANK() OVER, and used CORR() to test late delivery against review scores.\n\n**F1 (PostgreSQL):** CORR(), AVG and STDDEV by constructor, and LAG() for year-over-year change across 10,884 pit stops.\n\nThe code is on GitHub.",
+      "links": [{"label": "Olist case study", "to": "p-olist"}, {"label": "F1 case study", "to": "p-f1"}, {"label": "My GitHub", "to": "github"}]
+    },
+    {
+      "id": "dashboards",
+      "question": "What dashboards have you built?",
+      "keywords": "dashboard, dashboards, power bi, powerbi, tableau, dax, visualization, visualisation, visualize, data viz, reporting, report, reports, business intelligence, bi, charts",
+      "covers_skills": "Power BI, Tableau, DAX",
+      "answer": "**Adobe (Power BI):** 8 dashboards used by 20+ stakeholders.\n\n**Amazon (Tableau):** 10 dashboards used by 30+ stakeholders, for tracking seller health, fulfillment and SLA compliance.\n\n**Olist (Power BI):** a four-visual dashboard built on SQL views.\n\n**F1 (Power BI and DAX):** I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}, {"label": "Olist", "to": "p-olist"}, {"label": "F1 pit stops", "to": "p-f1"}]
+    },
+    {
+      "id": "data-quality",
+      "question": "How do you make sure the numbers are right?",
+      "keywords": "data quality, accuracy, accurate, validate, validation, trust, trustworthy, check, checks, error, errors, anomaly, anomalies, profiling, root cause, reconcile, reconciliation, reconciled, reconciling, reliable, integrity",
+      "covers_skills": "Reconciliation, Data profiling, Anomaly detection, Root cause analysis",
+      "answer": "I reconcile sources and catch gaps before anyone sees a chart. At Adobe I reconciled 25 KPIs. My data quality skills include reconciliation, data profiling, anomaly detection and root cause analysis.",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}]
+    },
+    {
+      "id": "automation",
+      "question": "Have you automated any reporting?",
+      "keywords": "automation, automate, automated, automating, manual, efficiency, time saved, saved time, save time, hours, faster, streamline, process improvement",
+      "answer": "At Adobe the reporting cycle went from **9 hours to 5**. At Amazon, weekly report prep went from **6 hours to under 2**.",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}]
+    },
+    {
+      "id": "big-data",
+      "question": "Have you worked with large datasets?",
+      "keywords": "large data, large dataset, large datasets, big data, scale, volume, million, 50m, records, redshift, s3",
+      "covers_skills": "Redshift, S3",
+      "answer": "At Amazon I worked with **50M+ records in Redshift**, using SQL and ETL to build the reporting operations teams used for seller health, fulfillment and SLA compliance. Tools there: SQL, Redshift, S3, Tableau, Excel, ETL.",
+      "links": [{"label": "Amazon role", "to": "experience-amazon"}]
+    },
+    {
+      "id": "ml",
+      "question": "Do you have machine learning experience?",
+      "keywords": "machine learning, ml, model, models, modeling, modelling, predictive, prediction, predict, ai, artificial intelligence, data science, data scientist, deep learning",
+      "answer": "I added machine learning during my M.S. at Rutgers. My capstone was on detecting model-stealing attacks, where someone copies a deployed ML model through its API.\n\nOther ML work: **housing prices** (tuned XGBoost, 0.93 R² on 586 test homes, with SHAP to explain each prediction), **protein localization** (SVM at 70.6% 10-fold cross-validated accuracy), and a comparison of **four metaheuristic optimizers** (Wolf Pack and PSO tied at 97.37% test accuracy).",
+      "links": [{"label": "Capstone", "to": "p-prada"}, {"label": "Housing prices", "to": "p-housing"}, {"label": "Protein localization", "to": "p-evostruct"}, {"label": "Metaheuristics", "to": "p-metaheuristics"}]
+    },
+    {
+      "id": "business-analysis",
+      "question": "Do you have business analysis experience?",
+      "keywords": "business analysis, brd, frd, user stories, user story, acceptance criteria, uat, agile, scrum, requirements gathering, requirement gathering",
+      "covers_skills": "BRD / FRD, User stories, Acceptance criteria, UAT, Agile / Scrum",
+      "answer": "These are on my skills list: BRD / FRD, user stories, acceptance criteria, UAT and Agile / Scrum. At Adobe I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards, and I define the KPIs with stakeholders before writing the SQL.",
+      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "How I work with stakeholders", "to": "ask-how-i-work"}]
+    },
+    {
+      "id": "cloud",
+      "question": "What cloud platforms have you used?",
+      "keywords": "cloud, aws, amazon web services, azure, azure data factory, data factory, adf",
+      "covers_skills": "AWS, Azure, Azure Data Factory",
+      "answer": "**AWS at Amazon:** Redshift and S3. **Azure at Adobe:** Azure Data Factory. I also hold Microsoft Azure Fundamentals (AZ-900).",
+      "links": [{"label": "Amazon role", "to": "experience-amazon"}, {"label": "Adobe role", "to": "experience-adobe"}]
+    },
+    {
+      "id": "education",
+      "question": "Where did you study?",
+      "keywords": "education, degree, degrees, university, college, school, study, studied, graduate, graduated, graduation, masters, master, ms, m s, bachelors, bachelor, gpa, rutgers, sathyabama, major, where did you study, alma mater, academic, qualification, qualifications",
+      "answer": "**M.S., Computer Science: Scientific Computing,** Rutgers University-Camden (Sep 2024 to May 2026, GPA 3.90).\n\n**B.E., Computer Science and Engineering,** Sathyabama Institute of Science and Technology, Chennai (Jul 2016 to May 2020, GPA 8.19 / 10).\n\nI also hold Microsoft Azure Fundamentals (AZ-900).",
+      "links": [{"label": "Education", "to": "education"}]
+    },
+    {
+      "id": "certifications",
+      "question": "Do you have any certifications?",
+      "keywords": "certification, certifications, certificate, certificates, certified, az 900, az900, azure fundamentals, microsoft, credential, credentials",
+      "answer": "I hold Microsoft Azure Fundamentals (AZ-900).",
+      "links": [{"label": "View credential", "to": "https://learn.microsoft.com/en-us/users/pramidreddy-0746/credentials/b95e27478661d53c"}]
+    },
+    {
+      "id": "teamwork",
+      "question": "Have you worked in a team?",
+      "keywords": "team, teams, teamwork, teammate, teammates, group project, collaboration, collaborate, collaborated, solo, alone, independently",
+      "answer": "The NFL weather analysis was a three-person team project, and Emotion Detection from Speech was a two-person team project with equal contribution.",
+      "links": [{"label": "NFL project", "to": "p-nfl"}, {"label": "How I work with stakeholders", "to": "ask-how-i-work"}]
+    },
+    {
+      "id": "contact",
+      "question": "How can I contact you?",
+      "keywords": "contact, email, e mail, reach, reach you, phone, phone number, call, message, get in touch, talk, schedule, interview, connect, linkedin, github, code, repo, repository, social",
+      "answer": "Email is the fastest way to reach me: pramidreddy@mycvcareer.com. I'm also on LinkedIn and GitHub, where the code for my projects is.",
+      "links": [{"label": "Email me", "to": "email"}, {"label": "LinkedIn", "to": "linkedin"}, {"label": "GitHub", "to": "github"}]
+    },
+    {
+      "id": "resume",
+      "question": "Can I get your resume?",
+      "keywords": "resume, resumes, cv, curriculum vitae, download resume, send resume",
+      "answer": "I don't post a resume on this site. Email me and I'll send it.",
+      "links": [{"label": "Request my resume", "to": "resume"}]
+    }
+  ]
 }

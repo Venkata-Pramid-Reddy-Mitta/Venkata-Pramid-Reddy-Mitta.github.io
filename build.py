@@ -50,6 +50,146 @@ by_id = {p["id"]: p for p in projects}
 cats = C["project_categories"]
 
 
+# ---------- Ask me: pre-written answers, matched in the browser by ask.js ----------
+AP = C["ask_page"]
+
+
+def ask_fail(msg):
+    raise SystemExit("content.json, ask section: " + msg)
+
+
+def csv(text):
+    return [x.strip() for x in str(text or "").split(",") if x.strip()]
+
+
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
+
+
+def paras(text):
+    return "".join(f"<p>{e(p)}</p>" for p in str(text).split("\n\n") if p.strip())
+
+
+LINK_TOKENS = {
+    "email": f"mailto:{EMAIL}",
+    "resume": f"mailto:{EMAIL}?subject=Resume%20request",
+    "linkedin": S["linkedin"],
+    "github": GH,
+}
+
+
+def link_href(to):
+    if to in LINK_TOKENS:
+        return LINK_TOKENS[to]
+    if to.startswith(("http://", "https://", "mailto:")):
+        return to
+    return "#" + to
+
+
+def ask_links(items):
+    return [{"label": l["label"], "href": link_href(l["to"])} for l in (items or [])]
+
+
+def join_names(xs):
+    return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1]
+
+
+# Other words a visitor might type for a skill.
+SKILL_ALIASES = {
+    "scikit-learn": ["sklearn"], "postgresql": ["postgres"], "xgboost": ["xg boost"],
+    "dbt": ["data build tool"], "excel": ["spreadsheet", "spreadsheets"], "git": ["version control"],
+    "mysql": ["my sql"], "cohort analysis": ["cohort", "cohorts"], "forecasting": ["forecast", "forecasts"],
+}
+
+
+def build_ask():
+    manual = C.get("ask", [])
+    seen = set()
+    for m in manual:
+        for key in ("id", "question", "keywords", "answer"):
+            if not m.get(key):
+                ask_fail(f"an item is missing '{key}': {m.get('id') or m.get('question')}")
+        if m["id"] in seen:
+            ask_fail(f"two items share the id '{m['id']}'")
+        seen.add(m["id"])
+
+    skill_names = {i.lower() for g in C["skills"] for i in g["items"]}
+    covered = set()
+    for m in manual:
+        for s in csv(m.get("covers_skills")):
+            if s.lower() not in skill_names:
+                ask_fail(f"covers_skills in '{m['id']}' lists '{s}', which is not in the skills list")
+            covered.add(s.lower())
+
+    entries = []
+    # Most specific first: when two answers score the same, the earlier one wins.
+    for p in projects:
+        entries.append({
+            "id": "p-" + p["id"], "q": f"Tell me about {p['title']}", "kind": "project",
+            "kw": [p["id"], p["title"].lower()] + csv(p.get("ask_keywords")),
+            "html": paras(p["one_line"] + " " + p["intro"]) + f"<p><b>Result.</b> {e(p['result'])}</p>",
+            "links": [{"label": "Read the case study", "href": "#p-" + p["id"]},
+                      {"label": "View code on GitHub", "href": GH + p["github_repo"]}],
+        })
+    for m in C.get("smaller_projects", []):
+        entries.append({
+            "id": "m-" + slugify(m["title"]), "q": f"Tell me about {m['title']}", "kind": "project",
+            "kw": [m["title"].lower()] + csv(m.get("ask_keywords")),
+            "html": paras(m["text"]),
+            "links": [{"label": "View code on GitHub", "href": GH + m["github_repo"]}],
+        })
+    for m in manual:
+        entries.append({
+            "id": m["id"], "q": m["question"], "kind": "faq",
+            "kw": csv(m["keywords"]) + csv(m.get("covers_skills")),
+            "html": paras(m["answer"]), "links": ask_links(m.get("links")),
+        })
+    for g in C["skills"]:
+        for item in g["items"]:
+            low = item.lower()
+            if low in covered:
+                continue
+            cos = [x for x in C["experience"] if low in [t.lower() for t in x["tools"]]]
+            prs = [p for p in projects if low in [t.lower() for t in p["tools"]]
+                   or (low == "sql" and any("sql" in t.lower() for t in p["tools"]))]
+            used = []
+            if cos:
+                used.append("at " + join_names([x["company"] for x in cos]))
+            if prs:
+                used.append("in " + (join_names([p["title"] for p in prs]) if len(prs) <= 2 else f"{len(prs)} projects"))
+            if used:
+                text = f"{item} is in my {g['group']} skills. I've used it {' and '.join(used)}."
+            else:
+                text = f"{item} is on my skills list ({g['group']}). My main tools are SQL, Python and Power BI."
+            links = [{"label": f"{x['company']} role", "href": "#experience-" + x["id"]} for x in cos]
+            if prs:
+                links.append({"label": f"Projects using {item}", "href": "#tool-" + slugify(item)})
+            entries.append({
+                "id": "skill-" + slugify(item), "q": f"Do you know {item}?", "kind": "skill",
+                "kw": [low] + SKILL_ALIASES.get(low, []), "html": paras(text), "links": links,
+            })
+
+    ids = {x["id"] for x in entries}
+    for key in ("ask_suggested", "ask_home"):
+        for i in C.get(key, []):
+            if i not in ids:
+                ask_fail(f"{key} lists '{i}', which is not an answer id")
+    return entries
+
+
+ask_entries = build_ask()
+ask_q = {x["id"]: x["q"] for x in ask_entries}
+ask_cfg = {
+    "entries": ask_entries,
+    "suggested": C.get("ask_suggested", []),
+    "email": EMAIL,
+    "subject": AP["email_subject"],
+    "no_match": AP["no_match"],
+    "no_match_skill": AP["no_match_skill"],
+}
+ask_json = json.dumps(ask_cfg, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+
+
 # ---------- pieces ----------
 def card(p, lead=False):
     thumb_file = p.get("card_thumbnail") or (p["images"][0]["thumbnail"] if p.get("images") else None)
@@ -95,6 +235,14 @@ xrows = "".join(
     f'<a href="#experience-{a(x["id"])}"><span class="co">{e(x["company"])}</span><span class="when">{e(x["short_title"])} &middot; <em>{e(x["dates"])}</em></span><span class="arrow" aria-hidden="true">&rarr;</span></a>'
     for x in C["experience"])
 
+home_chips = "".join(f'<li><a href="#ask-{a(i)}">{e(ask_q[i])}</a></li>' for i in C.get("ask_home", []))
+home_ask = f"""<section class="wrap sec askhome" aria-labelledby="ask-h">
+  <h2 id="ask-h">{e(AP['heading'])}</h2>
+  <p class="lede">{e(AP['home_text'])}</p>
+  <ul class="qchips">{home_chips}</ul>
+  <a class="btn solid" href="#ask">Ask a question</a>
+</section>"""
+
 home = f"""<div class="view" data-view="home">
 <div id="top" class="wrap hero">
  <img class="portrait" src="img/{a(pr['photo'])}" alt="Photo of {a(pr['name_line_1'])} {a(pr['name_line_2'])}" width="720" height="900">
@@ -116,6 +264,8 @@ home = f"""<div class="view" data-view="home">
   <p class="lede" style="max-width:62ch">{e(C['about']['text'])}</p>
   <ol class="how">{how}</ol>
 </section>
+
+{home_ask}
 
 <section class="wrap sec" aria-labelledby="feat-h">
   <h2 id="feat-h">Featured projects</h2>
@@ -227,6 +377,30 @@ education_view = f"""<div class="view" data-view="education">
 
 contact_view = f'<div class="view" data-view="contact">\n{contact_section()}\n</div>'
 
+ask_chip_buttons = "".join(
+    f'<li><button type="button" data-ask="{a(i)}" aria-pressed="false">{e(ask_q[i])}</button></li>'
+    for i in C.get("ask_suggested", []))
+ask_view = f"""<div class="view" data-view="ask">
+<div class="wrap phead">
+  <a class="crumb" href="#home">Home</a>
+  <h1>{e(AP['heading'])}</h1>
+  <p class="sub">{e(AP['text'])}</p>
+</div>
+<section class="wrap" aria-label="Ask a question">
+  <form class="askform" id="ask-form" role="search" autocomplete="off">
+    <label class="vh" for="ask-q">Your question</label>
+    <input id="ask-q" type="text" maxlength="200" placeholder="{a(AP['placeholder'])}" enterkeyhint="search" autocapitalize="sentences" spellcheck="false">
+    <button type="submit" class="btn solid">Ask</button>
+  </form>
+  <div id="ask-out" class="askout" aria-live="polite"></div>
+  <div class="askrel askpick">
+    <p class="hint">Or tap a question</p>
+    <ul class="qchips" id="ask-chips">{ask_chip_buttons}</ul>
+  </div>
+  <p class="hint askfoot">Not what you needed? <a href="mailto:{a(EMAIL)}">Email me</a> and I'll answer directly.</p>
+</section>
+</div>"""
+
 nfl_json = (ROOT / "data" / "nfl.json").read_text() if (ROOT / "data" / "nfl.json").exists() else None
 NFL_WIDGET = '''<div class="wrap" style="margin-bottom:18px">
 <figure class="fig nflw" id="nflw">
@@ -299,14 +473,16 @@ ICON = {
     "projects": '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/>',
     "experience": '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',
     "education": '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>',
+    "ask": '<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M10 9.5a2 2 0 1 1 3 1.7c-.7.4-1 .8-1 1.5"/><path d="M12 14.9h.01"/>',
     "contact": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
 }
-NAV = ["home", "projects", "experience", "education", "contact"]
+NAV = ["home", "projects", "experience", "education", "ask", "contact"]
+NAV_LABEL = {"ask": AP["heading"]}
 full_name = f"{pr['name_line_1']} {pr['name_line_2']}"
 title = f"{full_name} | Data Analyst"
 desc = "Business Data Analyst with 5+ years at Adobe and Amazon. SQL, Power BI, Python. Rutgers MS. Open to full-time roles."
-nav = "".join(f'      <a href="#{k}" data-nav="{k}">{k.title()}</a>\n' for k in NAV)
-dock = "".join(f'  <a href="#{k}" data-nav="{k}"><svg viewBox="0 0 24 24" aria-hidden="true">{ICON[k]}</svg>{k.title()}</a>\n' for k in NAV)
+nav = "".join(f'      <a href="#{k}" data-nav="{k}">{e(NAV_LABEL.get(k, k.title()))}</a>\n' for k in NAV)
+dock = "".join(f'  <a href="#{k}" data-nav="{k}"><svg viewBox="0 0 24 24" aria-hidden="true">{ICON[k]}</svg>{e(NAV_LABEL.get(k, k.title()))}</a>\n' for k in NAV)
 url = S["url"]
 
 page = f"""<!doctype html>
@@ -336,7 +512,7 @@ page = f"""<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -353,14 +529,17 @@ page = f"""<!doctype html>
 {experience_view}
 {education_view}
 {contact_view}
+{ask_view}
 {project_views}
 </main>
 <footer class="wrap">&copy; 2026 {e(full_name)} &middot; {e(S['location_footer'])}</footer>
 <nav class="dock" aria-label="Quick links">
 {dock}</nav>
-<script src="site.js?v=9" defer></script>
+<script type="application/json" id="ask-data">{ask_json}</script>
+<script src="ask.js?v=1" defer></script>
+<script src="site.js?v=10" defer></script>
 </body>
 </html>
 """
 (ROOT / "index.html").write_text(page, encoding="utf-8")
-print(f"Built index.html: {len(projects)} projects, {len(small)} smaller projects, {len(certs)} certifications")
+print(f"Built index.html: {len(projects)} projects, {len(small)} smaller projects, {len(certs)} certifications, {len(ask_entries)} Ask me answers")
