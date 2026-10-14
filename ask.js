@@ -12,6 +12,10 @@
    'where why tell about please any some there here also just so if then than too very really get got give show want need ' +
    'like know use used using work works working experience experiences make made').split(' ').forEach(function (w) { STOP[w] = 1; });
 
+  // Common words that match many answers. On their own they don't prove a match.
+  var WEAK = {};
+  'data report reporting analysis analytic analytics project tool testing test'.split(' ').forEach(function (w) { WEAK[w] = 1; });
+
   function norm(s) {
     var t = String(s).toLowerCase();
     try { t = t.normalize('NFD').replace(/[̀-ͯ]/g, ''); } catch (err) { /* old browser */ }
@@ -42,10 +46,11 @@
     return prev[b.length];
   }
 
-  // 3 = same word (or one typo), 2 = same start, 0 = unrelated
+  // 3 = same word, 2 = one typo or same start (a guess), 0 = unrelated
   function tokenScore(a, b) {
     if (a === b) return 3;
-    if (a.length >= 5 && b.length >= 5 && Math.abs(a.length - b.length) <= 1 && lev(a, b) <= 1) return 3;
+    // Typos only on longer words: short ones collide (audit / audio).
+    if (a.length >= 6 && b.length >= 6 && Math.abs(a.length - b.length) <= 1 && lev(a, b) <= 1) return 2;
     if (Math.min(a.length, b.length) >= 5 && (a.indexOf(b) === 0 || b.indexOf(a) === 0)) return 2;
     return 0;
   }
@@ -75,11 +80,19 @@
     };
   }
 
+  // Returns the score plus how sure we are: exact = keywords matched word for word,
+  // covered = how many of the visitor's real words matched anything.
   function scoreEntry(e, q) {
-    var s = 0, seen = {};
+    var s = 0, exact = 0, strong = 0, phrases = 0, seen = {}, hit = {};
     // Phrases are strong evidence, so longer ones score more.
     e._phrase.forEach(function (k) {
-      if (q.padded.indexOf(' ' + k + ' ') > -1) s += 3 + k.split(' ').length;
+      if (q.padded.indexOf(' ' + k + ' ') > -1) {
+        s += 3 + k.split(' ').length;
+        exact++;
+        strong++;
+        phrases++;
+        k.split(' ').forEach(function (w) { hit[w] = 1; });
+      }
     });
     // Each word the visitor typed counts once, for its best-matching keyword.
     q.all.forEach(function (t) {
@@ -87,25 +100,41 @@
       seen[t] = 1;
       var best = 0;
       e._single.forEach(function (k) { var v = tokenScore(t, k); if (v > best) best = v; });
+      if (best === 3) { exact++; if (!WEAK[t]) strong++; }
+      if (best) hit[t] = 1;
       s += best;
     });
     // Small bonus for sharing real words with the answer's own question.
     var o = 0;
-    q.content.forEach(function (t) { if (e._qt[t]) o++; });
-    return s + Math.min(o, 3);
+    q.content.forEach(function (t) { if (e._qt[t]) { o++; hit[t] = 1; } });
+    var covered = 0;
+    q.content.forEach(function (t) { if (hit[t]) covered++; });
+    return { score: s + Math.min(o, 3), exact: exact, strong: strong, phrases: phrases, covered: covered };
   }
 
   // Returns entries sorted best first. Earlier entries win ties.
   function rank(entries, query) {
     var q = parse(query);
-    return entries.map(function (e, i) { return { e: e, score: scoreEntry(e, q), i: i }; })
+    return entries.map(function (e, i) {
+      var r = scoreEntry(e, q);
+      return { e: e, score: r.score, exact: r.exact, strong: r.strong, phrases: r.phrases, covered: r.covered, words: q.content.length, i: i };
+    })
       .filter(function (r) { return r.score > 0; })
       .sort(function (a, b) { return b.score - a.score || a.i - b.i; });
   }
 
+  // Only answer when the match is real: enough score, and either
+  // - a meaningful keyword matched exactly, plus a whole phrase or at least half the visitor's words, or
+  // - every real word the visitor typed matched (so "what tools do you use" still works).
+  function confident(r) {
+    if (!r || r.score < MIN || r.exact === 0) return false;
+    if (r.strong > 0 && (r.phrases > 0 || r.covered * 2 >= r.words)) return true;
+    return r.covered >= r.words;
+  }
+
   var SKILL_INTENT = /\b(do you (know|use|have|work)|have you (used|worked|got)|experience (with|in)|familiar with|know how|proficient|skilled|expertise|comfortable with)\b/i;
 
-  var api = { norm: norm, tokens: tokens, prepare: prepare, rank: rank, MIN: MIN, SKILL_INTENT: SKILL_INTENT };
+  var api = { norm: norm, tokens: tokens, prepare: prepare, rank: rank, confident: confident, MIN: MIN, SKILL_INTENT: SKILL_INTENT };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (!root || !root.document) return;
 
@@ -162,7 +191,7 @@
     function related(id, ranked) {
       var res = [];
       (ranked || []).forEach(function (r) {
-        if (r.e.id !== id && r.score >= MIN && r.e.kind !== 'skill' && res.length < 3) res.push(r.e);
+        if (r.e.id !== id && confident(r) && r.e.kind !== 'skill' && res.length < 3) res.push(r.e);
       });
       suggestedExcept(id, 6).forEach(function (e) {
         if (res.length < 3 && res.indexOf(e) < 0) res.push(e);
@@ -219,16 +248,17 @@
       if (skill) btns.appendChild(linkEl({ label: 'See my skills', href: '#experience' }, 'btn'));
       m.appendChild(btns);
       log.appendChild(m);
+      // Guesses: anything sharing a real word with the question, or a likely typo.
       var close = [];
-      ranked.forEach(function (r) { if (r.e.kind !== 'skill' && close.length < 3) close.push(r.e); });
-      if (!close.length) close = suggestedExcept('', 3);
-      chipRow(close, 'Closest topics');
+      ranked.forEach(function (r) { if ((r.exact > 0 || r.score >= MIN) && close.length < 3) close.push(r.e); });
+      if (close.length) chipRow(close, 'Did you mean one of these?');
+      else chipRow(suggestedExcept('', 3), 'Questions I can answer');
     }
 
     function ask(typed) {
       var mine = said(typed);
       var ranked = rank(entries, typed);
-      if (ranked.length && ranked[0].score >= MIN) answer(ranked[0].e, typed, ranked);
+      if (confident(ranked[0])) answer(ranked[0].e, typed, ranked);
       else noMatch(typed, ranked);
       scrollTo(mine);
     }

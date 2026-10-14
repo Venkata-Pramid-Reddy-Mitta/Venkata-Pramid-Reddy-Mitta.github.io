@@ -913,7 +913,7 @@
     {
       "id": "automation",
       "question": "Tell me about a reporting process you automated",
-      "keywords": "automation, automate, automated, automating, manual, manual work, efficiency, time saved, saved time, save time, hours, faster, streamline, process improvement, reporting automation",
+      "keywords": "automation, automate, automated, automating, manual, manual work, efficiency, time saved, saved time, save time, faster, streamline, process improvement, reporting automation",
       "answer": "At Adobe, a recurring report was built by hand from Azure Data Factory pipeline outputs and took about **9 hours** each cycle. I automated the repeatable preparation and transformation steps with Python and Pandas, kept the validation checks inside the workflow, and brought it down to **5 hours**.\n\nAt Amazon I standardized the SQL extraction and automated the Excel and SQL steps of the weekly seller and fulfillment report, which cut prep from **6 hours to under 2**.\n\nIn both cases I compared the automated output against the old report before switching over.",
       "links": [
         {

@@ -543,7 +543,7 @@ page = f"""<!doctype html>
 {dock}</nav>
 {ask_widget}
 <script type="application/json" id="ask-data">{ask_json}</script>
-<script src="ask.js?v=2" defer></script>
+<script src="ask.js?v=3" defer></script>
 <script src="site.js?v=11" defer></script>
 </body>
 </html>
