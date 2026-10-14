@@ -356,8 +356,8 @@
         "SPIDER 2.0"
       ],
       "github_repo": "evostruct-sub-protein-localization",
-      "intro": "523 gram-positive bacterial proteins, four cell compartments.",
-      "question": "Given only a protein's amino-acid sequence, can a model predict which of four compartments it belongs to: cytoplasm, membrane, periplasm or extracellular?",
+      "intro": "523 Gram-positive bacterial proteins, four subcellular locations.",
+      "question": "Given only a protein's amino-acid sequence, can a model predict which of four locations it belongs to: cell membrane, cell wall, cytoplasm or extracellular?",
       "question_heading": "The question",
       "what_i_did": "Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 405-feature matrix, then trained and compared KNN, SVM and Random Forest.",
       "result": "Random Forest reached **99.23%** accuracy, well ahead of SVM (79.08%) and KNN (77.74%). That gap is unusually large for 523 samples, so I treat it as a result to verify, not a final number.",

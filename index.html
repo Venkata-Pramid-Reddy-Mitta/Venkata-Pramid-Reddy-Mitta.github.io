@@ -384,12 +384,12 @@
   <a class="crumb" href="#projects">All projects</a>
   <p class="kicker">machine learning · bioinformatics</p>
   <h1>EvoStruct-Sub Protein Localization</h1>
-  <p class="sub">523 gram-positive bacterial proteins, four cell compartments.</p>
+  <p class="sub">523 Gram-positive bacterial proteins, four subcellular locations.</p>
 </div>
 
 <article class="wrap">
   <div class="card feature">
-    <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Given only a protein's amino-acid sequence, can a model predict which of four compartments it belongs to: cytoplasm, membrane, periplasm or extracellular?</dd></div><div><dt>What I did</dt><dd>Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 405-feature matrix, then trained and compared KNN, SVM and Random Forest.</dd></div><div><dt>Result</dt><dd>Random Forest reached <b>99.23%</b> accuracy, well ahead of SVM (79.08%) and KNN (77.74%). That gap is unusually large for 523 samples, so I treat it as a result to verify, not a final number.</dd></div></dl>
+    <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Given only a protein's amino-acid sequence, can a model predict which of four locations it belongs to: cell membrane, cell wall, cytoplasm or extracellular?</dd></div><div><dt>What I did</dt><dd>Combined evolutionary features from PSI-BLAST (PSSM) with structural features from SPIDER 2.0 into a 405-feature matrix, then trained and compared KNN, SVM and Random Forest.</dd></div><div><dt>Result</dt><dd>Random Forest reached <b>99.23%</b> accuracy, well ahead of SVM (79.08%) and KNN (77.74%). That gap is unusually large for 523 samples, so I treat it as a result to verify, not a final number.</dd></div></dl>
     <div class="figs"><div><b>523</b><span>proteins</span></div><div><b>405</b><span>features per protein</span></div><div><b>99.23%</b><span>Random Forest accuracy</span></div><div><b>79.08%</b><span>SVM accuracy</span></div></div>
     <ul class="chips"><li>Python</li><li>Scikit-learn</li><li>PSI-BLAST</li><li>SPIDER 2.0</li></ul>
     <a class="btn solid gh-btn" href="https://github.com/Venkata-Pramid-Reddy-Mitta/evostruct-sub-protein-localization" rel="noopener">View code on GitHub</a>
