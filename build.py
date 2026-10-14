@@ -5,6 +5,7 @@ content.json changes (see .github/workflows/build.yml). To run it on a computer:
     python build.py
 """
 import html, json, re, pathlib
+from urllib.parse import quote
 
 ROOT = pathlib.Path(__file__).parent
 C = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
@@ -170,7 +171,7 @@ def build_ask():
             })
 
     ids = {x["id"] for x in entries}
-    for key in ("ask_suggested", "ask_home"):
+    for key in ("ask_suggested",):
         for i in C.get(key, []):
             if i not in ids:
                 ask_fail(f"{key} lists '{i}', which is not an answer id")
@@ -235,14 +236,6 @@ xrows = "".join(
     f'<a href="#experience-{a(x["id"])}"><span class="co">{e(x["company"])}</span><span class="when">{e(x["short_title"])} &middot; <em>{e(x["dates"])}</em></span><span class="arrow" aria-hidden="true">&rarr;</span></a>'
     for x in C["experience"])
 
-home_chips = "".join(f'<li><a href="#ask-{a(i)}">{e(ask_q[i])}</a></li>' for i in C.get("ask_home", []))
-home_ask = f"""<section class="wrap sec askhome" aria-labelledby="ask-h">
-  <h2 id="ask-h">{e(AP['heading'])}</h2>
-  <p class="lede">{e(AP['home_text'])}</p>
-  <ul class="qchips">{home_chips}</ul>
-  <a class="btn solid" href="#ask">Ask a question</a>
-</section>"""
-
 home = f"""<div class="view" data-view="home">
 <div id="top" class="wrap hero">
  <img class="portrait" src="img/{a(pr['photo'])}" alt="Photo of {a(pr['name_line_1'])} {a(pr['name_line_2'])}" width="720" height="900">
@@ -264,8 +257,6 @@ home = f"""<div class="view" data-view="home">
   <p class="lede" style="max-width:62ch">{e(C['about']['text'])}</p>
   <ol class="how">{how}</ol>
 </section>
-
-{home_ask}
 
 <section class="wrap sec" aria-labelledby="feat-h">
   <h2 id="feat-h">Featured projects</h2>
@@ -378,28 +369,27 @@ education_view = f"""<div class="view" data-view="education">
 contact_view = f'<div class="view" data-view="contact">\n{contact_section()}\n</div>'
 
 ask_chip_buttons = "".join(
-    f'<li><button type="button" data-ask="{a(i)}" aria-pressed="false">{e(ask_q[i])}</button></li>'
+    f'<li><button type="button" data-ask="{a(i)}">{e(ask_q[i])}</button></li>'
     for i in C.get("ask_suggested", []))
-ask_view = f"""<div class="view" data-view="ask">
-<div class="wrap phead">
-  <a class="crumb" href="#home">Home</a>
-  <h1>{e(AP['heading'])}</h1>
-  <p class="sub">{e(AP['text'])}</p>
-</div>
-<section class="wrap" aria-label="Ask a question">
-  <form class="askform" id="ask-form" role="search" autocomplete="off">
-    <label class="vh" for="ask-q">Your question</label>
-    <input id="ask-q" type="text" maxlength="200" placeholder="{a(AP['placeholder'])}" enterkeyhint="search" autocapitalize="sentences" spellcheck="false">
-    <button type="submit" class="btn solid">Ask</button>
-  </form>
-  <div id="ask-out" class="askout" aria-live="polite"></div>
-  <div class="askrel askpick">
-    <p class="hint">Or tap a question</p>
-    <ul class="qchips" id="ask-chips">{ask_chip_buttons}</ul>
+# The chat button sits in the corner of every screen and opens this window.
+ASK_ICON = '<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M10 9.5a2 2 0 1 1 3 1.7c-.7.4-1 .8-1 1.5"/><path d="M12 14.9h.01"/>'
+ask_widget = f"""<button class="askfab" id="ask-fab" type="button" aria-expanded="false" aria-controls="ask-panel"><svg viewBox="0 0 24 24" aria-hidden="true">{ASK_ICON}</svg><span>{e(AP['heading'])}</span></button>
+<section class="askpanel" id="ask-panel" role="dialog" aria-labelledby="ask-title" hidden>
+  <div class="askhead">
+    <div><h2 id="ask-title">{e(AP['heading'])}</h2><p>{e(AP['subtitle'])}</p></div>
+    <button type="button" class="askx" id="ask-close" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
   </div>
-  <p class="hint askfoot">Not what you needed? <a href="mailto:{a(EMAIL)}">Email me</a> and I'll answer directly.</p>
-</section>
-</div>"""
+  <div class="asklog" id="ask-log" aria-live="polite">
+    <div class="msg bot"><p>{e(AP['text'])}</p></div>
+    <div class="askrel"><p class="hint">Try one of these</p><ul class="qchips">{ask_chip_buttons}</ul></div>
+  </div>
+  <form class="askform" id="ask-form" autocomplete="off">
+    <label class="vh" for="ask-q">Your question</label>
+    <input id="ask-q" type="text" maxlength="200" placeholder="{a(AP['placeholder'])}" enterkeyhint="send" autocapitalize="sentences" spellcheck="false">
+    <button type="submit" class="asksend" aria-label="Send"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+  </form>
+  <p class="askfoot">Not what you needed? <a href="mailto:{a(EMAIL)}?subject={a(quote(AP['email_subject']))}">Email me</a></p>
+</section>"""
 
 nfl_json = (ROOT / "data" / "nfl.json").read_text() if (ROOT / "data" / "nfl.json").exists() else None
 NFL_WIDGET = '''<div class="wrap" style="margin-bottom:18px">
@@ -473,11 +463,10 @@ ICON = {
     "projects": '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18"/>',
     "experience": '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',
     "education": '<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/>',
-    "ask": '<path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M10 9.5a2 2 0 1 1 3 1.7c-.7.4-1 .8-1 1.5"/><path d="M12 14.9h.01"/>',
     "contact": '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
 }
-NAV = ["home", "projects", "experience", "education", "ask", "contact"]
-NAV_LABEL = {"ask": AP["heading"]}
+NAV = ["home", "projects", "experience", "education", "contact"]
+NAV_LABEL = {}
 full_name = f"{pr['name_line_1']} {pr['name_line_2']}"
 title = f"{full_name} | Data Analyst"
 desc = "Business Data Analyst with 5+ years at Adobe and Amazon. SQL, Power BI, Python. Rutgers MS. Open to full-time roles."
@@ -512,7 +501,7 @@ page = f"""<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -529,15 +518,15 @@ page = f"""<!doctype html>
 {experience_view}
 {education_view}
 {contact_view}
-{ask_view}
 {project_views}
 </main>
 <footer class="wrap">&copy; 2026 {e(full_name)} &middot; {e(S['location_footer'])}</footer>
 <nav class="dock" aria-label="Quick links">
 {dock}</nav>
+{ask_widget}
 <script type="application/json" id="ask-data">{ask_json}</script>
-<script src="ask.js?v=1" defer></script>
-<script src="site.js?v=10" defer></script>
+<script src="ask.js?v=2" defer></script>
+<script src="site.js?v=11" defer></script>
 </body>
 </html>
 """

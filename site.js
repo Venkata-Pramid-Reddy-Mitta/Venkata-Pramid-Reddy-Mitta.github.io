@@ -1,7 +1,7 @@
 // One-page app. The part of the address after # picks the screen:
 // #home, #projects, #experience, #education, #contact, #p-<project>,
 // #experience-<job> (opens that job's tab), #tool-<skill> (projects using that skill),
-// #ask and #ask-<answer> (the Ask me screen, optionally opened on one answer; see ask.js).
+// #ask and #ask-<answer> open the Ask me chat window over the current screen (see ask.js).
 (function () {
   var views = document.querySelectorAll('.view');
   var navs = document.querySelectorAll('[data-nav]');
@@ -106,6 +106,13 @@
 
   function route(initial) {
     var h = (location.hash || '#home').slice(1);
+    if (h === 'ask' || h.indexOf('ask-') === 0) {  // chat window, not a screen
+      var askId = h === 'ask' ? null : h.slice(4);
+      history.replaceState(null, '', current !== null ? '#' + current : location.pathname + location.search);
+      if (window.Ask) window.Ask.open(askId);
+      if (current !== null) return;  // stay on the screen underneath
+      h = 'home';
+    }
     if (h === 'main') {  // "Skip to content" link: stay on this screen, move focus
       var visible = document.querySelector('.view:not([hidden])');
       var hd = visible && visible.querySelector('h1, h2');
@@ -117,11 +124,10 @@
     if (goingBack) trail.pop(); else trail.push(h);
     current = h;
 
-    var view = h, tab = null, askId = null;
+    var view = h, tab = null;
     state.tool = null;
     if (h.indexOf('experience-') === 0) { view = 'experience'; tab = h.slice(11); }
     if (h.indexOf('tool-') === 0) { view = 'projects'; state.tool = h.slice(5); }
-    if (h.indexOf('ask-') === 0) { view = 'ask'; askId = h.slice(4); }
     var target = document.querySelector('.view[data-view="' + view + '"]');
     if (!target) { view = 'home'; target = document.querySelector('.view[data-view="home"]'); }
     views.forEach(function (v) { v.hidden = v !== target; });
@@ -137,7 +143,6 @@
       selectTab(t);
     }
     if (view === 'projects') applyFilters();
-    if (view === 'ask' && window.Ask) window.Ask.open(askId);
 
     if (initial) return;  // let the browser restore scroll on first load
     jump(goingBack && scrollPos[h] ? scrollPos[h] : 0);

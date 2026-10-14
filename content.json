@@ -634,15 +634,14 @@
   },
   "ask_page": {
     "heading": "Ask me",
-    "text": "Type a question and get an answer pulled from what's on this site, or tap one below. The answers are pre-written, so nothing is made up.",
-    "home_text": "Looking for something specific? Type a question or tap one below.",
+    "subtitle": "Pre-written answers from this site",
+    "text": "Hi, I'm Pramid. Ask me about my work, skills or availability, or tap a question below. The answers are pre-written from what's on this site, so nothing is made up.",
     "placeholder": "e.g. Do you know SQL?",
     "no_match": "I don't have a ready answer for that one, and I'd rather not guess.",
     "no_match_skill": "That isn't listed on this site, so I won't claim it here. My main tools are SQL, Python and Power BI. Email me and I'll tell you directly.",
     "email_subject": "Question from your portfolio"
   },
   "ask_suggested": ["work-auth", "location", "experience-years", "adobe", "amazon", "best-project", "sql", "dashboards", "education", "resume"],
-  "ask_home": ["work-auth", "experience-years", "adobe", "best-project", "resume"],
   "_how_to_edit_ask": "Each item in the ask list is one answer. keywords is a comma-separated list of words or phrases a visitor might type. Put a blank line between paragraphs as \\n\\n and wrap a word in two stars to make it bold. In links, 'to' can be a screen (p-olist, experience-adobe, education, projects, contact), another answer (ask-sql), a full web address, or one of: email, resume, linkedin, github. If an answer replaces the automatic 'Do you know X?' answer for a skill, list that skill in covers_skills. Only use facts that are already on this site.",
   "ask": [
     {

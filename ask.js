@@ -110,6 +110,7 @@
   if (!root || !root.document) return;
 
   // ---------------------------------------------------------------- UI
+  // A chat window that opens from the button in the corner of the screen.
   var doc = root.document;
 
   function el(tag, cls, text) {
@@ -120,30 +121,22 @@
   }
 
   function init() {
-    var form = doc.getElementById('ask-form'), input = doc.getElementById('ask-q');
-    var out = doc.getElementById('ask-out'), chipBox = doc.getElementById('ask-chips');
+    var fab = doc.getElementById('ask-fab'), panel = doc.getElementById('ask-panel');
+    var log = doc.getElementById('ask-log'), form = doc.getElementById('ask-form');
+    var input = doc.getElementById('ask-q'), closeBtn = doc.getElementById('ask-close');
     var dataEl = doc.getElementById('ask-data');
-    if (!form || !input || !out || !dataEl) return null;
+    if (!fab || !panel || !log || !form || !input || !dataEl) return null;
 
     var cfg = JSON.parse(dataEl.textContent);
     var entries = cfg.entries.map(prepare);
     var byId = {};
     entries.forEach(function (e) { byId[e.id] = e; });
 
-    function pressed(id) {
-      Array.prototype.forEach.call(chipBox.querySelectorAll('button[data-ask]'), function (b) {
-        b.setAttribute('aria-pressed', b.getAttribute('data-ask') === id ? 'true' : 'false');
-      });
-    }
-
-    function reveal() {
-      var top = out.getBoundingClientRect().top;
-      var vh = root.innerHeight || doc.documentElement.clientHeight;
-      var head = root.matchMedia && root.matchMedia('(min-width:720px)').matches ? 84 : 12;
-      if (top < head || top > vh * 0.55) root.scrollTo(0, Math.max(0, root.scrollY + top - head));
-    }
+    function phone() { return !(root.matchMedia && root.matchMedia('(min-width:720px)').matches); }
 
     function chipRow(list, label) {
+      // Only the newest set of question chips stays on screen.
+      Array.prototype.forEach.call(log.querySelectorAll('.askrel'), function (n) { n.parentNode.removeChild(n); });
       var wrap = el('div', 'askrel');
       wrap.appendChild(el('p', 'hint', label));
       var ul = el('ul', 'qchips');
@@ -155,7 +148,7 @@
         ul.appendChild(li);
       });
       wrap.appendChild(ul);
-      return wrap;
+      log.appendChild(wrap);
     }
 
     function suggestedExcept(id, n) {
@@ -177,33 +170,37 @@
       return res;
     }
 
-    function linkEl(l) {
-      var a = el('a', 'go', l.label);
+    function linkEl(l, cls) {
+      var a = el('a', cls || 'go', l.label);
       a.href = l.href;
       if (/^https?:/.test(l.href)) a.rel = 'noopener';
       return a;
     }
 
-    function show(e, typed, ranked) {
-      out.textContent = '';
-      var card = el('article', 'card askcard');
-      if (typed && norm(typed) !== norm(e.q)) {
-        card.appendChild(el('p', 'asked', 'You asked: ' + typed));
-        card.appendChild(el('p', 'asked', 'My closest answer:'));
-      }
-      card.appendChild(el('h2', 'askq', e.q));
+    function said(text) {
+      var m = el('div', 'msg me', text);
+      log.appendChild(m);
+      return m;
+    }
+
+    function scrollTo(node) {
+      log.scrollTop = Math.max(0, node.offsetTop - 12);
+    }
+
+    function answer(e, typed, ranked) {
+      var m = el('div', 'msg bot');
+      if (typed && norm(typed) !== norm(e.q)) m.appendChild(el('p', 'asked', 'My closest answer:'));
+      m.appendChild(el('p', 'askq', e.q));
       var ans = el('div', 'askans');
       ans.innerHTML = e.html; // built and escaped by build.py
-      card.appendChild(ans);
+      m.appendChild(ans);
       if (e.links && e.links.length) {
         var lk = el('div', 'asklinks');
         e.links.forEach(function (l) { lk.appendChild(linkEl(l)); });
-        card.appendChild(lk);
+        m.appendChild(lk);
       }
-      card.appendChild(chipRow(related(e.id, ranked), 'Related questions'));
-      out.appendChild(card);
-      pressed(e.id);
-      reveal();
+      log.appendChild(m);
+      chipRow(related(e.id, ranked), 'Related questions');
     }
 
     function mailto(typed) {
@@ -213,68 +210,94 @@
     }
 
     function noMatch(typed, ranked) {
-      out.textContent = '';
       var skill = SKILL_INTENT.test(typed);
-      var card = el('article', 'card askcard');
-      card.appendChild(el('p', 'asked', 'You asked: ' + typed));
-      card.appendChild(el('h2', 'askq', skill ? 'Not listed on this site' : 'No ready answer for that'));
-      card.appendChild(el('p', null, skill ? cfg.no_match_skill : cfg.no_match));
+      var m = el('div', 'msg bot');
+      m.appendChild(el('p', 'askq', skill ? 'Not listed on this site' : 'No ready answer for that'));
+      m.appendChild(el('p', null, skill ? cfg.no_match_skill : cfg.no_match));
+      var btns = el('div', 'asklinks stackbtns');
+      btns.appendChild(linkEl({ label: 'Email me your question', href: mailto(typed) }, 'btn solid'));
+      if (skill) btns.appendChild(linkEl({ label: 'See my skills', href: '#experience' }, 'btn'));
+      m.appendChild(btns);
+      log.appendChild(m);
       var close = [];
       ranked.forEach(function (r) { if (r.e.kind !== 'skill' && close.length < 3) close.push(r.e); });
       if (!close.length) close = suggestedExcept('', 3);
-      card.appendChild(chipRow(close, 'Closest topics'));
-      var btns = el('div', 'asklinks stackbtns');
-      var mail = el('a', 'btn solid', 'Email me your question');
-      mail.href = mailto(typed);
-      btns.appendChild(mail);
-      if (skill) {
-        var sk = el('a', 'btn', 'See my skills');
-        sk.href = '#experience';
-        btns.appendChild(sk);
-      }
-      card.appendChild(btns);
-      out.appendChild(card);
-      pressed('');
-      reveal();
+      chipRow(close, 'Closest topics');
     }
 
-    function reset() {
-      input.value = '';
-      out.textContent = '';
-      pressed('');
+    function ask(typed) {
+      var mine = said(typed);
+      var ranked = rank(entries, typed);
+      if (ranked.length && ranked[0].score >= MIN) answer(ranked[0].e, typed, ranked);
+      else noMatch(typed, ranked);
+      scrollTo(mine);
     }
 
-    function showById(id) {
+    function askById(id) {
       var e = byId[id];
       if (!e) return false;
-      input.value = '';
-      show(e, null, null);
-      if (root.history && root.history.replaceState) root.history.replaceState(null, '', '#ask-' + id);
+      var mine = said(e.q);
+      answer(e, null, null);
+      scrollTo(mine);
       return true;
     }
+
+    function isOpen() { return !panel.hidden; }
+
+    function open(id) {
+      if (!isOpen()) {
+        panel.hidden = false;
+        fab.setAttribute('aria-expanded', 'true');
+        doc.documentElement.classList.add('askopen');
+      }
+      if (id) askById(id);
+      if (phone()) { // don't pop the keyboard over the suggestions
+        var h = panel.querySelector('h2');
+        h.setAttribute('tabindex', '-1');
+        try { h.focus({ preventScroll: true }); } catch (err) { h.focus(); }
+      } else {
+        try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); }
+      }
+    }
+
+    function close() {
+      if (!isOpen()) return;
+      panel.hidden = true;
+      fab.setAttribute('aria-expanded', 'false');
+      doc.documentElement.classList.remove('askopen');
+      fab.focus();
+    }
+
+    fab.addEventListener('click', function () { open(null); });
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    doc.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && isOpen()) close(); });
 
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var v = input.value.replace(/\s+/g, ' ').trim();
       if (!v) { input.focus(); return; }
-      var ranked = rank(entries, v);
-      if (ranked.length && ranked[0].score >= MIN) show(ranked[0].e, v, ranked);
-      else noMatch(v, ranked);
-      if (root.history && root.history.replaceState && root.location.hash !== '#ask') root.history.replaceState(null, '', '#ask');
-      if (root.matchMedia && root.matchMedia('(max-width:719px)').matches) input.blur(); // close the phone keyboard
+      input.value = '';
+      ask(v);
+      if (phone()) input.blur(); // close the phone keyboard so the answer is visible
     });
 
-    function onChip(ev) {
-      var b = ev.target.closest ? ev.target.closest('button[data-ask]') : null;
-      if (b) showById(b.getAttribute('data-ask'));
-    }
-    chipBox.addEventListener('click', onChip);
-    out.addEventListener('click', onChip);
+    log.addEventListener('click', function (ev) {
+      var t = ev.target;
+      var b = t.closest ? t.closest('button[data-ask]') : null;
+      if (b) {
+        askById(b.getAttribute('data-ask'));
+        // The tapped chip is gone now, so keep keyboard focus inside the chat.
+        log.setAttribute('tabindex', '-1');
+        try { log.focus({ preventScroll: true }); } catch (err) { log.focus(); }
+        return;
+      }
+      var a = t.closest ? t.closest('a[href^="#"]') : null;
+      // A link to another screen: on a phone the chat covers the page, so get out of the way.
+      if (a && a.getAttribute('href').indexOf('#ask') !== 0 && phone()) close();
+    });
 
-    return {
-      open: function (id) { if (!(id && showById(id))) reset(); }
-    };
+    return { open: open, close: close };
   }
 
-  root.Ask = init() || { open: function () {} };
+  root.Ask = init() || { open: function () {}, close: function () {} };
 })(typeof window !== 'undefined' ? window : null);
