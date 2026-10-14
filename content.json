@@ -82,7 +82,7 @@
         "MNIST"
       ],
       "github_repo": "PRADA-Sybil_Resilient_Model",
-      "intro": "An extension of PRADA (Juuti et al., EuroS&P 2019), tested on a MNIST classifier. My master's capstone at Rutgers.",
+      "intro": "An extension of PRADA (Juuti et al., EuroS&P 2019), tested on an MNIST classifier. My master's capstone at Rutgers.",
       "question": "PRADA spots model-stealing by checking whether an account's query distances look normally distributed. An attacker can split queries across fake (Sybil) accounts so each one stays under PRADA's 100-query warm-up and never gets checked.",
       "question_heading": "The problem",
       "what_i_did": "A second detection layer that compares query-distance histograms across accounts using Jensen-Shannon divergence. Sybil accounts all send Jacobian-generated images, so their histograms converge. Benign accounts' don't.",
@@ -217,11 +217,11 @@
         },
         {
           "number": "+1.29s",
-          "label": "biggest year-over-year change, 2013 to 2014"
+          "label": "biggest year-over-year change in average pit time, 2013 to 2014"
         },
         {
           "number": "23.74s",
-          "label": "Red Bull average, fastest and most consistent"
+          "label": "Red Bull average pit time, fastest and most consistent"
         }
       ],
       "recommendation": "Don't treat pit-crew speed alone as a lever for race results. The bigger gap between teams is consistency: Aston Martin is mid-pack on speed but second-worst on variability, so that is where a team would focus.",

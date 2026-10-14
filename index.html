@@ -183,7 +183,7 @@
 <div class="wrap phead">
   <a class="crumb" href="#home">Home</a>
   <h1>Experience</h1>
-  <p class="sub">Highlights from each role. My resume, tailored to each job, has the full detail.</p>
+  <p class="sub">Highlights from each role. My resume has the full details.</p>
 </div>
 <section class="wrap" aria-label="Roles">
   <div class="tabs" role="tablist" aria-label="Employer"><button type="button" role="tab" id="tab-adobe" aria-controls="adobe" aria-selected="true">Adobe</button><button type="button" role="tab" id="tab-amazon" aria-controls="amazon" aria-selected="false" tabindex="-1">Amazon</button></div>
@@ -256,7 +256,7 @@
   <a class="crumb" href="#projects">All projects</a>
   <p class="kicker">master's capstone · ML security</p>
   <h1>Sybil-Resilient Model Extraction Detection</h1>
-  <p class="sub">An extension of PRADA (Juuti et al., EuroS&amp;P 2019), tested on a MNIST classifier. My master's capstone at Rutgers.</p>
+  <p class="sub">An extension of PRADA (Juuti et al., EuroS&amp;P 2019), tested on an MNIST classifier. My master's capstone at Rutgers.</p>
 </div>
 <div class="wrap" style="margin-bottom:18px"><figure class="fig"><a href="img/prada-sweep.webp" aria-label="Open full-size image: Detection rate vs number of Sybil accounts"><img src="img/prada-sweep.webp" alt="Detection rate vs number of Sybil accounts" loading="lazy"></a><figcaption><b>Figure</b>Detection rate as the attack is split across more fake accounts. PRADA alone drops to 0% at 64 accounts. The JS layer keeps firing, but past about 192 accounts its separation signal weakens (see limitations below). <span class="zoomhint">Tap to enlarge.</span></figcaption></figure></div>
 <article class="wrap">
@@ -308,7 +308,7 @@
 <article class="wrap">
   <div class="card feature">
     <dl class="rows" style="margin-top:0"><div><dt>The question</dt><dd>Does pit stop speed relate to where a driver finishes, and have stops gotten faster over the years?</dd></div><div><dt>What I did</dt><dd>Tested the link at three levels (single stop, race average, race total) with CORR(), compared constructors with AVG and STDDEV, and tracked year-over-year change with LAG. In Power BI I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.</dd></div><div><dt>Result</dt><dd>The link is weak: <b>+0.135 to +0.175</b>. P1 finishers averaged 43.2s of pit lane time per race vs 57.0s for P18, but top teams tend to have both faster cars and faster crews, so pit speed alone doesn't explain results.</dd></div></dl>
-    <div class="figs"><div><b>10,884</b><span>pit stops analyzed</span></div><div><b>+0.175</b><span>strongest correlation, race total</span></div><div><b>+1.29s</b><span>biggest year-over-year change, 2013 to 2014</span></div><div><b>23.74s</b><span>Red Bull average, fastest and most consistent</span></div></div>
+    <div class="figs"><div><b>10,884</b><span>pit stops analyzed</span></div><div><b>+0.175</b><span>strongest correlation, race total</span></div><div><b>+1.29s</b><span>biggest year-over-year change in average pit time, 2013 to 2014</span></div><div><b>23.74s</b><span>Red Bull average pit time, fastest and most consistent</span></div></div>
     <ul class="chips"><li>PostgreSQL</li><li>LAG()</li><li>Power BI</li><li>DAX</li></ul>
     <a class="btn solid gh-btn" href="https://github.com/Venkata-Pramid-Reddy-Mitta/F1-Pit-Stop-Strategy-Analysis" rel="noopener">View code on GitHub</a>
   </div>
