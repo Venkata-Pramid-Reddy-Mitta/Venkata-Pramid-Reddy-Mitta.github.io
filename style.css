@@ -38,6 +38,7 @@ p{margin:0 0 12px}
 .status{display:inline-flex;align-items:center;gap:8px;font:600 .8rem/1.3 var(--data);color:var(--ink);border:1.5px solid var(--rule);background:var(--sheet);padding:7px 12px;border-radius:999px;margin-bottom:20px}
 .status i{width:8px;height:8px;border-radius:50%;background:#1f9d55;display:block;flex:none}
 h1{font-size:clamp(2.4rem,10.5vw,4.4rem);font-weight:800;letter-spacing:-.035em;margin-bottom:14px}
+h1.as-h2{font-size:2rem;letter-spacing:-.02em;margin-bottom:0}
 h1 span{display:block}
 .role{font:600 1.08rem/1.4 var(--body);margin-bottom:12px}
 .pitch{color:var(--muted);font-size:1.08rem;max-width:54ch;margin-bottom:22px}
@@ -130,7 +131,7 @@ footer{padding-block:28px 22px;color:var(--muted);font:500 .8rem/1.4 var(--data)
   .btns{display:flex;flex-wrap:wrap}
   .ledger{max-width:620px}
   .ledger b{font-size:1.6rem}
-  h2{font-size:2.5rem}
+  h2,h1.as-h2{font-size:2.5rem}
   .card{padding:28px}
   .rows{grid-template-columns:repeat(3,1fr);gap:24px}
   .figs{grid-template-columns:repeat(4,1fr)}
@@ -376,6 +377,8 @@ body{padding-bottom:150px}
 .askfab:hover{background:var(--pen)}
 .askfab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .askfab[aria-expanded="true"]{display:none}
+/* phones: icon-only round button so it covers less of the page */
+@media (max-width:719px){.askfab{width:56px;height:56px;min-height:0;padding:0;justify-content:center}.askfab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.askfab svg{width:26px;height:26px}}
 .askpanel{position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.5}
 .askpanel[hidden]{display:none}
 html.askopen,html.askopen body{overflow:hidden}

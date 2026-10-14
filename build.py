@@ -228,7 +228,7 @@ def card(p, lead=False):
 def contact_section():
     return f"""<section class="wrap sec" aria-labelledby="contact-h">
   <div class="contact">
-    <h2 id="contact-h">{e(C['contact']['heading'])}</h2>
+    <h1 id="contact-h" class="as-h2">{e(C['contact']['heading'])}</h1>
     <p>{e(C['contact']['text'])}</p>
     <div class="mail">
       <a id="addr" href="mailto:{a(EMAIL)}">{e(EMAIL)}</a>
@@ -304,7 +304,7 @@ minis = "".join(
     for m in small)
 projects_view = f"""<div class="view" data-view="projects">
 <section class="wrap sec" aria-labelledby="work-h">
-  <h2 id="work-h">Projects</h2>
+  <h1 id="work-h" class="as-h2">Projects</h1>
   <p class="lede">Each one started with a question. Tap a project for the full story: what I asked, what I built, and what came out.</p>
   <div class="filters" role="group" aria-label="Filter projects">{filters}</div>
   <div class="grid">
@@ -519,7 +519,7 @@ page = f"""<!doctype html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -543,8 +543,8 @@ page = f"""<!doctype html>
 {dock}</nav>
 {ask_widget}
 <script type="application/json" id="ask-data">{ask_json}</script>
-<script src="ask.js?v=3" defer></script>
-<script src="site.js?v=11" defer></script>
+<script src="ask.js?v=4" defer></script>
+<script src="site.js?v=12" defer></script>
 </body>
 </html>
 """

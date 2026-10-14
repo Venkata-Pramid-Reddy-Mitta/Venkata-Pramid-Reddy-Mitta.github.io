@@ -241,7 +241,7 @@
     function noMatch(typed, ranked) {
       var skill = SKILL_INTENT.test(typed);
       var m = el('div', 'msg bot');
-      m.appendChild(el('p', 'askq', skill ? 'Not listed on this site' : 'No ready answer for that'));
+      m.appendChild(el('p', 'askq', skill ? 'Not covered here' : 'No ready answer for that'));
       m.appendChild(el('p', null, skill ? cfg.no_match_skill : cfg.no_match));
       var btns = el('div', 'asklinks stackbtns');
       btns.appendChild(linkEl({ label: 'Email me your question', href: mailto(typed) }, 'btn solid'));

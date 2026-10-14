@@ -96,6 +96,9 @@
   // ---------- Router ----------
   // Remember scroll position per address so Back returns you to where you were.
   var scrollPos = {};
+  var baseTitle = document.title;
+  var brand = document.querySelector('.brand');
+  var siteName = brand ? brand.textContent.trim() : baseTitle;
   var trail = [];          // addresses visited in this tab, to detect Back
   var current = null;
 
@@ -143,6 +146,10 @@
       selectTab(t);
     }
     if (view === 'projects') applyFilters();
+
+    // Tab title names the screen, so bookmarks and tabs are easy to tell apart.
+    var named = target.querySelector('h1');
+    document.title = view === 'home' || !named ? baseTitle : named.textContent.trim() + ' | ' + siteName;
 
     if (initial) return;  // let the browser restore scroll on first load
     jump(goingBack && scrollPos[h] ? scrollPos[h] : 0);
