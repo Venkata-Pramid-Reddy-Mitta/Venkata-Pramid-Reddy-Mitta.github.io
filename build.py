@@ -334,7 +334,7 @@ panels = "".join(f"""
     <div class="head">
       <span class="co">{e(x['company'])}</span>
       <strong>{e(x['title'])}</strong>
-      <span class="when"><em>{e(x['dates'])}</em> &middot; {e(x['place'])}</span>
+      <span class="when"><em>{e(x['dates'])}</em> &middot; {e(x['place'])}{(' &middot; ' + e(x['dates_note'])) if x.get('dates_note') else ''}</span>
     </div>
     {figs(x['key_numbers'])}
     <p class="focus">{e(x['focus'])}</p>
