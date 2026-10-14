@@ -1485,6 +1485,36 @@
           "to": "experience-amazon"
         }
       ]
+    },
+    {
+      "id": "weakness",
+      "question": "What's your biggest weakness?",
+      "keywords": "weakness, weaknesses, biggest weakness, greatest weakness, area of improvement, areas of improvement, improve on, working on, shortcoming, shortcomings, flaw, flaws",
+      "answer": "I tend to trust people too quickly. If a teammate or another team hands me something, I assume they've already worked out the details, so I don't always dig into them myself.\n\nIn data work that's risky, because a number someone else prepared can still be wrong. So now I check the details myself before I rely on them: I profile the data, reconcile totals back to the source, and confirm the KPI definition instead of assuming it. That's a big part of why I reconcile 25 KPIs at Adobe before anything reaches executives."
+    },
+    {
+      "id": "failure",
+      "question": "Tell me about a failure or mistake",
+      "keywords": "failure, failures, failed, fail, mistake, mistakes, setback, went wrong, lesson learned, lessons learned, learned from, what would you do differently",
+      "answer": "At Amazon, the seller reporting I supported only showed a problem after a seller had already missed its SLA. Operations could react, but by then the breach had happened, so the reports weren't really helping anyone prevent it.\n\nI changed the approach: I grouped sellers into cohorts and compared their fulfillment and SLA trends over time, so we could see which accounts were slipping before they breached. Operations used those lists for targeted intervention.\n\nThe lesson for me was that accurate reporting isn't enough. It has to show up early enough for someone to act on it.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "deadlines",
+      "question": "How do you handle tight deadlines and pressure?",
+      "keywords": "deadline, deadlines, tight deadline, tight deadlines, pressure, under pressure, stress, stressful, time pressure, urgent, urgent request, last minute, multiple deadlines, time management, manage your time",
+      "answer": "Most of my work runs on a fixed rhythm, like weekly operations reviews at Amazon and weekly business reviews at Adobe, so I plan backward from the review and do the checks first, not last.\n\nThe biggest thing that helped was automating the repetitive part. At Amazon I cut weekly report prep from **6 hours to under 2**, and at Adobe a recurring report went from **9 hours to 5**. That leaves time for the analysis and validation instead of rushing them.\n\nAt Adobe, anomaly detection flags KPI outliers before the weekly review, so surprises get handled early, and in Jira I fix reporting defects within the sprint. When things really pile up, I agree on priorities with the stakeholder rather than quietly cutting the validation."
+    },
+    {
+      "id": "age",
+      "question": "How old are you?",
+      "keywords": "how old, age, your age, years old, old are you",
+      "answer": "I'm 27."
     }
   ]
 }
