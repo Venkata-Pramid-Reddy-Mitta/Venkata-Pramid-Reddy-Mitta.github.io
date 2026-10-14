@@ -84,7 +84,8 @@ The **Ask me** chat button (bottom-right corner of every screen) opens a small c
 - `ask_suggested` lists the question chips shown when the chat opens.
 - `ask_page`: the chat's title, subtitle, greeting (`text`), placeholder and the "no match" messages.
 - Project answers and "Do you know X?" answers (one per skill) are made automatically from the projects and skills lists. To write your own for a skill, add it to `covers_skills` on an answer. Add extra words people might type for a project with `ask_keywords`.
-- Only put facts in answers that are already on the site. If a question has no match, the visitor sees the closest topics and an Email me button with their question filled in.
+- `ask_extra_skills`: skills that are on your resume but not on the site. Each gets a "Do you know X?" answer in the chat.
+- Only put facts in answers that are on the site or your resume. If a question has no match, the visitor sees the closest topics and an Email me button with their question filled in.
 
 ## Other things you can change in content.json
 - `profile`: name, "goes by", the status line, title, intro, photo file, the three highlight numbers

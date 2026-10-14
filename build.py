@@ -100,6 +100,9 @@ SKILL_ALIASES = {
     "scikit-learn": ["sklearn"], "postgresql": ["postgres"], "xgboost": ["xg boost"],
     "dbt": ["data build tool"], "excel": ["spreadsheet", "spreadsheets"], "git": ["version control"],
     "mysql": ["my sql"], "cohort analysis": ["cohort", "cohorts"], "forecasting": ["forecast", "forecasts"],
+    "t-sql": ["tsql", "sql server"], "pl/sql": ["plsql", "oracle"], "ssrs": ["reporting services"],
+    "azure synapse analytics": ["synapse"], "azure data lake storage": ["adls", "data lake", "azure data lake"],
+    "microsoft visio": ["visio"], "power automate": ["power automate flows"],
 }
 
 
@@ -114,7 +117,9 @@ def build_ask():
             ask_fail(f"two items share the id '{m['id']}'")
         seen.add(m["id"])
 
+    extra = C.get("ask_extra_skills", [])
     skill_names = {i.lower() for g in C["skills"] for i in g["items"]}
+    skill_names |= {i.lower() for g in extra for i in g["items"]}
     covered = set()
     for m in manual:
         for s in csv(m.get("covers_skills")):
@@ -159,9 +164,9 @@ def build_ask():
             if prs:
                 used.append("in " + (join_names([p["title"] for p in prs]) if len(prs) <= 2 else f"{len(prs)} projects"))
             if used:
-                text = f"{item} is in my {g['group']} skills. I've used it {' and '.join(used)}."
+                text = f"I've used {item} {' and '.join(used)}. It's part of my {g['group']} skills."
             else:
-                text = f"{item} is on my skills list ({g['group']}). My main tools are SQL, Python and Power BI."
+                text = f"{item} is on my skills list ({g['group']}), but it isn't a big part of my day-to-day work. My main tools are SQL, Python and Power BI."
             links = [{"label": f"{x['company']} role", "href": "#experience-" + x["id"]} for x in cos]
             if prs:
                 links.append({"label": f"Projects using {item}", "href": "#tool-" + slugify(item)})
@@ -170,7 +175,20 @@ def build_ask():
                 "kw": [low] + SKILL_ALIASES.get(low, []), "html": paras(text), "links": links,
             })
 
+    # Resume-only skills: listed in the chat, not on the Experience page.
+    for g in extra:
+        for item in g["items"]:
+            if item.lower() in covered:
+                continue
+            entries.append({
+                "id": "skill-" + slugify(item), "q": f"Do you know {item}?", "kind": "skill",
+                "kw": [item.lower()] + SKILL_ALIASES.get(item.lower(), []),
+                "html": paras(f"{item} is on my resume ({g['group']}). {g['note']}"), "links": [],
+            })
+
     ids = {x["id"] for x in entries}
+    if len(ids) != len(entries):
+        ask_fail("two answers share an id")
     for key in ("ask_suggested",):
         for i in C.get(key, []):
             if i not in ids:

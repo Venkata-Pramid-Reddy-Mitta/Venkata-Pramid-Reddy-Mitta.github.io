@@ -634,15 +634,71 @@
   },
   "ask_page": {
     "heading": "Ask me",
-    "subtitle": "Pre-written answers from this site",
-    "text": "Hi, I'm Pramid. Ask me about my work, skills or availability, or tap a question below. The answers are pre-written from what's on this site, so nothing is made up.",
+    "subtitle": "Pre-written answers, no AI",
+    "text": "Hi, I'm Pramid. Ask me about my work, skills or availability, or tap a question below. The answers are pre-written, so nothing is made up.",
     "placeholder": "e.g. Do you know SQL?",
     "no_match": "I don't have a ready answer for that one, and I'd rather not guess.",
-    "no_match_skill": "That isn't listed on this site, so I won't claim it here. My main tools are SQL, Python and Power BI. Email me and I'll tell you directly.",
+    "no_match_skill": "That isn't one of the skills I list, so I won't claim it here. My main tools are SQL, Python and Power BI. Email me and I'll tell you directly.",
     "email_subject": "Question from your portfolio"
   },
-  "ask_suggested": ["work-auth", "location", "experience-years", "adobe", "amazon", "best-project", "sql", "dashboards", "education", "resume"],
-  "_how_to_edit_ask": "Each item in the ask list is one answer. keywords is a comma-separated list of words or phrases a visitor might type. Put a blank line between paragraphs as \\n\\n and wrap a word in two stars to make it bold. In links, 'to' can be a screen (p-olist, experience-adobe, education, projects, contact), another answer (ask-sql), a full web address, or one of: email, resume, linkedin, github. If an answer replaces the automatic 'Do you know X?' answer for a skill, list that skill in covers_skills. Only use facts that are already on this site.",
+"_how_to_edit_ask_extra_skills": "Skills that are on the resume but not in the skills list on the site. Each one gets an automatic 'Do you know X?' answer in the chat: 'X is on my resume' plus the note.",
+  "ask_extra_skills": [
+    {
+      "group": "SQL dialects",
+      "items": [
+        "T-SQL",
+        "PL/SQL"
+      ],
+      "note": "Most of my SQL has been in Redshift, Snowflake and PostgreSQL, and the core skills carry over."
+    },
+    {
+      "group": "BI and reporting",
+      "items": [
+        "Looker",
+        "SSRS"
+      ],
+      "note": "Most of my dashboard work has been in Power BI at Adobe and Tableau at Amazon, and the same approach applies: define the KPI, validate the data, then visualize."
+    },
+    {
+      "group": "automation",
+      "items": [
+        "Alteryx",
+        "Power Automate"
+      ],
+      "note": "Most of my automation has been Python and Pandas at Adobe and Excel and SQL workflows at Amazon."
+    },
+    {
+      "group": "data platforms",
+      "items": [
+        "Azure Synapse Analytics",
+        "Azure Data Lake Storage"
+      ],
+      "note": "On Azure, my day-to-day work at Adobe is with Azure Data Factory outputs, Snowflake and Databricks."
+    },
+    {
+      "group": "collaboration",
+      "items": [
+        "ServiceNow",
+        "Azure DevOps",
+        "Lucidchart",
+        "Microsoft Visio"
+      ],
+      "note": "For UAT and defect tracking at Adobe I use Jira."
+    }
+  ],
+    "ask_suggested": [
+    "work-auth",
+    "about-me",
+    "adobe",
+    "amazon",
+    "sql",
+    "power-bi",
+    "why-hire",
+    "best-project",
+    "education",
+    "resume"
+  ],
+  "_how_to_edit_ask": "Each item in the ask list is one answer. keywords is a comma-separated list of words or phrases a visitor might type. Put a blank line between paragraphs as \\n\\n and wrap a word in two stars to make it bold. In links, 'to' can be a screen (p-olist, experience-adobe, education, projects, contact), another answer (ask-sql), a full web address, or one of: email, resume, linkedin, github. If an answer replaces the automatic 'Do you know X?' answer for a skill, list that skill in covers_skills. Only use facts from this site or the resume.",
   "ask": [
     {
       "id": "name",
@@ -655,7 +711,12 @@
       "question": "Are you authorized to work in the US?",
       "keywords": "work authorization, work authorisation, authorized, authorised, authorization, work permit, visa, sponsorship, sponsor, opt, h1b, h-1b, eligible to work, legally, citizen, citizenship, immigration, ead, right to work",
       "answer": "I'm authorized to work in the US (OPT). If you have questions beyond that, such as sponsorship, email me and I'll answer directly.",
-      "links": [{"label": "Email me", "to": "email"}]
+      "links": [
+        {
+          "label": "Email me",
+          "to": "email"
+        }
+      ]
     },
     {
       "id": "location",
@@ -666,168 +727,764 @@
     {
       "id": "looking-for",
       "question": "What kind of roles are you looking for?",
-      "keywords": "looking for, role, job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role, available, availability, open to work, job search, job hunting, new job, opportunities",
+      "keywords": "looking for, what role, what roles, kind of role, kind of roles, type of role, type of roles, roles are you, next role, new role, what job, next job, position, opening, full time, fulltime, permanent, hire, hiring, seeking, target, data analyst, business analyst, analyst role, available, availability, open to work, job search, job hunting, new job, opportunities",
       "answer": "Full-time data analyst and business analyst roles, anywhere in the US."
     },
     {
       "id": "experience-years",
       "question": "How many years of experience do you have?",
-      "keywords": "how many years, years of experience, years, how long, seniority, senior, tenure, how experienced",
+      "keywords": "how many years, years of experience, years, how long, how much experience, total experience, seniority, senior, tenure, how experienced",
       "answer": "5+ years in analytics, across two roles: Adobe (Dec 2025 to present) and Amazon (Jan 2020 to Aug 2024).",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}]
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
     },
     {
       "id": "about-me",
       "question": "Tell me about yourself",
       "keywords": "tell me about yourself, about yourself, about you, who are you, introduce yourself, introduction, background, summary, overview, bio, profile, pitch, describe yourself, what do you do, profession, occupation, career, hi, hello, hey",
       "answer": "I'm a data analyst with 5+ years at Adobe and Amazon. I use SQL, Python and Power BI to turn raw data into dashboards and reports that teams use to make decisions.\n\nI work with stakeholders to define KPIs, write the SQL behind them, and check the numbers before they reach leadership. I added machine learning during my M.S. in Computer Science at Rutgers.",
-      "links": [{"label": "Experience and skills", "to": "experience"}, {"label": "Projects", "to": "projects"}]
+      "links": [
+        {
+          "label": "Experience and skills",
+          "to": "experience"
+        },
+        {
+          "label": "Projects",
+          "to": "projects"
+        }
+      ]
     },
     {
       "id": "how-i-work",
       "question": "How do you work with stakeholders?",
-      "keywords": "stakeholder, stakeholders, how do you work, how i work, approach, process, methodology, requirements, requirement, communicate, communication, strengths, strength, why hire you, why should we hire you, why should i hire you, what makes you different, kpi, kpis, kpi design, define kpis",
-      "covers_skills": "KPI design",
+      "keywords": "stakeholder, stakeholders, stakeholder management, how do you work, how i work, approach, process, methodology, work style, working style",
       "answer": "I work in three steps.\n\n**Define the question.** Agree on the decision and the metric with the people who will use it.\n\n**Make the numbers trustworthy.** Reconcile sources and catch gaps before anyone sees a chart.\n\n**Turn them into action.** Dashboards and short write-ups that say what to do next.\n\nIn practice, 20+ stakeholders use my dashboards at Adobe, and 30+ used the ones I delivered at Amazon."
     },
     {
       "id": "adobe",
       "question": "What do you do at Adobe?",
       "keywords": "adobe, current job, current role, current employer, current company, currently working, where do you work, present role, job title, title, designation, current title, current position, working now, right now, customer experience, marketing analytics",
-      "answer": "At Adobe (Dec 2025 to present) I'm a Business Data Analyst for Customer Experience Intelligence & Marketing Analytics. I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards that leaders use in weekly reviews.\n\nResults: the reporting cycle went from **9 hours to 5**, **8 Power BI dashboards** are used by **20+ stakeholders**, and I reconciled **25 KPIs**.\n\nTools: SQL, Snowflake, dbt, Databricks, Power BI, Python, Azure Data Factory, Jira.",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}]
+      "answer": "I'm a Business Data Analyst at Adobe (Dec 2025 to present) on the Customer Experience Intelligence & Marketing Analytics platform. My work starts with requirements from marketing, product and customer experience teams, which I turn into BRDs, FRDs, user stories and acceptance criteria.\n\nOn the data side I write SQL over dbt-modeled tables in Snowflake to analyze customer journeys, adoption and retention. That segmentation logic feeds **12 recurring stakeholder reports**. I built and own **8 Power BI dashboards** used by **20+ stakeholders**, which replaced manually assembled weekly decks.\n\nI also automated recurring reporting with Python and Pandas on Azure Data Factory outputs (**9 hours to 5** per cycle), and I reconcile **25 KPIs** from source to report before anything reaches executives.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
     },
     {
       "id": "amazon",
       "question": "What did you do at Amazon?",
       "keywords": "amazon, previous job, previous role, previous employer, last job, last role, supply chain, seller, sellers, seller performance, fulfillment, fulfilment, sla, india",
-      "answer": "At Amazon (Jan 2020 to Aug 2024, India) I was a Data Analyst for Supply Chain Optimization & Seller Performance Analytics. I built the SQL, ETL and Tableau reporting that operations teams used to track seller health, fulfillment and SLA compliance.\n\nResults: **50M+ records** in Redshift, **10 Tableau dashboards** used by **30+ stakeholders**, and weekly report prep cut from **6 hours to under 2**.\n\nTools: SQL, Redshift, S3, Tableau, Excel, ETL.",
-      "links": [{"label": "Amazon role", "to": "experience-amazon"}]
+      "answer": "At Amazon (Jan 2020 to Aug 2024, India) I was a Data Analyst in Supply Chain Optimization & Seller Performance Analytics.\n\nI wrote SQL against Redshift order, inventory and fulfillment tables spanning **50M+ records**, pulling from S3, to produce the SLA and seller-performance metrics used in weekly operations reviews. I built SQL-based ETL across **15 source datasets** that fed daily reporting, and delivered **10 Tableau dashboards** used by **30+ stakeholders**.\n\nI also ran cohort analysis across seller segments to flag high-risk accounts before they breached SLA, built fulfillment-volume forecasts for peak-season staffing, and automated Excel and SQL reporting, which cut weekly prep from **6 hours to under 2**.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
     },
     {
       "id": "timeline",
       "question": "What have you done since Amazon?",
-      "keywords": "timeline, career path, career history, work history, since amazon, after amazon, left amazon, gap, career gap, employment gap",
+      "keywords": "timeline, career path, career history, work history, since amazon, after amazon, gap, career gap, employment gap, journey so far",
       "answer": "Amazon ended in Aug 2024. From Sep 2024 to May 2026 I did my M.S. in Computer Science (Scientific Computing) at Rutgers University-Camden, and in Dec 2025 I started at Adobe, where I still work.",
-      "links": [{"label": "Education", "to": "education"}, {"label": "Adobe role", "to": "experience-adobe"}]
+      "links": [
+        {
+          "label": "Education",
+          "to": "education"
+        },
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
     },
     {
       "id": "skills-main",
       "question": "What are your main skills and tools?",
       "keywords": "skills, skill, tools, tech stack, stack, technologies, toolkit, strongest, best at, proficient, languages, programming languages, main tools, what do you use",
-      "answer": "My main tools are SQL, Python and Power BI. I also work with Tableau, Snowflake, Redshift, Databricks, dbt and Azure Data Factory.\n\nAsk about any one of them, such as Snowflake or Tableau, or see the full list on the Experience page.",
-      "links": [{"label": "All skills", "to": "experience"}]
+      "answer": "SQL is my strongest skill, and Python and Power BI are what I use most alongside it. I've also used Tableau (at Amazon), Snowflake, dbt and Databricks (at Adobe), Redshift and S3 (at Amazon), Azure Data Factory and Excel.\n\nOn the business side: requirements, BRDs and FRDs, user stories, UAT and KPI definitions. Ask me about any one of them, such as Snowflake or UAT.",
+      "links": [
+        {
+          "label": "All skills",
+          "to": "experience"
+        }
+      ]
     },
     {
       "id": "projects-list",
       "question": "What projects have you done?",
       "keywords": "project, projects, portfolio, side projects, personal projects, case study, case studies, all projects",
       "answer": "The case studies on this site are my Rutgers capstone on model-extraction detection, Olist delivery performance, F1 pit stops, NFL and weather, housing prices, protein localization and a metaheuristics comparison. There are also two smaller projects: Emotion Detection from Speech and StudyArena.",
-      "links": [{"label": "All projects", "to": "projects"}]
+      "links": [
+        {
+          "label": "All projects",
+          "to": "projects"
+        }
+      ]
     },
     {
       "id": "best-project",
       "question": "Which project should I look at first?",
       "keywords": "best project, strongest project, favorite project, favourite project, proudest, proud of, most proud, most impressive, highlights, highlight, featured, which project, top project, start with, look at first, standout, stand out",
       "answer": "Three I'd start with.\n\n**Olist Delivery Performance** shows my SQL-to-dashboard work: 99,441 orders in PostgreSQL, with a Power BI dashboard on SQL views.\n\n**The capstone, Sybil-Resilient Model Extraction Detection,** is my ML security project. PRADA alone flagged 0 of 64 Sybil accounts, and with my extra layer detection held from 4 to 128 accounts with zero false positives.\n\n**F1 Pit Stop Strategy** asks whether faster pit stops win races, using SQL and DAX on 10,884 pit stops.",
-      "links": [{"label": "Olist", "to": "p-olist"}, {"label": "Capstone", "to": "p-prada"}, {"label": "F1 pit stops", "to": "p-f1"}]
+      "links": [
+        {
+          "label": "Olist",
+          "to": "p-olist"
+        },
+        {
+          "label": "Capstone",
+          "to": "p-prada"
+        },
+        {
+          "label": "F1 pit stops",
+          "to": "p-f1"
+        }
+      ]
     },
     {
       "id": "sql",
-      "question": "Can you show me examples of your SQL?",
-      "keywords": "sql, query, queries, join, joins, window function, window functions, rank, postgres, postgresql",
+      "question": "How strong is your SQL?",
+      "keywords": "sql, query, queries, join, joins, window function, window functions, rank, postgres, postgresql, sql examples, sql level, how good is your sql, how strong is your sql, strongest skill, cte, ctes, subquery",
       "covers_skills": "SQL, PostgreSQL",
-      "answer": "SQL is one of my main tools.\n\n**Amazon:** SQL against 50M+ Redshift records, plus the ETL behind the reporting.\n\n**Olist (PostgreSQL):** joined five tables, flagged late orders with CASE WHEN, ranked states and categories with RANK() OVER, and used CORR() to test late delivery against review scores.\n\n**F1 (PostgreSQL):** CORR(), AVG and STDDEV by constructor, and LAG() for year-over-year change across 10,884 pit stops.\n\nThe code is on GitHub.",
-      "links": [{"label": "Olist case study", "to": "p-olist"}, {"label": "F1 case study", "to": "p-f1"}, {"label": "My GitHub", "to": "github"}]
+      "answer": "SQL is my strongest skill, and I use it every day: extraction, joins, aggregations, validation, reconciliation, segmentation and ETL.\n\n**Amazon:** SQL against **50M+** Redshift order, inventory and fulfillment records, plus SQL-based ETL across 15 source datasets.\n\n**Adobe:** SQL over dbt-modeled Snowflake tables for customer journeys, adoption, retention and segmentation.\n\n**Projects (PostgreSQL):** in Olist I used CASE WHEN flags, RANK() OVER (PARTITION BY state) and CORR(); in F1 I used LAG() for year-over-year change across 10,884 pit stops.\n\nI filter early, select only the columns I need, watch join cardinality, and check totals before I trust a result.",
+      "links": [
+        {
+          "label": "Olist case study",
+          "to": "p-olist"
+        },
+        {
+          "label": "F1 case study",
+          "to": "p-f1"
+        },
+        {
+          "label": "My GitHub",
+          "to": "github"
+        }
+      ]
     },
     {
       "id": "dashboards",
       "question": "What dashboards have you built?",
-      "keywords": "dashboard, dashboards, power bi, powerbi, tableau, dax, visualization, visualisation, visualize, data viz, reporting, report, reports, business intelligence, bi, charts",
-      "covers_skills": "Power BI, Tableau, DAX",
+      "keywords": "dashboard, dashboards, visualization, visualisation, visualize, data viz, reporting, report, reports, business intelligence, bi, what dashboards",
       "answer": "**Adobe (Power BI):** 8 dashboards used by 20+ stakeholders.\n\n**Amazon (Tableau):** 10 dashboards used by 30+ stakeholders, for tracking seller health, fulfillment and SLA compliance.\n\n**Olist (Power BI):** a four-visual dashboard built on SQL views.\n\n**F1 (Power BI and DAX):** I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}, {"label": "Olist", "to": "p-olist"}, {"label": "F1 pit stops", "to": "p-f1"}]
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        },
+        {
+          "label": "Olist",
+          "to": "p-olist"
+        },
+        {
+          "label": "F1 pit stops",
+          "to": "p-f1"
+        }
+      ]
     },
     {
       "id": "data-quality",
-      "question": "How do you make sure the numbers are right?",
-      "keywords": "data quality, accuracy, accurate, validate, validation, trust, trustworthy, check, checks, error, errors, anomaly, anomalies, profiling, root cause, reconcile, reconciliation, reconciled, reconciling, reliable, integrity",
-      "covers_skills": "Reconciliation, Data profiling, Anomaly detection, Root cause analysis",
-      "answer": "I reconcile sources and catch gaps before anyone sees a chart. At Adobe I reconciled 25 KPIs. My data quality skills include reconciliation, data profiling, anomaly detection and root cause analysis.",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}]
+      "question": "How do you make sure your numbers are right?",
+      "keywords": "data quality, accuracy, accurate, validate, validation, validating, trust, trustworthy, check, checks, correct numbers, numbers right, data profiling, profiling, reconciliation, reconcile, reconciled, data integrity, governance",
+      "covers_skills": "Reconciliation, Data profiling",
+      "answer": "I validate at every stage instead of waiting until the dashboard is done.\n\nI start with profiling: record counts, nulls, duplicates, ranges and distinct values. Then I compare key totals between source and transformed data so nothing is lost or doubled. For each KPI I check the calculation against its written definition and test a few records by hand.\n\nAt Adobe I reconcile **25 KPIs** from source to report before executive reporting. At Amazon I profiled and reconciled seller data to catch duplicates, missing values and KPI discrepancies.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
     },
     {
       "id": "automation",
-      "question": "Have you automated any reporting?",
-      "keywords": "automation, automate, automated, automating, manual, efficiency, time saved, saved time, save time, hours, faster, streamline, process improvement",
-      "answer": "At Adobe the reporting cycle went from **9 hours to 5**. At Amazon, weekly report prep went from **6 hours to under 2**.",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "Amazon role", "to": "experience-amazon"}]
+      "question": "Tell me about a reporting process you automated",
+      "keywords": "automation, automate, automated, automating, manual, manual work, efficiency, time saved, saved time, save time, hours, faster, streamline, process improvement, reporting automation",
+      "answer": "At Adobe, a recurring report was built by hand from Azure Data Factory pipeline outputs and took about **9 hours** each cycle. I automated the repeatable preparation and transformation steps with Python and Pandas, kept the validation checks inside the workflow, and brought it down to **5 hours**.\n\nAt Amazon I standardized the SQL extraction and automated the Excel and SQL steps of the weekly seller and fulfillment report, which cut prep from **6 hours to under 2**.\n\nIn both cases I compared the automated output against the old report before switching over.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
     },
     {
       "id": "big-data",
       "question": "Have you worked with large datasets?",
-      "keywords": "large data, large dataset, large datasets, big data, scale, volume, million, 50m, records, redshift, s3",
-      "covers_skills": "Redshift, S3",
-      "answer": "At Amazon I worked with **50M+ records in Redshift**, using SQL and ETL to build the reporting operations teams used for seller health, fulfillment and SLA compliance. Tools there: SQL, Redshift, S3, Tableau, Excel, ETL.",
-      "links": [{"label": "Amazon role", "to": "experience-amazon"}]
+      "keywords": "large data, large dataset, large datasets, big data, scale, volume, million, millions, 50m, records, huge data, large tables, big tables",
+      "answer": "My biggest example is Amazon, where the Redshift order, inventory and fulfillment tables spanned **50M+ records**.\n\nAt that size I don't pull everything out. I filter, aggregate and transform inside the warehouse and bring only the output I need into reporting. I watch joins closely, because a bad join can multiply rows, and I validate counts, since a small logic error touches a lot of records.\n\nThat data fed the SLA metrics, seller-performance reporting, ETL and Tableau dashboards.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
     },
     {
       "id": "ml",
       "question": "Do you have machine learning experience?",
-      "keywords": "machine learning, ml, model, models, modeling, modelling, predictive, prediction, predict, ai, artificial intelligence, data science, data scientist, deep learning",
+      "keywords": "machine learning, ml, model, models, predictive, prediction, predict, ai, artificial intelligence, data science, data scientist, deep learning, neural network, xgboost model",
       "answer": "I added machine learning during my M.S. at Rutgers. My capstone was on detecting model-stealing attacks, where someone copies a deployed ML model through its API.\n\nOther ML work: **housing prices** (tuned XGBoost, 0.93 R² on 586 test homes, with SHAP to explain each prediction), **protein localization** (SVM at 70.6% 10-fold cross-validated accuracy), and a comparison of **four metaheuristic optimizers** (Wolf Pack and PSO tied at 97.37% test accuracy).",
-      "links": [{"label": "Capstone", "to": "p-prada"}, {"label": "Housing prices", "to": "p-housing"}, {"label": "Protein localization", "to": "p-evostruct"}, {"label": "Metaheuristics", "to": "p-metaheuristics"}]
+      "links": [
+        {
+          "label": "Capstone",
+          "to": "p-prada"
+        },
+        {
+          "label": "Housing prices",
+          "to": "p-housing"
+        },
+        {
+          "label": "Protein localization",
+          "to": "p-evostruct"
+        },
+        {
+          "label": "Metaheuristics",
+          "to": "p-metaheuristics"
+        }
+      ]
     },
     {
       "id": "business-analysis",
       "question": "Do you have business analysis experience?",
-      "keywords": "business analysis, brd, frd, user stories, user story, acceptance criteria, uat, agile, scrum, requirements gathering, requirement gathering",
-      "covers_skills": "BRD / FRD, User stories, Acceptance criteria, UAT, Agile / Scrum",
-      "answer": "These are on my skills list: BRD / FRD, user stories, acceptance criteria, UAT and Agile / Scrum. At Adobe I turn marketing, product and customer-experience questions into KPIs, SQL and Power BI dashboards, and I define the KPIs with stakeholders before writing the SQL.",
-      "links": [{"label": "Adobe role", "to": "experience-adobe"}, {"label": "How I work with stakeholders", "to": "ask-how-i-work"}]
+      "keywords": "business analysis, business analyst, ba, user stories, user story, agile, scrum, sprint, sprints, backlog, backlog grooming, sprint planning, gap analysis, process mapping, bpmn, use case, use cases, rtm, traceability, sdlc",
+      "covers_skills": "User stories, Agile / Scrum",
+      "answer": "Business analysis is half my job at Adobe. I turn marketing, product and customer experience requirements into BRDs, FRDs, user stories and acceptance criteria across Agile workstreams, then run UAT and business validation in Jira and resolve reporting defects within the sprint.\n\nAt Amazon I translated supply chain, seller services and fulfillment requirements into KPI definitions and reporting specifications for operations teams.\n\nMy resume also lists gap analysis, process mapping (BPMN), use cases, RTM, backlog grooming and sprint planning.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "How I work with stakeholders",
+          "to": "ask-how-i-work"
+        }
+      ]
     },
     {
       "id": "cloud",
       "question": "What cloud platforms have you used?",
-      "keywords": "cloud, aws, amazon web services, azure, azure data factory, data factory, adf",
-      "covers_skills": "AWS, Azure, Azure Data Factory",
-      "answer": "**AWS at Amazon:** Redshift and S3. **Azure at Adobe:** Azure Data Factory. I also hold Microsoft Azure Fundamentals (AZ-900).",
-      "links": [{"label": "Amazon role", "to": "experience-amazon"}, {"label": "Adobe role", "to": "experience-adobe"}]
+      "keywords": "cloud, aws, amazon web services, azure, microsoft azure, cloud platform, cloud platforms",
+      "covers_skills": "AWS, Azure",
+      "answer": "**AWS at Amazon:** Redshift and S3. **Azure at Adobe:** Azure Data Factory, with Snowflake and Databricks as the data platforms.\n\nI also hold Microsoft Azure Fundamentals (AZ-900).",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        },
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
     },
     {
       "id": "education",
       "question": "Where did you study?",
       "keywords": "education, degree, degrees, university, college, school, study, studied, graduate, graduated, graduation, masters, master, ms, m s, bachelors, bachelor, gpa, rutgers, sathyabama, major, where did you study, alma mater, academic, qualification, qualifications",
       "answer": "**M.S., Computer Science: Scientific Computing,** Rutgers University-Camden (Sep 2024 to May 2026, GPA 3.90).\n\n**B.E., Computer Science and Engineering,** Sathyabama Institute of Science and Technology, Chennai (Jul 2016 to May 2020, GPA 8.19 / 10).\n\nI also hold Microsoft Azure Fundamentals (AZ-900).",
-      "links": [{"label": "Education", "to": "education"}]
+      "links": [
+        {
+          "label": "Education",
+          "to": "education"
+        }
+      ]
     },
     {
       "id": "certifications",
       "question": "Do you have any certifications?",
       "keywords": "certification, certifications, certificate, certificates, certified, az 900, az900, azure fundamentals, microsoft, credential, credentials",
       "answer": "I hold Microsoft Azure Fundamentals (AZ-900).",
-      "links": [{"label": "View credential", "to": "https://learn.microsoft.com/en-us/users/pramidreddy-0746/credentials/b95e27478661d53c"}]
+      "links": [
+        {
+          "label": "View credential",
+          "to": "https://learn.microsoft.com/en-us/users/pramidreddy-0746/credentials/b95e27478661d53c"
+        }
+      ]
     },
     {
       "id": "teamwork",
-      "question": "Have you worked in a team?",
-      "keywords": "team, teams, teamwork, teammate, teammates, group project, collaboration, collaborate, collaborated, solo, alone, independently",
-      "answer": "The NFL weather analysis was a three-person team project, and Emotion Detection from Speech was a two-person team project with equal contribution.",
-      "links": [{"label": "NFL project", "to": "p-nfl"}, {"label": "How I work with stakeholders", "to": "ask-how-i-work"}]
+      "question": "How big was your team, and who did you work with?",
+      "keywords": "team, teams, teamwork, team size, how big, how many people, team members, team structure, who did you work with, teammate, teammates, group project, collaboration, collaborate, collaborated, cross functional, data engineers, engineering team",
+      "answer": "**Adobe:** I'm the business data analyst on a team with 2 data engineers, a data scientist, a BI developer, a product owner, 2 business SMEs and a QA/UAT analyst. I partner with data engineering on source requirements for new data feeds and with marketing, product and customer experience on what to build.\n\n**Amazon:** I was the data analyst alongside 2 data engineers, a BI/Tableau developer, 2 operations and supply chain SMEs and a project manager.\n\nIn school, the NFL weather analysis was a three-person team project, and Emotion Detection from Speech was a two-person project with equal contribution.",
+      "links": [
+        {
+          "label": "NFL project",
+          "to": "p-nfl"
+        },
+        {
+          "label": "How I work with stakeholders",
+          "to": "ask-how-i-work"
+        }
+      ]
     },
     {
       "id": "contact",
       "question": "How can I contact you?",
       "keywords": "contact, email, e mail, reach, reach you, phone, phone number, call, message, get in touch, talk, schedule, interview, connect, linkedin, github, code, repo, repository, social",
       "answer": "Email is the fastest way to reach me: pramidreddy@mycvcareer.com. I'm also on LinkedIn and GitHub, where the code for my projects is.",
-      "links": [{"label": "Email me", "to": "email"}, {"label": "LinkedIn", "to": "linkedin"}, {"label": "GitHub", "to": "github"}]
+      "links": [
+        {
+          "label": "Email me",
+          "to": "email"
+        },
+        {
+          "label": "LinkedIn",
+          "to": "linkedin"
+        },
+        {
+          "label": "GitHub",
+          "to": "github"
+        }
+      ]
     },
     {
       "id": "resume",
       "question": "Can I get your resume?",
       "keywords": "resume, resumes, cv, curriculum vitae, download resume, send resume",
       "answer": "I don't post a resume on this site. Email me and I'll send it.",
-      "links": [{"label": "Request my resume", "to": "resume"}]
+      "links": [
+        {
+          "label": "Request my resume",
+          "to": "resume"
+        }
+      ]
+    },
+    {
+      "id": "why-hire",
+      "question": "Why should we hire you?",
+      "keywords": "why hire, why should we hire, hire you, what makes you, stand out, unique, strengths, strength, your strengths, value, bring to the team, good fit, fit, why you, what can you bring",
+      "answer": "I work comfortably on both sides of analytics. I can sit with stakeholders, pin down the real business question and the KPI, and then do the data work myself in SQL and Python.\n\nI've done it at scale: 50M+ records at Amazon, and customer and marketing analytics at Adobe on Snowflake, dbt and Power BI. I also check my own work through reconciliation and UAT instead of shipping a dashboard and hoping the numbers are right.\n\nAnd I try to end with a recommendation, not just a chart.",
+      "links": [
+        {
+          "label": "Experience",
+          "to": "experience"
+        },
+        {
+          "label": "Projects",
+          "to": "projects"
+        }
+      ]
+    },
+    {
+      "id": "enjoy",
+      "question": "What do you enjoy about data work?",
+      "keywords": "enjoy, like most, love, passion, passionate, why data, why analytics, why analyst, motivate, motivation, motivates, why this field, why this career",
+      "answer": "What I enjoy most is taking a business problem, understanding the data behind it, and turning it into something people actually use to make a decision."
+    },
+    {
+      "id": "why-left-amazon",
+      "question": "Why did you leave Amazon?",
+      "keywords": "why leave, why did you leave, left amazon, leaving amazon, quit, quit amazon, reason for leaving, why masters, why ms, why grad school",
+      "answer": "I left Amazon in Aug 2024 to start my M.S. in Computer Science at Rutgers in Sep 2024. That's where I added machine learning to my analytics background. During the program I joined Adobe in Dec 2025, and I'm still there.",
+      "links": [
+        {
+          "label": "Education",
+          "to": "education"
+        }
+      ]
+    },
+    {
+      "id": "us-experience",
+      "question": "Do you have US work experience?",
+      "keywords": "us experience, usa experience, united states experience, us work experience, experience in the us, american experience, local experience",
+      "answer": "Adobe (Dec 2025 to present) is my US role. Before that I spent Jan 2020 to Aug 2024 at Amazon in India.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "salary",
+      "question": "What are your salary expectations?",
+      "keywords": "salary, salary expectations, expected salary, pay, compensation, comp, rate, hourly rate, ctc, package, money, how much do you expect, how much pay, wage",
+      "answer": "I'd rather talk about that once I know more about the role and the full package. Email me and we can discuss it.",
+      "links": [
+        {
+          "label": "Email me",
+          "to": "email"
+        }
+      ]
+    },
+    {
+      "id": "start-date",
+      "question": "When can you start?",
+      "keywords": "start, start date, when can you start, notice, notice period, when can you join, can you join, joining, how soon, immediately, available to start, availability date",
+      "answer": "I'm currently at Adobe, so it depends on the role and the timing. Email me and I'll give you a specific date.",
+      "links": [
+        {
+          "label": "Email me",
+          "to": "email"
+        }
+      ]
+    },
+    {
+      "id": "work-mode",
+      "question": "Are you open to remote, hybrid or onsite work?",
+      "keywords": "remote, hybrid, onsite, on site, in office, office, in person, work from home, wfh, commute",
+      "answer": "I'm open to relocating anywhere in the US, so onsite and hybrid roles work for me. If you have a specific setup in mind, email me and we can talk about it.",
+      "links": [
+        {
+          "label": "Email me",
+          "to": "email"
+        }
+      ]
+    },
+    {
+      "id": "requirements",
+      "question": "How do you gather requirements from stakeholders?",
+      "keywords": "gather requirements, gathering requirements, requirements gathering, requirement gathering, requirements, requirement, elicitation, stakeholder needs, discovery, understand the business, intake",
+      "answer": "I start with the decision the stakeholder is trying to make, not the dashboard they think they want. I ask what problem they're solving, who will use the output, which KPIs matter and how often they need it.\n\nThen I pin down definitions, because \"active customer\" or \"SLA compliance\" can mean different things to different teams. I document it as BRDs, FRDs, user stories and acceptance criteria, check the source data actually exists at the right level of detail, and review it with business and technical people before development starts. That saves a lot of rework in UAT.",
+      "links": [
+        {
+          "label": "How I work with stakeholders",
+          "to": "ask-how-i-work"
+        }
+      ]
+    },
+    {
+      "id": "brd-frd",
+      "question": "What's the difference between a BRD and an FRD?",
+      "keywords": "brd, frd, business requirements document, functional requirements document, difference between brd and frd, brd vs frd, requirements document, documentation",
+      "covers_skills": "BRD / FRD",
+      "answer": "The BRD says what the business needs and why. The FRD goes into how the solution should behave.\n\nFor example, the BRD might say marketing needs to see customer retention by segment. The FRD defines the metrics, filters, dimensions and business rules behind that.\n\nAt Adobe I write both, then break them into user stories and acceptance criteria, so there's a clear trail from the business problem through development and UAT."
+    },
+    {
+      "id": "kpi",
+      "question": "How do you define a KPI?",
+      "keywords": "kpi, kpis, define kpi, defining kpis, kpi definition, key performance indicator, metric, metrics, define a metric, measure success, success metrics, north star",
+      "covers_skills": "KPI design",
+      "answer": "I start with the business goal behind it, because a metric without context misleads people. Then I write down the formula, numerator, denominator, grain, filters, time period, exclusions and source system, plus edge cases like cancelled orders or inactive customers.\n\nOnce it's agreed, I turn it into SQL and test it on sample records. At Adobe I define KPI and data-quality rules across Snowflake and Databricks and reconcile **25 KPIs** before executive reporting. The goal is that a KPI means the same thing to every team that looks at it."
+    },
+    {
+      "id": "power-bi",
+      "question": "Tell me about your Power BI experience",
+      "keywords": "power bi, powerbi, pbi, dax, power query, power bi experience, measures, semantic model",
+      "covers_skills": "Power BI, DAX",
+      "answer": "Power BI is my main reporting tool at Adobe. I built and own **8 Power BI dashboards** used by **20+ stakeholders** across marketing, product and customer experience, and they replaced manually assembled weekly decks.\n\nI start from the KPI definitions, make sure the dataset has the right grain and reconciles with the source, and then design it so people can go from a top-line KPI down to trends and segments. When dashboards got slow, I pushed heavy aggregations down into the Snowflake/dbt layer.\n\nIn projects: a four-visual Olist dashboard on SQL views, and an F1 report where I rebuilt the Pearson correlation by hand in DAX and matched SQL's 0.175.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Olist",
+          "to": "p-olist"
+        },
+        {
+          "label": "F1 pit stops",
+          "to": "p-f1"
+        }
+      ]
+    },
+    {
+      "id": "tableau",
+      "question": "What's your experience with Tableau?",
+      "keywords": "tableau, tableau experience, tableau dashboards, tableau prep",
+      "covers_skills": "Tableau",
+      "answer": "Tableau was my main tool at Amazon. I delivered **10 Tableau dashboards** used by **30+ stakeholders** to track seller health, fulfillment performance, inventory and SLA compliance.\n\nThe data came from large Redshift tables, so I validated every dashboard against SQL output before release. I kept them focused: an operations manager needed to see quickly which seller or fulfillment area needed attention, not twenty charts.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "bi-compare",
+      "question": "Power BI or Tableau: which do you prefer?",
+      "keywords": "prefer, preference, power bi vs tableau, tableau vs power bi, power bi or tableau, tableau or power bi, which tool, favorite tool, favourite tool, which is better, compare tools",
+      "answer": "I've used both, so I don't have a strong favorite. My recent work at Adobe is Power BI, and I used Tableau heavily at Amazon.\n\nI'd pick based on the company's ecosystem, data sources and users. The process is the same either way: define the KPI, prepare reliable data, validate it, then visualize it."
+    },
+    {
+      "id": "dashboard-design",
+      "question": "How do you design a good dashboard?",
+      "keywords": "design a dashboard, dashboard design, good dashboard, build a dashboard, designing dashboards, dashboard best practices, best practices, usability, slow dashboard, dashboard performance, layout",
+      "answer": "I start with the business question and the KPI definitions, not the visuals. Then I make sure the data underneath has the right grain and reconciles with the source.\n\nThe layout goes from the top-line KPI to trends to the detail, with filters and drill-downs so people don't need to ask me for a separate report. I keep it actionable rather than packed with charts, and I watch performance, because a fast, simple dashboard beats an impressive slow one. At Adobe I moved complex aggregations into the Snowflake/dbt layer to keep refreshes fast."
+    },
+    {
+      "id": "etl",
+      "question": "Explain an ETL pipeline you worked on",
+      "keywords": "etl, elt, pipeline, pipelines, data pipeline, data pipelines, extract transform load, ingestion, data integration, source datasets, data flow",
+      "answer": "At Amazon I built SQL-based ETL across **15 source datasets** of seller, order, inventory and fulfillment data, which fed daily operational reporting.\n\nIn the transform step I applied the business rules and shaped the data to the grain the KPIs needed. Validation was built in: duplicates, missing values, counts and KPI consistency. The output fed the recurring reports and the Tableau dashboards.\n\nIn my NFL project I also built a reproducible Python pipeline joining 25 seasons of game stats with weather data from two APIs.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        },
+        {
+          "label": "NFL project",
+          "to": "p-nfl"
+        }
+      ]
+    },
+    {
+      "id": "snowflake-dbt",
+      "question": "What's your experience with Snowflake and dbt?",
+      "keywords": "snowflake, dbt, data build tool, dbt models, dbt modeled, snowflake experience, data warehouse, warehouse, warehousing",
+      "covers_skills": "Snowflake, dbt",
+      "answer": "At Adobe I use Snowflake for customer journey, adoption, retention and segmentation analysis. The tables are dbt-modeled, so I'm working on top of standardized models rather than rebuilding transformations from raw data.\n\nMy SQL over those models produces the segmentation logic behind **12 recurring stakeholder reports**, and I reconcile KPIs against Snowflake as part of source-to-report checks. I like that setup because the logic is defined once upstream, so different dashboards don't end up with different versions of the same metric.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "databricks",
+      "question": "Have you used Databricks?",
+      "keywords": "databricks, spark, pyspark, lakehouse, delta lake",
+      "covers_skills": "Databricks",
+      "answer": "At Adobe I work with Databricks datasets alongside Snowflake as part of KPI and data-quality validation, making sure numbers stay consistent from source systems to stakeholder reporting. My focus there is analysis and validation rather than data engineering. PySpark is on my resume, but most of my large-scale work has been in SQL.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "redshift",
+      "question": "What's your experience with Redshift and S3?",
+      "keywords": "redshift, amazon redshift, s3, aws s3, amazon s3",
+      "covers_skills": "Redshift, S3",
+      "answer": "At Amazon I wrote SQL against Redshift order, inventory and fulfillment tables spanning **50M+ records**, extracting from S3, to produce the SLA and seller-performance metrics for weekly operations reviews. With tables that size I filtered and aggregated inside Redshift and only pulled what the report needed.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "adf",
+      "question": "Have you used Azure Data Factory?",
+      "keywords": "azure data factory, data factory, adf",
+      "covers_skills": "Azure Data Factory",
+      "answer": "At Adobe I automate recurring reporting with Python and Pandas on Azure Data Factory pipeline outputs, which cut each cycle from **9 hours to 5**. I also partner with data engineering to define source requirements for new marketing data feeds and validate the output before it goes into reporting.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "python",
+      "question": "How have you used Python?",
+      "keywords": "python, pandas, python experience, scripting, script, scripts, jupyter, notebook, notebooks",
+      "covers_skills": "Python, Pandas",
+      "answer": "At work, mostly for automation and data processing. At Adobe I use Python and Pandas on Azure Data Factory outputs to automate recurring reporting, which cut each cycle from **9 hours to 5**. I use Pandas for cleaning, transforming, validating and aggregating data.\n\nIn projects I've used Python for API pipelines (NFL weather) and machine learning with Scikit-learn, XGBoost and SHAP (housing prices). I see SQL and Python as a pair: SQL for warehouse work, Python for automation and deeper analysis.",
+      "links": [
+        {
+          "label": "Projects using Python",
+          "to": "tool-python"
+        }
+      ]
+    },
+    {
+      "id": "excel",
+      "question": "How good are you with Excel?",
+      "keywords": "excel, advanced excel, spreadsheet, spreadsheets, pivot, pivot table, pivot tables, vlookup, xlookup, macros, vba",
+      "covers_skills": "Excel",
+      "answer": "Advanced Excel is on my resume, and at Amazon Excel was a big part of weekly reporting. I automated the Excel and SQL steps of that workflow, which cut weekly prep from **6 hours to under 2**. These days I move anything repetitive into SQL or Python."
+    },
+    {
+      "id": "jira",
+      "question": "Have you used Jira and Confluence?",
+      "keywords": "jira, confluence, atlassian, ticket, tickets, azure devops, ado",
+      "covers_skills": "Jira, Confluence",
+      "answer": "At Adobe I run UAT and business validation through Jira: logging reporting defects, coordinating fixes and retesting within the sprint. Confluence is where requirements and KPI documentation live. Azure DevOps and ServiceNow are also on my resume."
+    },
+    {
+      "id": "uat",
+      "question": "What's your UAT process?",
+      "keywords": "uat, user acceptance testing, acceptance testing, testing, test, test cases, test scenarios, acceptance criteria, defect, defects, bug, bugs, qa, sign off",
+      "covers_skills": "UAT, Acceptance criteria",
+      "answer": "UAT starts with the acceptance criteria we wrote during requirements. I build test scenarios around the business need, not just whether the dashboard loads: KPI calculations, filters, date ranges, segments and source-to-report consistency.\n\nAt Adobe I run this in Jira. When expected and actual results differ, I log a defect, work with the technical team on the fix, then retest the defect and related functionality. It's done when it meets the original requirement, not when development says it's finished."
+    },
+    {
+      "id": "segmentation",
+      "question": "How do you do customer segmentation?",
+      "keywords": "segmentation, segment, segments, customer segmentation, customer segments, customer journey, customer journeys, journey analytics, adoption, retention, churn, customer analytics, product analytics",
+      "answer": "I start with the business objective, because segments should drive a decision, not just split customers into groups.\n\nAt Adobe I write SQL over Snowflake to analyze customer journeys, adoption and retention, and build segmentation logic from behavioral and business attributes that are consistently available. I validate segment sizes and distributions over time, since a sudden shift can be a real trend or a data issue. That logic feeds **12 recurring stakeholder reports**.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "cohort",
+      "question": "Tell me about your cohort analysis experience",
+      "keywords": "cohort, cohorts, cohort analysis, seller segments, high risk sellers, at risk, risk accounts",
+      "covers_skills": "Cohort analysis",
+      "answer": "At Amazon I grouped sellers into cohorts and compared their fulfillment and SLA behavior over time. I looked for cohorts whose performance was slipping, which flagged high-risk accounts before an actual SLA breach.\n\nOperations teams used those lists for targeted intervention. That moved the reporting from describing what already happened to supporting action ahead of time.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "forecasting",
+      "question": "What's your experience with forecasting?",
+      "keywords": "forecast, forecasts, forecasting, demand forecasting, capacity planning, capacity, staffing, peak season, time series, seasonality, projection",
+      "covers_skills": "Forecasting",
+      "answer": "At Amazon I built forecast models for fulfillment volume to support peak-season planning. I started from historical volumes, looked at trend and seasonality, and produced forecasts early enough for operations to prepare.\n\nThey fed staffing and capacity decisions. I tracked actual vs. forecast and presented forecasts as planning signals with ranges, not guarantees.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "anomaly",
+      "question": "How have you used anomaly detection?",
+      "keywords": "anomaly, anomalies, anomaly detection, outlier, outliers, spike, spikes, unusual, unexpected change, alerts",
+      "covers_skills": "Anomaly detection",
+      "answer": "At Adobe I use anomaly detection to flag KPI outliers before the weekly stakeholder review, based on historical KPI patterns and statistical thresholds.\n\nWhen something is flagged I don't assume it's real. I check the underlying data, recent pipeline changes and the KPI's history. If the data is right, it's a business trend worth explaining. If it's a data issue, it gets fixed before it reaches anyone.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "discrepancy",
+      "question": "Tell me about a time you caught a discrepancy before executive reporting",
+      "keywords": "discrepancy, discrepancies, mismatch, mismatched, numbers didnt match, numbers dont match, wrong numbers, caught an error, caught a mistake, found an error, mistake, error in report",
+      "answer": "At Adobe I reconcile **25 KPIs** from source to report before executive reporting. When one doesn't match, I first figure out whether the problem is in the source, the transformation or the report calculation.\n\nI compare record counts and totals at each stage instead of debugging from the dashboard, narrow it to the KPI, time period or segment, and trace it back through the data flow. If it's a transformation issue I work with the technical team on the fix and validate the corrected output. It only goes to executives once it reconciles.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        }
+      ]
+    },
+    {
+      "id": "dq-story",
+      "question": "Tell me about a data quality issue you handled",
+      "keywords": "data quality issue, data issue, bad data, dirty data, messy data, duplicate, duplicates, missing values, missing data, nulls, inconsistent data, clean data, data cleaning, cleaning",
+      "answer": "At Amazon, inconsistent seller data sometimes threw off downstream KPIs. Profiling would surface duplicates, missing values or gaps between operational data and the calculated metrics.\n\nInstead of patching the dashboard, I isolated which of the 15 source datasets caused the mismatch, compared source counts and totals with the reporting data, and traced the affected seller records. Once the source or transformation issue was fixed, I reconciled the KPI again before it went into executive reporting. Since then I treat validation as part of the analysis, not an afterthought.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "root-cause",
+      "question": "What do you do when a dashboard number looks wrong?",
+      "keywords": "root cause, root cause analysis, rca, number looks wrong, dashboard wrong, wrong number, debug, debugging, troubleshoot, troubleshooting, investigate, investigation, why did it drop, why did it change",
+      "covers_skills": "Root cause analysis",
+      "answer": "I work backward from the dashboard. First I confirm the KPI definition, filters, date range and grain, so I know what the right answer should be.\n\nThen I run the SQL independently and compare it with the dashboard. If they still differ, I trace the metric through the transformation logic to the source, using counts and small samples to find exactly where the values split. After the fix I rerun the same reconciliation, and I check related KPIs, because one transformation bug often affects several."
+    },
+    {
+      "id": "sql-optimize",
+      "question": "How would you optimize a slow SQL query?",
+      "keywords": "optimize, optimise, optimization, optimisation, slow query, slow queries, query performance, performance tuning, tuning, speed up, faster query, expensive query, execution plan",
+      "answer": "First I work out where the cost comes from: data volume, joins, filters, aggregation or the data model.\n\nThen I filter as early as possible, select only the columns I need, and check joins carefully, since a many-to-many join multiplies rows and hurts both speed and accuracy. Repeated heavy logic can move into a reusable reporting layer.\n\nAfterward I compare both the runtime and the output totals with the original. A faster query is no use if it changes the answer."
+    },
+    {
+      "id": "eda",
+      "question": "How do you approach exploratory data analysis?",
+      "keywords": "eda, exploratory, exploratory data analysis, explore data, exploring data, exploration, new dataset, first look, understand the data, distributions, patterns",
+      "answer": "I look at structure and quality first: counts, nulls, duplicates, ranges and distinct values. Then distributions, relationships and anything odd.\n\nIn my Olist project I explored 99,441 orders across 27 states and 70+ categories before answering the business question, and that's how the link between late delivery and review score (-0.327 correlation) came up.",
+      "links": [
+        {
+          "label": "Olist case study",
+          "to": "p-olist"
+        }
+      ]
+    },
+    {
+      "id": "statistics",
+      "question": "How do you use statistics?",
+      "keywords": "statistics, statistical, statistical analysis, stats, correlation, regression, hypothesis, significance, sample size, trend analysis",
+      "answer": "Mostly in practical ways. In Olist I used CORR() to measure late delivery against review score (-0.327). In F1 I rebuilt a Pearson correlation in DAX and matched SQL's 0.175. In the NFL project I compared win rates across temperature bands while watching sample sizes.\n\nAt work: statistical thresholds for KPI anomaly detection at Adobe, and trend and seasonality for fulfillment forecasting at Amazon."
+    },
+    {
+      "id": "data-modeling",
+      "question": "Do you know data modeling?",
+      "keywords": "data modeling, data modelling, data model, dimensional modeling, dimensional modelling, star schema, snowflake schema, fact table, dimension table, facts and dimensions, schema design",
+      "answer": "Data modeling, dimensional modeling and star schemas are on my resume. In practice, at Adobe I work on top of dbt-modeled Snowflake tables, and in my Olist project I built SQL views as the reporting layer under the Power BI dashboard. I always check the grain before building a KPI on a table."
+    },
+    {
+      "id": "storytelling",
+      "question": "How do you explain findings to non-technical people?",
+      "keywords": "non technical, nontechnical, explain to, explain findings, explaining findings, communicate findings, communication, communicate, storytelling, data storytelling, present, presentation, presentations, presenting, leadership, executives, business users, simplify",
+      "answer": "I start with what it means for the business, not the method. For an SLA-risk analysis I'd lead with which sellers are at risk, what changed and what happens if nobody acts. The SQL comes later, if someone asks.\n\nAt Adobe I present to marketing and product leadership in recurring business reviews, and at Amazon I presented weekly fulfillment and seller findings to operations leadership. My aim is that people leave knowing what happened, why it matters and what to do."
+    },
+    {
+      "id": "conflict",
+      "question": "How do you handle conflicting stakeholder requirements?",
+      "keywords": "conflict, conflicts, conflicting, disagree, disagreement, disagreements, push back, pushback, difficult stakeholder, difficult stakeholders, competing priorities, competing requirements, priorities, prioritize, prioritise",
+      "answer": "First I check whether people disagree on the goal or just on how to measure it. Usually it's two definitions of the same KPI or different levels of detail.\n\nI write down both views and use real examples to show where the numbers differ, then bring it back to the business objective, the source of truth and the audience. If one definition can't serve both, I suggest a standard KPI or two clearly named metrics. Whatever is decided goes into the requirements and acceptance criteria, so it doesn't come back in UAT. My job isn't to pick a winner. It's to make the choice clear."
+    },
+    {
+      "id": "challenging-project",
+      "question": "What's the most challenging project you've worked on?",
+      "keywords": "challenging, challenge, challenges, hardest, difficult project, toughest, complex project, biggest challenge, most complex, proudest work",
+      "answer": "My Amazon supply chain work, because of the scale, the data quality and the impact. It meant 50M+ records across order, inventory, fulfillment and seller data, and the numbers had to be reliable enough for weekly operations decisions.\n\nI built SQL ETL across 15 datasets with profiling and reconciliation, used cohort analysis to catch high-risk sellers, forecast peak-season volume, delivered the Tableau dashboards and automated the weekly reporting. It covered the full cycle, from requirements and raw data to operations taking action.",
+      "links": [
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
+    },
+    {
+      "id": "data-governance",
+      "question": "Do you have data governance experience?",
+      "keywords": "data governance, governance, data lineage, lineage, metadata, metadata management, mdm, master data, access control, data security, sensitive data, pii",
+      "answer": "Data governance, lineage, metadata management and MDM are on my resume. Day to day, it shows up as KPI and data-quality rules at Adobe and documenting KPI definitions so every team uses the same ones. When requirements involve sensitive customer data, I scope reporting to what each audience needs and keep detailed data out of layers that don't need it."
+    },
+    {
+      "id": "achievements",
+      "question": "What are your biggest achievements?",
+      "keywords": "achievement, achievements, biggest achievement, accomplishment, accomplishments, impact, results, wins, key results, what have you achieved, highlights of your career",
+      "answer": "A few results I'd point to:\n\n**Adobe:** automated recurring reporting from **9 hours to 5** per cycle, built and own **8 Power BI dashboards** used by **20+ stakeholders**, and reconcile **25 KPIs** before executive reporting.\n\n**Amazon:** cut weekly report prep from **6 hours to under 2**, delivered **10 Tableau dashboards** used by **30+ stakeholders**, and flagged high-risk sellers before SLA breaches with cohort analysis.\n\n**School:** 3.90 GPA in my M.S. at Rutgers.",
+      "links": [
+        {
+          "label": "Adobe role",
+          "to": "experience-adobe"
+        },
+        {
+          "label": "Amazon role",
+          "to": "experience-amazon"
+        }
+      ]
     }
   ]
 }
